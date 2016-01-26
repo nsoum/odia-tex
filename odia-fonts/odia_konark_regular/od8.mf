@@ -1,0 +1,26 @@
+% od8.mf -- Odia regular 8 pt parameter file
+% Copyright 1996 Jeroen Hellingman
+
+mode_setup;
+
+input odcode;
+input odbase;
+
+gensize# := 8pt#; 
+uh#     := 0.17pt#;             % unit height, (X-height is 25uh)
+uw#     := 0.18pt#;             % unit width
+rm#     := 6.0uw#;              % space in between characters
+rb#     := 1.5uw#;              % extra space to right of standing bars
+slant   := 0;                   % slant of characters
+calligraphic := true;		% calligraphic effects
+rot     := 30;                  % angle of pen
+thick#  := 3uh#;  		% longest diameter of pen            
+thin#   := 0.8uh#;  		% smallest diameter of pen
+
+font_size               8pt#;
+font_identifier :=      "OD8";
+
+input odia;
+
+end.
+% end of od8.mf

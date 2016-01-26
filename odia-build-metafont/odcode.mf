@@ -1,0 +1,330 @@
+% odcode.mf -- glyph codes for the Odia metafont
+% Copyright 1996, 97, 98, 99 Jeroen Hellingman
+%
+% History:
+%   26-MAY-2002 added data for ppa (AP)
+%   08-JUN-1999 added several conjuncts (JH)
+%   21-MAY-1999 added skha (JH)
+%   31-MAY-1998 added hma (JH)
+%   30-MAY-1998 added ni, n+ta, n+ti variants (JH)
+%   17-MAY-1997 fixed encoding of bracket (JH)
+%   29-APR-1997 Edits (Jeroen Hellingman)
+%
+% the assignment of codes is totally ad hoc, and will be made more
+% rational later. This file is the only place where the actual codes are
+% used, everywhere else the identifiers are used.
+%
+% The file odcode.tex is derived from this file, using getcode.awk.
+%
+% used codes: (KEEP UP TO DATE!)
+%
+% letters               A-Za-z 0-9 @/\| []<>*+.,:;?!()-#{}
+% gaps used				127, 128, 94, 95, 32, 34, 36
+% upto (inc.)           0--31
+% upto (inc.)           128--249
+% downto (inc.)         255--250
+%
+% gaps still free:		37, 64
+%
+% naming conventions
+%
+% c_*   full vowel/consonant
+% cs_*  vowel sign/secondary consonant
+%
+% vowels                        %%% TeX macros for accessing characters
+                                %%% (automatically extracted from odcode.mf)
+c_a             := ASCII "a";   %%\def\odvowela{a}
+                                %%\def\odvowelaa{aA}
+c_i             := ASCII "i";   %%\def\odvoweli{i}
+c_ii            := ASCII "I";   %%\def\odvowelii{I}
+c_u             := ASCII "u";   %%\def\odvowelu{u}
+c_uu            := ASCII "U";   %%\def\odvoweluu{U}
+c_ri            := 128;         %%\def\odvowelri{\char128}
+c_rii           := 130;         %%\def\odvowelrii{\char130}
+c_li            := 132;         %%\def\odvowelli{\char132}
+c_lii           := 134;         %%\def\odvowellii{\char134}
+c_e             := ASCII "e";   %%\def\odvowele{e}
+c_ai            := ASCII "E";   %%\def\odvowelai{E}
+c_o             := ASCII "o";   %%\def\odvowelo{o}
+c_au            := ASCII "O";   %%\def\odvowelau{O}
+
+% vowel signs
+
+cs_aa           := ASCII "A";   %%\def\odsignaa{A}
+cs_i            := ASCII "[";   %%\def\odsigni{[}
+cs_i_var        := 151;         %%\def\odsignivar{\char151}
+cs_ii           := ASCII "X";   %%\def\odsignii{X}
+cs_u            := ASCII "]";   %%\def\odsignu{]}
+cs_u_var        := 145;         %%\def\odsignuvar{\char145}
+cs_u_low        := 211;         %%\def\odsignulow{\char211}
+cs_u_verylow    := 216;         %%\def\odsignuverylow{\char216}
+cs_u_center     := 7;		    %%\def\odsignucenter{\char7}
+cs_uu           := ASCII "Z";   %%\def\odsignuu{Z}
+cs_uu_low       := 212;         %%\def\odsignuulow{\char212}
+cs_uu_verylow   := 217;         %%\def\odsignuuverylow{\char217}
+cs_uu_center	:= 8;		    %%\def\odsignuucenter{\char8}
+cs_ri           := 129;         %%\def\odsignri{\char129}
+cs_ri_low       := 213;         %%\def\odsignrilow{\char213}
+cs_ri_verylow   := 218;         %%\def\odsignriverylow{\char218}
+cs_ri_center	:= 9;		    %%\def\odsignricenter{\char9}
+cs_rii          := 131;         %%\def\odsignrii{\char131}
+cs_li           := 133;         %%\def\odsignli{\char133}
+cs_lii          := 135;         %%\def\odsignlii{\char135}
+cs_e            := ASCII "<";   %%\def\odsigne{<}
+cs_ai           := ASCII ">";   %%\def\odsignai{>}
+cs_au           := ASCII "*";   %%\def\odsignau{*}
+
+% modifiers
+
+c_anusvara      := ASCII "M";   %%\def\odanusvara{M}
+c_candrabindu   := ASCII "/";   %%\def\odcandrabindu{/}
+c_visarga       := ASCII "H";   %%\def\odvisarga{H}
+c_visarga_var   := 250;         %%\def\odvisargavar{\char250}
+
+% consonants
+
+c_ka            := ASCII "k";
+c_kha           := ASCII "K";
+c_ga            := ASCII "g";
+c_gha           := ASCII "G";
+c_nga           := ASCII "f";
+
+c_ca            := ASCII "c";
+c_cha           := ASCII "C";
+c_ja            := ASCII "j";
+c_jha           := ASCII "J";
+c_nya           := ASCII "F";
+c_nya_var       := 252;
+
+c_tta           := ASCII "q";
+c_tta_var       := 255;
+c_ttha          := ASCII "Q";
+c_dda           := ASCII "w";
+c_rra           := ASCII "R";
+c_ddha          := ASCII "W";
+c_rrha          := ASCII "@";
+c_nna           := ASCII "N";
+
+c_ta            := ASCII "t";
+c_tha           := ASCII "T";
+c_da            := ASCII "d";
+c_dha           := ASCII "D";
+c_na            := ASCII "n";
+
+c_pa            := ASCII "p";
+c_pha           := ASCII "P";
+c_ba            := ASCII "b";
+c_bha           := ASCII "B";
+c_ma            := ASCII "m";
+
+c_ya            := ASCII "y";
+c_yya           := ASCII "Y";
+c_ra            := ASCII "r";
+c_la            := ASCII "l";
+c_lla           := ASCII "L";
+c_va            := ASCII "v";
+c_badot			:= 20;			%%\def\odbadot{\char20}
+c_sha           := ASCII "z";
+c_ssa           := ASCII "S";
+c_sa            := ASCII "s";
+c_ha            := ASCII "h";
+
+% secondary consonants
+
+cs_ddha         := 175;         %%\def\odsecDha{\char175}
+cs_ta           := 174;         %%\def\odsecta{\char174}
+cs_tha          := 195;         %%\def\odsectha{\char195}\def\odseccha{\char195}
+cs_na           := 240;         %%\def\odsecna{\char240}
+cs_pa           := 143;         %%\def\odsecpa{\char143}   % not used
+cs_bha          := 239;         %%\def\odsecbha{\char239}
+cs_ma           := 136;         %%\def\odsecma{\char136}
+cs_ya           := 138;         %%\def\odsecya{\char138}
+cs_ra           := 146;         %%\def\odsecra{\char146}
+cs_ra_low       := 206;         %%\def\odsecralow{\char206}
+cs_la           := 155;         %%\def\odsecla{\char155}
+cs_lla          := 156;         %%\def\odsecLa{\char156}
+cs_va           := 164;         %%\def\odsecva{\char164}
+
+% secondary consonant vowel-sign combinations
+
+cs_bhu			:= 17;			%%\def\odsecbhu{\char17}
+cs_vu			:= 18;			%%\def\odsecvu{\char18}
+
+% special signs
+
+c_halant        := ASCII "+";   %%\def\odhalant{+}
+c_halant_low    := 142;         %%\def\odhalantlow{\char142}
+c_reph          := 147;         %%\def\odreph{\char147}
+c_nukta         := 144;         %%\def\odnukta{\char144}
+c_avagraha      := 253;         %%\def\odavagraha{\char253}
+
+% punctuation
+
+c_centerdot     := ASCII "#";   %%\def\oddot{\#}
+c_danda         := ASCII ".";   %%\def\oddanda{.}
+c_comma         := ASCII ",";
+c_colon         := ASCII ":";
+c_semicolon     := ASCII ";";
+c_question      := ASCII "?";
+c_exclamation   := ASCII "!";
+c_openquote     := ASCII "`";
+c_closequote    := ASCII "'";
+c_dash          := ASCII "-";
+c_endash        := 2;           % accessed via ligatures only
+c_emdash        := 3;
+c_openparen     := ASCII "(";
+c_closeparen    := ASCII ")";
+c_openbracket	:= 4;
+c_closebracket	:= 5;
+c_openbrace	    := ASCII "{";
+c_closebrace	:= ASCII "}";
+c_slash			:= ASCII "|";	%%\def\odslash{|}
+c_backslash		:= ASCII "\";
+
+
+% figures
+
+c_zero          := ASCII "0";
+c_one           := ASCII "1";
+c_two           := ASCII "2";
+c_three         := ASCII "3";
+c_four          := ASCII "4";
+c_five          := ASCII "5";
+c_six           := ASCII "6";
+c_seven         := ASCII "7";
+c_eight         := ASCII "8";
+c_nine          := ASCII "9";
+
+% consonant-vowel combinations
+
+c_kaa           := 157;
+c_ki            := 141;
+c_ku            := 139;
+c_kuu           := 150;
+c_caa           := 137;
+c_ddi			:= 14;
+c_ddhi			:= 15;
+c_taa			:= 12;
+c_ti            := 193;
+c_tu            := 194;
+c_tuu			:= 13;
+c_di            := 192;
+c_naa           := 209;
+c_ni			:= 22;
+c_raa			:= 11;
+c_laa           := 158;
+c_hi            := 196;
+c_hu            := 140;
+c_lli           := 149;
+c_llaa          := 208;
+
+% conjuncts
+
+c_k_ka          := 199;         %%\def\odkka{\char199}
+c_k_tta			:= 27;			%%\def\odkTa{\char27}
+c_k_ta          := 182;         %%\def\odkta{\char182}
+c_k_ra          := 176;         %%\def\odkra{\char176}
+c_k_la          := 231;         %%\def\odkla{\char231}
+c_k_ssa         := ASCII "x";   %%\def\odkSa{x}
+c_k_ss_nna      := 225;         %%\def\odkSNa{\char225}
+c_k_sa          := 203;         %%\def\odksa{\char203}
+c_g_ga			:= 30;			%%\def\odgga{\char30}
+c_g_dha			:= 31;			%%\def\odgdha{\char31}
+c_ng_ka         := 148;         %%\def\odngka{\char148}
+c_ng_kha        := 159;         %%\def\odngkha{\char159}
+c_ng_ga         := 160;         %%\def\odngga{\char160}
+c_ng_gha        := 202;         %%\def\odnggha{\char202}
+c_c_ca          := 152;         %%\def\odcca{\char152}
+c_c_cha         := 210;         %%\def\odccha{\char210}
+c_j_ja          := 153;         %%\def\odjja{\char153}
+c_j_jha			:= 36;			%%\def\odjjha{\char36}
+c_j_nya         := 179;         %%\def\odjnya{\char179}
+c_ny_ca         := 172;         %%\def\odnyca{\char172}
+c_ny_cha        := 230;         %%\def\odnycha{\char230}
+c_ny_ja         := 189;         %%\def\odnyja{\char189}
+c_ny_jha        := 173;         %%\def\odnyjha{\char173}
+c_tt_tta        := 161;         %%\def\odTTa{\char161}
+c_dd_ga			:= 127;			%%\def\odDga{\char127}
+c_rr_ga			:= 126;			%%\def\odRga{\char126}
+c_dd_dda        := 236;         %%\def\odDDa{\char236}
+c_nn_tta        := 242;         %%\def\odNTa{\char242}
+c_nn_ttha       := 220;         %%\def\odNTha{\char220}
+c_nn_dda        := 187;         %%\def\odNDa{\char187}
+c_nn_ddha       := 188;         %%\def\odNDha{\char188}
+c_nn_nna        := 186;         %%\def\odNNa{\char186}
+c_t_ta          := 154;         %%\def\odtta{\char154}
+c_t_na          := 162;         %%\def\odtna{\char162}
+c_t_pa			:= 28;			%%\def\odtpa{\char28}
+c_t_ma          := 163;         %%\def\odtma{\char163}
+c_t_ra          := 177;         %%\def\odtra{\char177}
+c_t_sa          := 241;         %%\def\odtsa{\char241}
+c_d_ga          := 234;         %%\def\oddga{\char234}
+c_d_da          := 169;         %%\def\oddda{\char169}
+c_d_dha         := 170;         %%\def\odddha{\char170}
+c_d_bha         := 214;         %%\def\oddbha{\char214}
+c_dh_ya         := 178;         %%\def\oddhya{\char178}
+c_n_ta          := 226;         %%\def\odnta{\char226}
+c_n_ta_var		:= 23;			%%\def\odntavar{char23}
+c_n_ti_var		:= 24;			%%\def\odntivar{char24}
+c_n_t_ra        := 232;         %%\def\odntra{\char232}
+c_n_tha         := 227;         %%\def\odntha{\char227}
+c_n_da          := 165;         %%\def\odnda{\char165}
+c_n_dha         := 166;         %%\def\odndha{\char166}
+c_b_ja			:= 34;			%%\def\odbja{\char34}
+c_b_da          := 167;         %%\def\odbda{\char167}
+c_b_dha			:= 29;			%%\def\odbdha{\char29}
+c_b_ba          := 168;         %%\def\odbba{\char168}
+c_p_ta          := 181;         %%\def\odpta{\char181}
+c_p_pa          := 183;         %%\def\odppa{\char183}
+c_p_sa          := 197;         %%\def\odpsa{\char197}
+c_m_pa          := 190;         %%\def\odmpa{\char190}
+c_m_pha         := 191;         %%\def\odmpha{\char191}
+c_m_bha		    := 244;		    %%\def\odmbha{\char244}
+c_m_ma          := 215;         %%\def\odmma{\char215}
+c_l_ka          := 219;         %%\def\odlka{\char219}
+c_l_pa          := 221;         %%\def\odlpa{\char221}
+c_l_pha         := 223;         %%\def\odlpha{\char223}
+c_l_la          := 237;         %%\def\odlla{\char237}
+c_sh_tta        := 204;         %%\def\odshTa{\char204}
+c_sh_ca         := 205;         %%\def\odshca{\char205}
+c_sh_cha        := 229;         %%\def\prshcha{\char229}
+c_ss_ka         := 200;         %%\def\odSka{\char200}
+c_ss_tta        := 198;         %%\def\odSTa{\char198}
+c_ss_ttha       := 207;         %%\def\odSTha{\char207}
+c_ss_nna	    := 16;		    %%\def\odSNa{\char16}
+c_ss_pa         := 184;         %%\def\odSpa{\char184}
+c_ss_pha        := 222;         %%\def\odSpha{\char222}
+c_s_ka          := 201;         %%\def\odska{\char201}
+c_s_kha			:= 26;			%%\def\odskha{\char26}
+c_s_ta          := 180;         %%\def\odsta{\char180}
+c_s_tu			:= 32;			%%\def\odstu{\char32}
+c_s_t_ra        := 233;         %%\def\odstra{\char233}
+c_s_tha         := 228;         %%\def\odstha{\char228}
+c_s_pa          := 185;         %%\def\odspa{\char185}
+c_s_pha         := 224;         %%\def\odspha{\char224}
+c_h_na			:= 94;			%%\def\odhna{\char94}
+c_h_ba			:= 95;			%%\def\odhba{\char95}\def\odhva{\odhba}
+c_h_ma			:= 25;			%%\def\odhma{\char25}
+
+% vowel sign combinations
+
+cs_i_candrabindu 	    := 243;	   %%\def\odicandrabindu{\char243}
+cs_i_reph       	    := 171;    %%\def\odireph{\char171}
+cs_i_reph_var   	    := 251;    % not used
+cs_i_reph_candrabindu 	:= 245;    %%\def\odirephcandrabindu{\char245}
+cs_ai_candrabindu	    := 247;
+cs_ai_reph		        := 246;    %%\def\odaireph{\char246}
+cs_ai_reph_candrabindu	:= 248;
+cs_au_candrabindu	    := 249;
+cs_au_reph		        := 19;
+cs_au_reph_candrabindu	:= 6;
+
+% varia
+
+c_odomsign              := 21;  %%\def\odomsign{\char21}
+c_ganesh                := 254; %%\def\odganesh{\char254}
+c_dotted_circle         := 0;   %%\def\dotcircle{\char0}
+c_white_square          := 1;   %%\def\whitesquare{\char1}
+c_crossed_white_square  := 10;	%%\def\crossedwhitesquare{\char10}
+
+% end of odcode.mf

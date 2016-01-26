@@ -1,0 +1,25 @@
+% odsl12.mf -- Odia slanted 12 pt parameter file
+% Copyright 1996 Jeroen Hellingman
+
+mode_setup;
+
+input odcode;
+input odbase;
+
+gensize# := 12pt#; 
+uh#     := 0.25pt#;             % unit height, (X-height is 25uh)
+uw#     := 0.25pt#;             % unit width
+rm#     := 6.0uw#;              % space in between characters
+rb#     := 1.5uw#;              % extra space to right of standing bars
+slant   := 0.17;                % slant of characters
+calligraphic := true;		% calligraphic effects
+rot     := 30;                  % angle of pen
+thick#  := 3uh#;  		% longest diameter of pen            
+thin#   := 0.7uh#;  		% smallest diameter of pen
+
+font_size               12pt#;
+font_identifier :=      "ODSL12";
+
+input odia;
+
+% end of od12.mf

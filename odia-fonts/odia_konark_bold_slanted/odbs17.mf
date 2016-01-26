@@ -1,0 +1,25 @@
+% odbf17.mf -- Odia bold slanted 17 pt parameter file
+% Copyright 1996 Jeroen Hellingman
+
+mode_setup;
+
+input odcode;
+input odbase;
+
+gensize# := 17.28pt#; 
+uh#     := 0.36pt#;             % unit height, (X-height is 25uh)
+uw#     := 0.36pt#;             % unit width
+rm#     := 6.0uw#;              % space in between characters
+rb#     := 1.5uw#;              % extra space to right of standing bars
+slant   := 0.17;                % slant of characters
+calligraphic := true;		% calligraphic effects
+rot     := 30;                  % angle of pen
+thick#  := 4.5uh#;  		% longest diameter of pen            
+thin#   := 1.5uh#;  		% smallest diameter of pen
+
+font_size               17.28pt#;
+font_identifier :=      "ODBS17";
+
+input odia;
+
+% end of odbs17.mf

@@ -1,0 +1,60 @@
+% odkern2.mf -- kerning table for Oriya metafont
+% Copyright 1996, 1997, 1998, 1999 Jeroen Hellingman
+%
+% Note:
+%   we can't use kerning tables to position the matra's correctly, as that
+%   will shift all following characters as well, we can, however, use kerning
+%   and ligatures to change or join matras to the characters -- making the
+%   preprocessor much simpler. For this need to create various, differently
+%   positioned, copies of of the matras, but that we will have to do anyway, 
+%   when we create a PostScript version of the font for use in applications
+%   that assume all glyphs are on the same line.
+%
+% History:
+%   20-JUN-1999 Added j+ja, j+jha (JH)
+%   16-JUN-1999 Added s+tu
+%   29-MAY-1999 Added k+tta, t+pa (JH)
+%   31-MAY-1998 Added h+ma (JH)
+%   30-MAY-1998 Added ni, n+ti, etc. (JH)
+%   07-SEP-1997 Added d+ga (JH)
+%   27-APR-1997 Added bhu combination (JH)
+%   18-NOV-1996 Added centered matras under some letters (JH)
+%   23-SEP-1996 Added flag to disable consonant-matra ligatures (JH)
+
+% define macros for variants of the vowel signs.
+
+def lowmatras =
+  cs_u          |=: cs_u_low
+, cs_uu         |=: cs_uu_low
+, cs_ri         |=: cs_ri_low
+, cs_ra         |=: cs_ra_low
+, c_halant      |=: c_halant_low
+enddef;
+
+def verylowmatras =
+  cs_u          |=: cs_u_verylow
+, cs_uu         |=: cs_uu_verylow
+, cs_ri         |=: cs_ri_verylow
+, cs_ra         |=: cs_ra_low
+, c_halant      |=: c_halant_low
+enddef;
+
+def centermatras =
+  cs_u          |=: cs_u_center
+, cs_uu         |=: cs_uu_center
+, cs_ri         |=: cs_ri_center
+enddef;
+
+% kern values:
+
+k#   := 1uw#;
+kk#  := 2uw#;
+kkk# := 3uw#;
+
+% consonant-matra ligatures
+% note that the ligatures for the aa vowel sign will also be used for the
+% oo vowel sign. When noligs is true, no consonant-matra ligatures will
+% be use, however, the lowered variants of some matras will still be
+% needed.
+
+% end of odkern2.mf

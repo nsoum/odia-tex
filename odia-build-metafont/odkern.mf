@@ -1,0 +1,234 @@
+% odkern.mf -- kerning table for Oriya metafont
+% Copyright 1996, 1997, 1998, 1999 Jeroen Hellingman
+%
+% Note:
+%   we can't use kerning tables to position the matra's correctly, as that
+%   will shift all following characters as well, we can, however, use kerning
+%   and ligatures to change or join matras to the characters -- making the
+%   preprocessor much simpler. For this need to create various, differently
+%   positioned, copies of of the matras, but that we will have to do anyway, 
+%   when we create a PostScript version of the font for use in applications
+%   that assume all glyphs are on the same line.
+%
+% History:
+%   20-JUN-1999 Added j+ja, j+jha (JH)
+%   16-JUN-1999 Added s+tu
+%   29-MAY-1999 Added k+tta, t+pa (JH)
+%   31-MAY-1998 Added h+ma (JH)
+%   30-MAY-1998 Added ni, n+ti, etc. (JH)
+%   07-SEP-1997 Added d+ga (JH)
+%   27-APR-1997 Added bhu combination (JH)
+%   18-NOV-1996 Added centered matras under some letters (JH)
+%   23-SEP-1996 Added flag to disable consonant-matra ligatures (JH)
+
+% define macros for variants of the vowel signs.
+
+def lowmatras =
+  cs_u          |=: cs_u_low
+, cs_uu         |=: cs_uu_low
+, cs_ri         |=: cs_ri_low
+, cs_ra         |=: cs_ra_low
+, c_halant      |=: c_halant_low
+enddef;
+
+def verylowmatras =
+  cs_u          |=: cs_u_verylow
+, cs_uu         |=: cs_uu_verylow
+, cs_ri         |=: cs_ri_verylow
+, cs_ra         |=: cs_ra_low
+, c_halant      |=: c_halant_low
+enddef;
+
+def centermatras =
+  cs_u          |=: cs_u_center
+, cs_uu         |=: cs_uu_center
+, cs_ri         |=: cs_ri_center
+enddef;
+
+% kern values:
+
+k#   := 1uw#;
+kk#  := 2uw#;
+kkk# := 3uw#;
+
+% consonant-matra ligatures
+% note that the ligatures for the aa vowel sign will also be used for the
+% oo vowel sign. When noligs is true, no consonant-matra ligatures will
+% be use, however, the lowered variants of some matras will still be
+% needed.
+
+if ligs:
+
+ligtable c_ka : cs_aa =: c_kaa,
+                cs_i =: c_ki,
+                cs_u =: c_ku,
+                cs_uu =: c_kuu;
+ligtable c_jha  : lowmatras;
+ligtable c_ta   : cs_aa =: c_taa
+                , cs_i =: c_ti
+                , cs_u =: c_tu
+                , cs_uu =: c_tuu;
+ligtable c_tha  : cs_i |=: cs_i_var;
+ligtable c_da   : cs_i =: c_di;
+ligtable c_dha  : cs_i |=: cs_i_var;
+ligtable c_na   : cs_aa =: c_naa
+                , cs_i =: c_ni
+                , cs_u |=: cs_u_var;
+ligtable c_yya  : lowmatras;
+ligtable c_la   : cs_aa =: c_laa
+                , cs_u |=: cs_u_var
+                , c_halant |=: c_halant_low;
+ligtable c_ha   : cs_i =: c_hi
+                , cs_u =: c_hu
+                , cs_uu |=: cs_uu_low
+                , cs_ri |=: cs_ri_low
+                , cs_ra |=: cs_ra_low;
+ligtable c_lla  : cs_aa =: c_llaa
+                , cs_i =: c_lli
+                , cs_u |=: cs_u_var;
+
+% conjunct-matra combinations:
+
+ligtable c_ng_ka    : cs_u |=: cs_u_var;
+ligtable c_ny_ca    : cs_i |=: cs_i_var;
+ligtable c_ny_jha   : cs_i |=: cs_i_var;
+ligtable c_n_ta_var : cs_i =: c_n_ti_var
+                    , cs_u |=: cs_u_low
+                    , cs_uu |=: cs_uu_low
+                    , cs_ri |=: cs_ri_low
+                    , cs_ra |=: cs_ra_low
+                    , c_halant |=: c_halant_low;
+
+else:
+
+ligtable c_yya  : lowmatras;
+ligtable c_la   : lowmatras;
+ligtable c_ha   : lowmatras;
+
+ligtable c_n_ta_var : lowmatras;
+
+fi;
+
+ligtable c_k_ka         : verylowmatras;
+ligtable c_k_tta        : verylowmatras;
+ligtable c_k_ta         : lowmatras;
+ligtable c_k_sa         : lowmatras;
+ligtable c_k_ss_nna     : verylowmatras;
+ligtable c_g_ga         : verylowmatras;
+ligtable c_g_dha        : verylowmatras;
+ligtable c_nga          : centermatras;
+ligtable c_ca           : if ligs:
+                            cs_aa =: c_caa
+                        , fi centermatras;
+ligtable c_cha          : centermatras;
+ligtable c_j_ja         : verylowmatras;
+ligtable c_j_jha		: verylowmatras;
+ligtable c_tta          : centermatras
+                        , c_ttha kern-kk#;
+ligtable c_ttha         : centermatras;
+ligtable c_dda          : if ligs:
+                            cs_i =: c_ddi
+                        , fi centermatras;
+ligtable c_dd_ga        : lowmatras;
+ligtable c_rr_ga        : lowmatras;
+ligtable c_dd_dda       : lowmatras;
+ligtable c_ddha         : if ligs:
+                            cs_i =: c_ddhi
+                        , fi centermatras;
+ligtable c_nn_tta       : verylowmatras;
+ligtable c_nn_ttha      : verylowmatras;
+ligtable c_nn_dda       : lowmatras;
+ligtable c_nn_ddha      : lowmatras;
+ligtable c_nn_nna       : verylowmatras;
+ligtable c_t_na         : lowmatras;
+ligtable c_t_pa         : lowmatras;
+ligtable c_t_ma         : lowmatras;
+ligtable c_d_ga         : lowmatras;
+ligtable c_n_ta         : lowmatras;
+ligtable c_n_t_ra       : verylowmatras;
+ligtable c_p_ta         : lowmatras;
+ligtable c_p_sa         : verylowmatras;
+ligtable c_b_dha        : verylowmatras;
+ligtable c_m_ma         : lowmatras;
+ligtable c_ra           : if ligs:
+                            cs_aa =: c_raa
+                        , fi centermatras;
+ligtable c_l_ka         : verylowmatras;
+ligtable c_l_pa         : verylowmatras;
+ligtable c_l_pha        : verylowmatras;
+ligtable c_l_la         : verylowmatras;
+ligtable c_sh_ca        : verylowmatras;
+ligtable c_ss_ka        : verylowmatras;
+ligtable c_ss_tta       : verylowmatras;
+ligtable c_ss_ttha      : verylowmatras;
+ligtable c_ss_pa        : verylowmatras;
+ligtable c_ss_pha       : verylowmatras;
+ligtable c_s_ka         : verylowmatras;
+ligtable c_s_ta         : cs_u           =: c_s_tu
+                        , cs_uu         |=: cs_uu_low
+                        , cs_ri         |=: cs_ri_low
+                        , cs_ra         |=: cs_ra_low
+                        , c_halant      |=: c_halant_low;
+ligtable c_s_kha        : verylowmatras;
+ligtable c_s_t_ra       : verylowmatras;
+ligtable c_s_pa         : verylowmatras;
+ligtable c_s_pha        : verylowmatras;
+ligtable c_h_ba         : lowmatras;
+ligtable c_h_ma         : verylowmatras;
+
+ligtable c_dotted_circle: lowmatras;
+
+% low matras after secondary consonants
+
+ligtable cs_tha         : lowmatras;
+ligtable cs_na          : verylowmatras;
+ligtable cs_bha         : cs_u          =: cs_bhu
+                        , cs_uu         |=: cs_uu_verylow
+                        , cs_ri         |=: cs_ri_verylow
+                        , cs_ra         |=: cs_ra_low
+                        , c_halant      |=: c_halant_low;
+ligtable cs_ma          : verylowmatras;
+ligtable cs_ra          : lowmatras;
+ligtable cs_ra_low      : verylowmatras;
+ligtable cs_la          : verylowmatras;
+ligtable cs_lla         : verylowmatras;
+ligtable cs_va          : cs_u          =: cs_vu
+                        , cs_uu         |=: cs_uu_verylow
+                        , cs_ri         |=: cs_ri_verylow
+                        , cs_ra         |=: cs_ra_low
+                        , c_halant      |=: c_halant_low;
+
+% matra-reph-candrabindu combinations:
+
+ligtable cs_i                   : c_reph =: cs_i_reph
+                                , c_candrabindu =: cs_i_candrabindu;
+ligtable cs_i_reph              : c_candrabindu =: cs_i_reph_candrabindu;
+ligtable cs_i_candrabindu       : c_reph =: cs_i_reph_candrabindu;
+ligtable cs_ai                  : c_reph =: cs_ai_reph
+                                , c_candrabindu =: cs_ai_candrabindu;
+ligtable cs_ai_reph             : c_candrabindu =: cs_ai_reph_candrabindu;
+ligtable cs_ai_candrabindu      : c_reph =: cs_ai_reph_candrabindu;
+ligtable cs_au                  : c_candrabindu =: cs_au_candrabindu
+                                , c_reph =: cs_au_reph;
+ligtable cs_au_reph             : c_candrabindu =: cs_au_reph_candrabindu;
+ligtable cs_au_candrabindu      : c_reph =: cs_au_reph_candrabindu;
+
+% numerals:
+
+ligtable c_one          : c_one kern-k#
+                        , c_four kern-k#
+                        , c_five kern-k#;
+ligtable c_four         : c_two kern-kk#;
+ligtable c_eight        : c_two kern-kkk#
+                        , c_nine kern-kk#;
+
+% punctuation:
+
+ligtable c_danda        : c_danda |=: cs_aa;
+ligtable c_openquote    : c_openquote kern-kk#;
+ligtable c_closequote   : c_closequote kern-kk#;
+
+ligtable c_dash         : c_dash =: c_endash;
+ligtable c_endash       : c_dash =: c_emdash;
+
+% end of odkern.mf

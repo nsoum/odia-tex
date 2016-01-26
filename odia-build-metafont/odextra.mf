@@ -1,0 +1,81 @@
+% odextra.mf
+%
+% Additional glyphs for the Odia font, that didn't fit in the 256 positions 
+% Metafont normally has available.
+
+% codes
+
+
+
+% glyphs
+
+% A
+beginchar(c_k_ss_ma, 25uw#+rm#, 25uh#, 7uh#); "Odia conjunct k+ss+ma";
+  currentpicture := sup_k_ssa_picture + sub_ma_picture;
+endchar;
+
+% B
+beginchar(c_m_nna, 24uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+nna";
+  currentpicture := sup_ma_picture + sec_nna_picture shifted (-6uw, 3uh);
+endchar;
+
+% C
+beginchar(c_s_ma, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+ma";
+  currentpicture := sup_sa_picture + sub_ma_picture;
+endchar;
+
+% D
+beginchar(c_ss_ma, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+ma";
+  currentpicture := sup_ssa_picture + sub_ma_picture;
+endchar;
+
+% E
+beginchar(c_g_ma, 29uw#+rm#, 25uh#, 10uh#); "Odia conjunct g+ma";
+  currentpicture := sup_ga_picture + sub_ma_picture shifted (6uw, 0);
+endchar;
+
+% F
+beginchar(c_d_ma, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct d+ma";
+  currentpicture := sup_da_picture + sub_ma_picture;
+endchar;
+
+% G
+beginchar(c_nn_ma, 28uw#+rm#, 25uh#, 8uh#); "Odia conjunct nn+ma";
+  currentpicture := sup_nna_picture + sub_ma_picture shifted(5uw, 0);
+endchar;
+
+% H
+beginchar(c_s_sa, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+sa";
+  currentpicture := sup_sa_picture + sub_sa_picture;
+endchar;
+
+% I
+%beginchar(c_l_ga, 30uw#+rm#, 25uh#, 10uh#); "Odia conjunct l+ga";
+beginchar(c_l_ga, 28uw#+rm#, 25uh#, 9uh#); "Odia conjunct l+ga";
+  currentpicture := full_lla_picture + sub_ga_picture shifted (8uw, 0);
+  z1 = (4uw, 12uh);
+  x4 = 28uw;
+  new_outer_circle;
+endchar;
+
+% J
+beginchar(c_t_ka, 28uw#+rb#+rm#, 25uh#, 0uh#); "Odia conjunct t+ka";
+    currentpicture := full_ka_picture;
+    z1 = (4uw, 12uh);
+    x4 = 28uw;
+    new_outer_circle;
+
+    pickup subpen;
+    z6 = (8uw, 1uh);
+    z7 = (5uw, -4uh);
+    z8 = (9uw, -7uh);
+    z9 = (22uw, -10uh);
+    draw z6..z7{down}..z8---z9;
+    penlabels(1,2,3,4);
+endchar;
+
+
+
+
+
+

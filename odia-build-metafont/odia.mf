@@ -1,0 +1,14 @@
+% odia.mf -- An Odia Metafont, driver file
+% Copyright 1996 Jeroen Hellingman
+
+input odsetup;			% set-up parameters
+input odkern;			% kerning table
+
+input odtest;
+
+input odglyphs;			% the Odia glyph programs
+input dotcirc;			% dotted circle and white box character
+
+end.
+
+% end of odia.mf

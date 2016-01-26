@@ -1,0 +1,387 @@
+% Copyright 1996 Jeroen Hellingman
+%
+% History:
+%   27-NOV-1996 last edit (JH)
+%   07-JUN-1996 added `hints' for discretion (JH)
+%   15-MAY-1996 created from oriya.mf (Jeroen Hellingman)
+%
+%% define the character codes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% input odcode.mf  % <--- now called from parent file
+
+%% \section{boolean variables} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% skeleton reduces all lines to very thin lines
+boolean skeleton;       skeleton     := false;
+
+%% Setting calligraphic adds some effects that
+%% won't work fine with equal line thickness.
+%% The effects work nice with $(30 \leq rot \leq 60)$
+boolean calligraphic;   calligraphic := true;
+
+%% old skips all old designs of glyphs in the file
+boolean old;            old := false;
+
+%% ligs: use consonant-matra ligatures
+boolean ligs;         	ligs := true;
+
+%% \section{picture variable} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+picture savepicture;
+
+%% \section{definitions} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% adjust the position of non-spacing characters, to be alined under or above the
+% previous character.
+
+def adjustpos(expr w) = 
+  if mode <> proof:
+    currentpicture := currentpicture shifted -(w, 0uh);
+  fi;  
+enddef; 
+
+def eye(suffix a,b,c,d) (expr w, h) =
+  % define points of ellipse relative to z.a
+  % z.a = left point, clockwise direction
+  % w = width of ellipse
+  % h = height of ellipse
+  z.b = (x.a + .5w, y.a + .5h);
+  z.c = (x.a + w,   y.a);
+  z.d = (x.a + .5w, y.a - .5h);
+enddef;
+
+def draw_eye(suffix a,b,c,d) =
+  % draw eye through four points defined by eye
+  draw z.a{up}..z.b{right}..z.c{down}..z.d{left}..cycle;
+enddef;
+
+%% tailtwo defines a tail which looks a bit like the roman numeral two
+%% it is used in yya, caa, and for secondary bha
+
+def tailtwo(suffix a, b, c, d, e, f, g) =
+  z.a = z.b + (-4uw, -4uh);
+  z.c = z.b + (3uw, -3uh);
+  z.d = z.a + (0uw, -8uh);
+  z.e = z.d + (3.5uw, 2uh);
+  z.f = z.d + (7uw,   -1uh);
+  z.g = z.d + (10uw,   1uh);
+  draw z.a..z.b{right}..z.c{down}..{curl0}z.d;
+  draw z.d{curl0}..z.e{right}..z.f{right}..{curl0}z.g;
+  drawdot(z.a);
+  drawdot(z.d);
+  drawdot(z.g);
+enddef;
+
+def new_tailtwo(suffix a, b, c, d, e, f, g) =
+  z.a = z.b + (-4uw, -4uh);
+  z.c = z.b + (4uw, -4uh);
+  z.d = z.b + (0, -9uh);
+  z.e = z.d + (4.5uw, -5.5uh);
+  z.f = z.d + (7uw,   -1uh); % not used
+  z.g = z.d + (10uw,   1uh); % not used
+  draw z.a{up}..z.b{right}..z.c{down}..{curl0}z.d;
+  draw z.d--z.e;
+  drawdot(z.a);
+  drawdot(z.d);
+  drawdot(z.e);
+enddef;
+
+% various types of outer circles with the vowel signs attached to
+% them
+
+def outer_circle =
+  pickup curvepen;
+  % z1 to be defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));
+  % x4 to be defined by caller
+  y4 = 16uh;
+  z5 = (x4-1uw, 12uh);
+  draw z1..z2{up}..z3{right}..z4{down}..z5; drawdot(z5);
+  penlabels(1,2,3,4,5);
+enddef;
+
+def aa_circle =
+  pickup curvepen;
+  % z1 to be defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));
+  % x4 to be defined by caller
+  y4 = 25uh-joint;
+  draw z1..z2{up}..z3{right}..{curl0}z4;
+  pickup barpen;
+  z5 = (x4, 25uh);
+  z6 = (x5, 0uh);
+  draw z5--z6; drawdot(z5); drawdot(z6);
+  penlabels(1,2,3,4,5,6);
+enddef;
+
+def i_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 14uh);
+  z6 = (6uw, good.y 20uh);
+  z7 = (15uw, 18uh);
+  draw z1..z2{up}..z6{right}..z7;
+  z8 = (8uw, 20.125uh);
+  z9 = (good.x 7uw, 22uh);
+  z3 = (14.5uw, good.y (25uh+overshoot));
+  % x4 defined by caller
+  y4 = 16uh;
+  z5 = (x4-1uw, 12uh);
+  draw z8..z9{up}..z3{right}..z4{down}..z5; drawdot(z5);
+  penlabels(1,2,3,4,5,6,7,8,9);
+enddef;
+
+def narrow_i_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 15uh);
+  z6 = (5uw, good.y 20uh);
+  z7 = (12uw, 19uh);
+  draw z1..z2{up}..z6{right}..z7;
+  z8 = (6uw, 20.125uh);
+  z9 = (good.x 5uw, 22uh);
+  z3 = (12.5uw, good.y (25uh+overshoot));
+  % x4 defined by caller
+  y4 = 16uh;
+  z5 = (x4-1uw, 12uh);
+  draw z8..z9{up}..z3{right}..z4{down}..z5; drawdot(z5);
+  penlabels(1,2,3,4,5,6,7,8,9);
+enddef;
+
+def u_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (0.4833[x2,x4], good.y (25uh+overshoot));  % curious value
+  % x4 defined by caller
+  y4 = 10uh;
+  z5 = (x4 - 14uw, good.y -10uh);
+  z6 = (good.x (x4 - 18uw),  -7uh);
+  z7 = (x5, good.y -4uh);
+  z8 = (x4, good.y -11uh);
+  z9 = (x4 + 6uw, -9uh);
+  draw z1..z2{up}..z3{right}..tension0.9..z4{down}..tension1.1..z5{left}
+                 ..z6{up}..z7{right}..z8{right}..z9;
+  drawdot(z9);
+  penlabels(1,2,3,4,5,6,7,8,9);
+enddef;
+
+def uu_circle =
+  pickup curvepen;
+  % z1 to be defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));
+  % x4 to be defined by caller
+  y4 = 10uh;
+  z5 = (x4-6uw, -3uh);            % matches z2 in "Odia vowel sign uu"
+  z6 = (good.x(x5-5uw), -8uh);    % z3
+  z7 = (x5-2uw, good.y -11uh);    % z4
+  z8 = (x5+3.5uw, good.y -8.5uh); % z5
+  z9 = (x5+14uw, good.y -14uh);   % z6
+  z9' = (x9+2uw, y9+1uh);         % z7
+  draw z1..z2{up}..z3{right}..tension 0.9..z4{down}..z5..z6{down}..z7{right}
+         ..z8{right}..z9{right}..z9'; drawdot(z9');
+  penlabels(1,2,3,4,5,6,7,8,9,9');
+enddef;
+
+def tail_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2, x4], good.y (25uh+overshoot));
+  y4 = 13uh;
+  z5 = (x4 - 3uw, 2uh);
+  z6 = (x4 + 2uw, -4uh);
+  draw z1..z2{up}..z3{right}..tension0.95..z4{down}..z5; drawdot(z5);
+  draw z5--z6; drawdot(z6);
+  penlabels(1,2,3,4,5,6);
+enddef;
+
+def loop_tail_circle =  % loop tail circle as on uu and ri
+  pickup curvepen;
+  % z1 = (5.5uw, 9.5uh);                        % z1 defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));    % adjusted
+  % z4 = (28uw, 16uh);                          % adjusted (x4 defined by caller)
+  y4 = 16uh;
+  z5 = (x4-3uw, good.y 9uh);                    % adjusted
+  draw z1..z2{up}..z3{right}..z4{down}..tension 0.9..z5;
+  drawdot(z5);
+  % loop and tail
+  z6 = (x4 + 1uw, 6.5uh);
+  z7 = (x4 - 1uw, 0uh);
+  z8 = (x4 + 3.1667uw, -5uw);
+  draw z5{right}..z6..z7; draw z7--z8; drawdot(z6);
+  penlabels(1,2,3,4,5,6,7,8);
+enddef;
+
+% a set of new macros, for better appearance of the letters
+
+def define_new_outer_circle =
+  % z1 to be defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));
+  % x4 to be defined by caller
+  y4 = 16uh;
+  z5 = (x4-1.5uw, 12uh);
+enddef;
+
+def draw_new_outer_circle =
+  pickup curvepen;
+  draw z1{left}..z2{up}..z3{right}..z4{down}..z5;
+  drawdot(z5);
+  penlabels(1,2,3,4,5);
+enddef;
+
+def new_outer_circle_path =
+  z1{left}..z2{up}..z3{right}..z4{down}..z5
+enddef;
+
+def new_outer_circle =
+  define_new_outer_circle;
+  draw_new_outer_circle;
+enddef;
+
+def new_aa_circle =
+  pickup curvepen;
+  % z1 to be defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));
+  % x4 to be defined by caller
+  y4 = 25uh-joint;
+  draw z1{left}..z2{up}..z3{right}..{curl0}z4;
+  pickup barpen;
+  z5 = (x4, 25uh);
+  z6 = (x5, 0uh);
+  draw z5--z6; drawdot(z5); drawdot(z6);
+  penlabels(1,2,3,4,5,6);
+enddef;
+
+def new_i_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 15uh);
+  z6 = (6uw, good.y 20uh);
+  z7 = (15uw, 18uh);
+  draw z1..z2{up}..z6{right}..z7;
+  z8 = (8uw, 20.125uh);
+  z9 = (good.x 7uw, 22uh);
+  z3 = (14.5uw, good.y (25uh+overshoot));
+  % x4 defined by caller
+  y4 = 16uh;
+  z5 = (x4-1.5uw, 12uh);
+  draw z8{left}..z9{up}..z3{right}..z4{down}..z5; drawdot(z5);
+  penlabels(1,2,3,4,5,6,7,8,9);
+enddef;
+
+def new_narrow_i_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 15uh);
+  z6 = (5uw, good.y 20uh);
+  z7 = (12uw, 19uh);
+  draw z1{left}..z2{up}..z6{right}..z7;
+  z8 = (6uw, 20.125uh);
+  z9 = (good.x 5uw, 22uh);
+  z3 = (12.5uw, good.y (25uh+overshoot));
+  % x4 defined by caller
+  y4 = 16uh;
+  z5 = (x4-1uw, 12uh);
+  draw z8..z9{up}..z3{right}..z4{down}..z5; drawdot(z5);
+  penlabels(1,2,3,4,5,6,7,8,9);
+enddef;
+
+def new_u_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (0.4833[x2,x4], good.y (25uh+overshoot));  % curious value
+  % x4 defined by caller
+  y4 = 10uh;
+  z5 = (x4 - 14uw, good.y -10uh);
+  z6 = (good.x (x4 - 18uw),  -7uh);
+  z7 = (x5, good.y -4uh);
+  z8 = (x4, good.y -11uh);
+  z9 = (x4 + 6uw, -9uh);
+  draw z1{left}..z2{up}..z3{right}..tension0.9..z4{down}..tension1.1..z5{left}
+                 ..z6{up}..z7{right}..z8{right}..z9;
+  drawdot(z9);
+  penlabels(1,2,3,4,5,6,7,8,9);
+enddef;
+
+def new_uu_circle =
+  pickup curvepen;
+  % z1 to be defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));
+  % x4 to be defined by caller
+  y4 = 10uh;
+  z5 = (x4-6uw, -3uh);            % matches z2 in "Odia vowel sign uu"
+  z6 = (good.x(x5-5uw), -8uh);    % z3
+  z7 = (x5-2uw, good.y -11uh);    % z4
+  z8 = (x5+3.5uw, good.y -8.5uh); % z5
+  z9 = (x5+14uw, good.y -14uh);   % z6
+  z9' = (x9+2uw, y9+1uh);         % z7
+  draw z1{left}..z2{up}..z3{right}..tension 0.9..z4{down}..z5..z6{down}..z7{right}
+         ..z8{right}..z9{right}..z9'; drawdot(z9');
+  penlabels(1,2,3,4,5,6,7,8,9,9');
+enddef;
+
+def new_tail_circle =
+  pickup curvepen;
+  % z1 defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2, x4], good.y (25uh+overshoot));
+  y4 = 13uh;
+  z5 = (x4 - 3uw, 2uh);
+  z6 = (x4 + 2uw, -4uh);
+  draw z1{left}..z2{up}..z3{right}..tension0.95..z4{down}..z5; drawdot(z5);
+  draw z5--z6; drawdot(z6);
+  penlabels(1,2,3,4,5,6);
+enddef;
+
+def new_loop_tail_circle =  % loop tail circle as on uu and ri
+  pickup curvepen;
+  % z1 = (5.5uw, 9.5uh);                        % z1 defined by caller
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2,x4], good.y (25uh+overshoot));    % adjusted
+  % z4 = (28uw, 16uh);                          % adjusted (x4 defined by caller)
+  y4 = 16uh;
+  z5 = (x4-3uw, good.y 9uh);                    % adjusted
+  draw z1{left}..z2{up}..z3{right}..z4{down}..tension 0.9..z5;
+  drawdot(z5);
+  % loop and tail
+  z6 = (x4 + 1uw, 6.5uh);
+  z7 = (x4 - 1uw, 0uh);
+  z8 = (x4 + 3.1667uw, -5uw);
+  draw z5{right}..z6..z7; draw z7--z8; drawdot(z6);
+  penlabels(1,2,3,4,5,6,7,8);
+enddef;
+
+% top left eye, that turns the pa into a pha.
+
+def top_left_eye =
+  pickup curvepen;
+  z31 = (x31, 18uh);
+  z32 = (x31+3.5uw, good.y 16uh);
+  z33 = (good.x (x31+7uw), 20.5uh);
+  z34 = (x32, good.y 25uh);
+  z35 = (x31, 23uh);
+  draw z31..z32{right}..z33{up}..z34{left}..z35;
+  penlabels(31,32,33,34,35)
+enddef;
+
+def ta_tail =
+  pickup curvepen;
+  z2 = z1 + (-3.5uw, 2uh);
+  z3 = z1 + (-7uw, -2uh);
+  z4 = z1 + (6uw, -12uh);
+  draw z1..z2{left}..z3{down}..{curl0}z4;
+  penlabels(1,2,3,4);
+enddef;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% end of odbase.mf

@@ -1,0 +1,34 @@
+% odcode2.mf -- glyph codes for the extended Oriya metafont
+% Copyright 2015, Jeroen Hellingman, Soumyashant Nayak & Anshuman Pandey
+%
+% History:
+%   21-DEC-2015 added the conjunct "tka" (\odtka) (SN)
+%   26-MAY-2002 added several conjuncts (AP)
+%
+% the assignment of codes is totally ad hoc, and will be made more
+% rational later. This file is the only place where the actual codes are
+% used, everywhere else the identifiers are used.
+%
+% The file odcode.tex is derived from this file, using getcode.awk.
+%
+% used codes: (KEEP UP TO DATE!)
+%
+%
+% naming conventions
+%
+% c_*   full vowel/consonant
+% cs_*  vowel sign/secondary consonant
+%
+
+c_k_ss_ma       := 65;         %%\def\odkSma{\char65}
+c_m_nna         := 66;         %%\def\odmNa{\char66}
+c_s_ma          := 67;         %%\def\odsma{\char67}
+c_ss_ma         := 68;         %%\def\odSma{\char68}
+c_g_ma          := 69;         %%\def\odgma{\char69}
+c_d_ma          := 70;         %%\def\oddma{\char70}
+c_nn_ma         := 71;         %%\def\odNma{\char71}
+c_s_sa          := 72;         %%\def\odssa{\char72}
+c_l_ga          := 73;         %%\def\odlga{\char73}
+c_t_ka          := 74;         %%\def\odtka{\char74}
+
+% end of odcode2.mf

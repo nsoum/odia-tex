@@ -1,0 +1,26 @@
+% odsssl10.mf -- Odia modern slanted 10 pt parameter file
+% Copyright 1996 Jeroen Hellingman
+
+mode_setup;
+
+input odcode;
+input odbase;
+
+gensize# := 10pt#; 
+uh#     := 0.21pt#;             % unit height, (X-height is 25uh)
+uw#     := 0.21pt#;             % unit width
+rm#     := 6.0uw#;              % space in between characters
+rb#     := 1.5uw#;              % extra space to right of standing bars
+slant   := 0.17;                % slant of characters
+calligraphic := false;		% calligraphic effects
+ligs    := false;
+rot     := 30;                  % angle of pen
+thick#  := 2.0uh#;  		% longest diameter of pen            
+thin#   := 2.0uh#;  		% smallest diameter of pen
+
+font_size               10pt#;
+font_identifier :=      "ODSSSL10";
+
+input odia;
+
+% end of odsssl10.mf

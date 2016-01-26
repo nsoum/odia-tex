@@ -1,0 +1,27 @@
+% odxss8.mf -- Odia modern 8 pt parameter file
+% Copyright 1996 Jeroen Hellingman
+
+mode_setup;
+
+input odcode2;
+input odbase;
+
+gensize# := 8pt#; 
+uh#     := 0.17pt#;             % unit height, (X-height is 25uh)
+uw#     := 0.18pt#;             % unit width
+rm#     := 6.0uw#;              % space in between characters
+rb#     := 1.5uw#;              % extra space to right of standing bars
+slant   := 0;                   % slant of characters
+calligraphic := false;		% calligraphic effects
+ligs    := false;
+rot     := 30;                  % angle of pen
+thick#  := 2.0uh#;  		% longest diameter of pen            
+thin#   := 2.0uh#;  		% smallest diameter of pen
+
+font_size               8pt#;
+font_identifier :=      "ODSS8";
+
+input odia2;
+
+end.
+% end of odxss8.mf

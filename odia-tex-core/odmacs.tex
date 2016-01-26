@@ -1,0 +1,339 @@
+% Copyright 1996 Jeroen Hellingman
+
+
+% odmacs.tex -- Odia macros
+%
+% History:
+%   21-DEC-2015 created Odia Cuttack fonts with typographical emphasis (bold, italics), for the extra characters in odextra.mf (SN)
+%               created missing font sizes from {8, 10, 12, 17, 24, 36} for all the fonts and edited the odmacs.tex file accordingly (SN)
+%   19-DEC-2015 changed filenames, fontnames, character names to reflect the name Odia - instead of Oriya (SN)
+
+\catcode`\@=11
+
+%%%%% Font loading Macros
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %   
+%         Load ODIA (Konark) fonts              %
+%                                               %       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\font\od@VIII     = od8
+\font\od@X        = od10
+\font\od@XII      = od12
+\font\od@XVII     = od17
+\font\od@XXIV     = od24
+\font\od@XXXVI    = od36
+\font\od@LXXII    = od36 at 72pt
+
+\font\odsl@VIII   = odsl8
+\font\odsl@X      = odsl10
+\font\odsl@XII    = odsl12
+\font\odsl@XVII   = odsl17
+\font\odsl@XXIV   = odsl24
+\font\odsl@XXXVI  = odsl36
+\font\odsl@LXXII  = odsl36 at 72pt
+
+\font\odbf@VIII   = odbf8
+\font\odbf@X      = odbf10
+\font\odbf@XII    = odbf12
+\font\odbf@XVII   = odbf17
+\font\odbf@XXIV   = odbf24
+\font\odbf@XXXVI  = odbf36
+\font\odbf@LXXII  = odbf36 at 72pt
+
+\font\odbs@VIII   = odbs8
+\font\odbs@X      = odbs10
+\font\odbs@XII    = odbs12
+\font\odbs@XVII   = odbs17
+\font\odbs@XXIV   = odbs24
+\font\odbs@XXXVI  = odbs36
+\font\odbs@LXXII  = odbs36 at 72pt
+
+\def\odVIII{\od@VIII\baselineskip=9pt}
+\def\od{\od@X\baselineskip=12pt}
+\def\odXII{\od@XII\baselineskip=15pt}
+\def\odXVII{\od@XVII\baselineskip=20pt}
+\def\odXXIV{\od@XXIV\baselineskip=26pt}
+\def\odXXXVI{\od@XXXVI\baselineskip=36pt}
+\def\odLXXII{\od@LXXII\baselineskip=72pt}
+
+\def\odslVIII{\odsl@VIII\baselineskip=9pt}
+\def\odsl{\odsl@X\baselineskip=12pt}
+\def\odslXII{\odsl@XII\baselineskip=15pt}
+\def\odslXVII{\odsl@XVII\baselineskip=20pt}
+\def\odslXXIV{\odsl@XXIV\baselineskip=26pt}
+\def\odslXXXVI{\odsl@XXXVI\baselineskip=36pt}
+\def\odslLXXII{\odsl@LXXII\baselineskip=72pt}
+
+\def\odbfVIII{\odbf@VIII\baselineskip=9pt}
+\def\odbf{\odbf@X\baselineskip=12pt}
+\def\odbfXII{\odbf@XII\baselineskip=15pt}
+\def\odbfXVII{\odbf@XVII\baselineskip=20pt}
+\def\odbfXXIV{\odbf@XXIV\baselineskip=26pt}
+\def\odbfXXXVI{\odbf@XXXVI\baselineskip=36pt}
+\def\odbfLXXII{\odbf@LXXII\baselineskip=72pt}
+
+\def\odbsVIII{\odbs@VIII\baselineskip=9pt}
+\def\odbs{\odbs@X\baselineskip=12pt}
+\def\odbsXII{\odbs@XII\baselineskip=15pt}
+\def\odbsXVII{\odbs@XVII\baselineskip=20pt}
+\def\odbsXXIV{\odbs@XXIV\baselineskip=26pt}
+\def\odbsXXXVI{\odbs@XXXVI\baselineskip=36pt}
+\def\odbsLXXII{\odbs@LXXII\baselineskip=72pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %   
+%         Load ODIA (Cuttack) fonts             %
+%                                               %       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\font\odss@VIII     = odss8
+\font\odss@X	    = odss10
+\font\odss@XII      = odss12
+\font\odss@XVII	    = odss17
+\font\odss@XXIV     = odss24
+\font\odss@XXXVI    = odss36
+\font\odss@LXXII    = odss36 at 72pt
+
+\font\odsssl@VIII   = odsssl8
+\font\odsssl@X      = odsssl10
+\font\odsssl@XII    = odsssl12
+\font\odsssl@XVII   = odsssl17
+\font\odsssl@XXIV   = odsssl24
+\font\odsssl@XXXVI  = odsssl36
+\font\odsssl@LXXII  = odsssl36 at 72pt
+
+\font\odssbf@VIII   = odssbf8
+\font\odssbf@X      = odssbf10
+\font\odssbf@XII    = odssbf12
+\font\odssbf@XVII   = odssbf17
+\font\odssbf@XXIV   = odssbf24
+\font\odssbf@XXXVI  = odssbf36
+\font\odssbf@LXXII  = odssbf36 at 72pt
+
+\font\odssbs@VIII   = odssbs8
+\font\odssbs@X      = odssbs10
+\font\odssbs@XII    = odssbs12
+\font\odssbs@XVII   = odssbs17
+\font\odssbs@XXIV   = odssbs24
+\font\odssbs@XXXVI  = odssbs36
+\font\odssbs@LXXII  = odssbs36 at 72pt
+
+\def\odssVIII{\odss@VIII\baselineskip=9pt}
+\def\odss{\odss@X\baselineskip=12pt}
+\def\odssXII{\odss@XII\baselineskip=15pt}
+\def\odssXVII{\odss@XVII\baselineskip=20pt}
+\def\odssXXIV{\odss@XXIV\baselineskip=26pt}
+\def\odssXXXVI{\odss@XXXVI\baselineskip=36pt}
+\def\odssLXXII{\odss@LXXII\baselineskip=72pt}
+
+\def\odssslVIII{\odsssl@VIII\baselineskip=9pt}
+\def\odsssl{\odsssl@X\baselineskip=12pt}
+\def\odssslXII{\odsssl@XII\baselineskip=15pt}
+\def\odssslXVII{\odsssl@XVII\baselineskip=20pt}
+\def\odssslXXIV{\odsssl@XXIV\baselineskip=26pt}
+\def\odssslXXXVI{\odsssl@XXXVI\baselineskip=36pt}
+\def\odssslLXXII{\odsssl@LXXII\baselineskip=72pt}
+
+\def\odssbfVIII{\odssbf@VIII\baselineskip=9pt}
+\def\odssbf{\odssbf@X\baselineskip=12pt}
+\def\odssbfXII{\odssbf@XII\baselineskip=15pt}
+\def\odssbfXVII{\odssbf@XVII\baselineskip=20pt}
+\def\odssbfXXIV{\odssbf@XXIV\baselineskip=26pt}
+\def\odssbfXXXVI{\odssbf@XXXVI\baselineskip=36pt}
+\def\odssbfLXXII{\odssbf@LXXII\baselineskip=72pt}
+
+\def\odssbsVIII{\odssbs@VIII\baselineskip=9pt}
+\def\odssbs{\odssbs@X\baselineskip=12pt}
+\def\odssbsXII{\odssbs@XII\baselineskip=15pt}
+\def\odssbsXVII{\odssbs@XVII\baselineskip=20pt}
+\def\odssbsXXIV{\odssbs@XXIV\baselineskip=26pt}
+\def\odssbsXXXVI{\odssbs@XXXVI\baselineskip=36pt}
+\def\odssbsLXXII{\odssbs@LXXII\baselineskip=72pt}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %   
+%       Load ODIA (Konark) extra fonts          %
+%                                               %       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\font\odx@VIII     = odx8
+\font\odx@X        = odx10
+\font\odx@XII      = odx12
+\font\odx@XVII     = odx17
+\font\odx@XXIV     = odx24
+\font\odx@XXXVI    = odx36
+\font\odx@LXXII    = odx36 at 72pt
+
+\font\odsxl@VIII   = odxsl8
+\font\odxsl@X      = odxsl10
+\font\odxsl@XII    = odxsl12
+\font\odxsl@XVII   = odxsl17
+\font\odxsl@XXIV   = odxsl24
+\font\odxsl@XXXVI  = odxsl36
+\font\odxsl@LXXII  = odxsl36 at 72pt
+
+\font\odxbf@VIII   = odxbf8
+\font\odxbf@X      = odxbf10
+\font\odxbf@XII    = odxbf12
+\font\odxbf@XVII   = odxbf17
+\font\odxbf@XXIV   = odxbf24
+\font\odxbf@XXXVI  = odxbf36
+\font\odxbf@LXXII  = odxbf36 at 72pt
+
+\font\odxbs@VIII   = odxbs8
+\font\odxbs@X      = odxbs10
+\font\odxbs@XII    = odxbs12
+\font\odxbs@XVII   = odxbs17
+\font\odxbs@XXIV   = odxbs24
+\font\odxbs@XXXVI  = odxbs36
+\font\odxbs@LXXII  = odxbs36 at 72pt
+
+\def\odxVIII{\odx@VIII\baselineskip=9pt}
+\def\odx{\odx@X\baselineskip=12pt}
+\def\odxXII{\odx@XII\baselineskip=15pt}
+\def\odxXVII{\odx@XVII\baselineskip=20pt}
+\def\odxXXIV{\odx@XXIV\baselineskip=26pt}
+\def\odxXXXVI{\odx@XXXVI\baselineskip=36pt}
+\def\odxLXXII{\odx@LXXII\baselineskip=72pt}
+
+\def\odxslVIII{\odxsl@VIII\baselineskip=9pt}
+\def\odxsl{\odxsl@X\baselineskip=12pt}
+\def\odxslXII{\odxsl@XII\baselineskip=15pt}
+\def\odxslXVII{\odxsl@XVII\baselineskip=20pt}
+\def\odxslXXIV{\odxsl@XXIV\baselineskip=26pt}
+\def\odxslXXXVI{\odxsl@XXXVI\baselineskip=36pt}
+\def\odxslLXXII{\odxsl@LXXII\baselineskip=72pt}
+
+\def\odxbfVIII{\odxbf@VIII\baselineskip=9pt}
+\def\odxbf{\odxbf@X\baselineskip=12pt}
+\def\odxbfXII{\odxbf@XII\baselineskip=15pt}
+\def\odxbfXVII{\odxbf@XVII\baselineskip=20pt}
+\def\odxbfXXIV{\odxbf@XXIV\baselineskip=26pt}
+\def\odxbfXXXVI{\odxbf@XXXVI\baselineskip=36pt}
+\def\odxbfLXXII{\odxbf@LXXII\baselineskip=72pt}
+
+\def\odxbsVIII{\odxbs@VIII\baselineskip=9pt}
+\def\odxbs{\odxbs@X\baselineskip=12pt}
+\def\odxbsXII{\odxbs@XII\baselineskip=15pt}
+\def\odxbsXVII{\odxbs@XVII\baselineskip=20pt}
+\def\odxbsXXIV{\odxbs@XXIV\baselineskip=26pt}
+\def\odxbsXXXVI{\odxbs@XXXVI\baselineskip=36pt}
+\def\odxbsLXXII{\odxbs@LXXII\baselineskip=72pt}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %   
+%       Load ODIA (Cuttack) extra fonts         %
+%                                               %       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\font\odxss@VIII     = odxss8
+\font\odxss@X	     = odxss10
+\font\odxss@XII      = odxss12
+\font\odxss@XVII     = odxss17
+\font\odxss@XXIV     = odxss24
+\font\odxss@XXXVI    = odxss36
+\font\odxss@LXXII    = odxss36 at 72pt
+
+\font\odxsssl@VIII   = odxsssl8
+\font\odxsssl@X      = odxsssl10
+\font\odxsssl@XII    = odxsssl12
+\font\odxsssl@XVII   = odxsssl17
+\font\odxsssl@XXIV   = odxsssl24
+\font\odxsssl@XXXVI  = odxsssl36
+\font\odxsssl@LXXII  = odxsssl36 at 72pt
+
+\font\odxssbf@VIII   = odxssbf8
+\font\odxssbf@X      = odxssbf10
+\font\odxssbf@XII    = odxssbf12
+\font\odxssbf@XVII   = odxssbf17
+\font\odxssbf@XXIV   = odxssbf24
+\font\odxssbf@XXXVI  = odxssbf36
+\font\odxssbf@LXXII  = odxssbf36 at 72pt
+
+\font\odxssbs@VIII   = odxssbs8
+\font\odxssbs@X      = odxssbs10
+\font\odxssbs@XII    = odxssbs12
+\font\odxssbs@XVII   = odxssbs17
+\font\odxssbs@XXIV   = odxssbs24
+\font\odxssbs@XXXVI  = odxssbs36
+\font\odxssbs@LXXII  = odxssbs36 at 72pt
+
+\def\odxssVIII{\odxss@VIII\baselineskip=9pt}
+\def\odxss{\odxss@X\baselineskip=12pt}
+\def\odxssXII{\odxss@XII\baselineskip=15pt}
+\def\odxssXVII{\odxss@XVII\baselineskip=20pt}
+\def\odxssXXIV{\odxss@XXIV\baselineskip=26pt}
+\def\odxssXXXVI{\odxss@XXXVI\baselineskip=36pt}
+\def\odxssLXXII{\odxss@LXXII\baselineskip=72pt}
+
+\def\odxssslVIII{\odxsssl@VIII\baselineskip=9pt}
+\def\odxsssl{\odxsssl@X\baselineskip=12pt}
+\def\odxssslXII{\odxsssl@XII\baselineskip=15pt}
+\def\odxssslXVII{\odxsssl@XVII\baselineskip=20pt}
+\def\odxssslXXIV{\odxsssl@XXIV\baselineskip=26pt}
+\def\odxssslXXXVI{\odxsssl@XXXVI\baselineskip=36pt}
+\def\odxssslLXXII{\odxsssl@LXXII\baselineskip=72pt}
+
+\def\odxssbfVIII{\odxssbf@VIII\baselineskip=9pt}
+\def\odxssbf{\odxssbf@X\baselineskip=12pt}
+\def\odxssbfXII{\odxssbf@XII\baselineskip=15pt}
+\def\odxssbfXVII{\odxssbf@XVII\baselineskip=20pt}
+\def\odxssbfXXIV{\odxssbf@XXIV\baselineskip=26pt}
+\def\odxssbfXXXVI{\odxssbf@XXXVI\baselineskip=36pt}
+\def\odxssbfLXXII{\odxssbf@LXXII\baselineskip=72pt}
+
+\def\odxssbsVIII{\odxssbs@VIII\baselineskip=9pt}
+\def\odxssbs{\odxssbs@X\baselineskip=12pt}
+\def\odxssbsXII{\odxssbs@XII\baselineskip=15pt}
+\def\odxssbsXVII{\odxssbs@XVII\baselineskip=20pt}
+\def\odxssbsXXIV{\odxssbs@XXIV\baselineskip=26pt}
+\def\odxssbsXXXVI{\odxssbs@XXXVI\baselineskip=36pt}
+\def\odxssbsLXXII{\odxssbs@LXXII\baselineskip=72pt}
+
+
+%%%%% Odia Characters
+
+\def\<#1>{\char#1}
+
+\input odcode
+\input odcode2
+
+\newif\ifodmode\odmodefalse     % toggle for Odia mode
+
+
+%%%%% Syllable Composition Algorithm
+%
+% The intention here is to create macros that correctly parse ISCII input,
+% and build the syllables on the fly. This will allow users to type their
+% text in a ISCII editor, and then simply put it through TeX to view and
+% print it. It will make processing a bit slow, but it saves a lot of 
+% hassle with pre-processors.
+
+% make the ISCII characters active, and let them call appropriate macros
+
+% \IsciiCons is called by all consonants and full vowels, it will look 
+% ahead to see what is next. The next character can be
+%   a halant            call \IsciiHalant
+%   a vowel sign        call \IsciiMatra
+%   a modifier          call \IsciiModifier
+%   something else      call \IsciiBuildSyllable
+
+\def\IsciiCons#1{#1}
+
+% \IsciiReph is called in the special case of the letter ra, it will look
+% ahead to see what is next. The next character can be
+
+
+
+% we have given all glyphs in our font symbolic names, we define them here.
+
+\catcode`\@=12
+\endinput

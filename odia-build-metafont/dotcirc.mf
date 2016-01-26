@@ -1,0 +1,88 @@
+% dotcirc.mf -- Dotted Circle
+% Copyright 1993, 1996 Jeroen Hellingman
+%
+% History:
+%   18-NOV-1996 added crossed out box (JH)
+%   29-SEP-1996 added real dotted circle (JH)
+%   06-JUN-1996 adopted from mmpunct.mf (JH)
+%
+%%%%% dotted circle to show placement of accents/matras, etc.
+
+% this one is actually made up out of little curved segments, not dots.
+
+if old:
+beginchar(c_dotted_circle, 30uw#+rm#, 25uh#, 5uh#); "U+25CC dotted circle";
+  numeric n, d, db, r, rb, i, a;
+  z0 = (15uw, 10uh);
+  n:=14;
+  d:=360/n; db:=360/(4n);
+  r:=15uh; rb:=15uh - thin;
+
+  a := 0;
+  forsuffixes s = 1,2,3,4,5,6,7,8,9,10,11,12,13,14 :
+    z.s.a = z0 + r * dir (a+db);
+    z.s.b = z0 + r * dir a;
+    z.s.c = z0 + r * dir (a-db);
+    z.s.d = z0 + rb * dir (a-db);
+    z.s.e = z0 + rb * dir a;
+    z.s.f = z0 + rb * dir (a+db);
+    fill z.s.a..z.s.b..z.s.c--z.s.d..z.s.e..z.s.f--cycle;
+    a := a + d;
+    penlabels(s.a,s.b,s.c,s.d,s.e,s.f);
+  endfor;
+  penlabels(0);
+endchar;
+fi;
+
+% dotted circle with real dots.
+
+beginchar(c_dotted_circle, 30uw#+rm#, 25uh#, 5uh#); "U+25CC dotted circle";
+  numeric n, d, r, i, a;
+  z0 = (15uw, 10uh);
+  n:=14;
+  d:=360/n;
+  r:=15uh;
+
+  pickup pencircle scaled thick;
+  a := 0;
+  forsuffixes s = 1,2,3,4,5,6,7,8,9,10,11,12,13,14 :
+    z.s = z0 + r * dir a;
+    drawdot(z.s);
+    a := a + d;
+    penlabels(s);
+  endfor;
+  penlabels(0);
+endchar;
+
+%%%%%% white square, to show missing characters
+
+beginchar(c_white_square, 30uw#+rm#, 25uh#, 5uh#); "U+25A1 white square";
+  pickup pensquare scaled thick;
+  z1=(0,-5uh)+.5(thick, thick);
+  z2=(0,25uh)+.5(thick, -thick);
+  z3=(30uw, 25uh)+.5(-thick, -thick);
+  z4=(30uw, -5uh)+.5(-thick, thick);
+  draw z1--z2 & z2--z3 & z3--z4 & z4--cycle;
+  penlabels(1,2,3,4);
+endchar;
+
+%%%%%% crossed white square to fill empty cells
+
+beginchar(c_crossed_white_square, 30uw#+rm#, 25uh#, 5uh#); "crossed white square";
+  pickup pensquare scaled thick;
+  z1=(0,-5uh)+.5(thick, thick);
+  z2=(0,25uh)+.5(thick, -thick);
+  z3=(30uw, 25uh)+.5(-thick, -thick);
+  z4=(30uw, -5uh)+.5(-thick, thick);
+  draw z1--z2 & z2--z3 & z3--z4 & z4--cycle;
+  pickup pensquare scaled thick rotated 45;
+  z1'=(0,-5uh)+(thick, thick);
+  z2'=(0,25uh)+(thick, -thick);
+  z3'=(30uw, 25uh)+(-thick, -thick);
+  z4'=(30uw, -5uh)+(-thick, thick);
+  draw z1'--z3';
+  draw z2'--z4';
+  penlabels(1,2,3,4,1',2',3',4');
+endchar;
+
+% end of dotcirc.mf
