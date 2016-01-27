@@ -74,6 +74,56 @@ beginchar(c_t_ka, 28uw#+rb#+rm#, 25uh#, 0uh#); "Odia conjunct t+ka";
     penlabels(1,2,3,4);
 endchar;
 
+% K
+beginchar(c_m_ba, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+ba";
+  path ma_top;
+  path ma_bot;
+  path ma_bar;
+
+  pickup curvepen;
+  % top left bow
+  z1 = (5.5uw, 7.75uh);
+  z2 = (good.x 0uw, 17uh);
+  z3 = (11uw, good.y (25uh+overshoot));
+  z4 = (good.x 22uw, 25uh-joint);
+  ma_top = z1..z2{up}..z3{right}..{curl0}z4;
+  % bottom curve
+  pickup curvepen;
+  z5 = (6uw, 0uh);
+  z6 = (good.x 3uw, 3uh);
+  z7 = (8uw, 8uh);
+  z8 = (15uw, 12uh);
+  ma_bot = z5..z6{up}..tension1.2..{(3,1)}z8;
+  % standing bar
+  pickup barpen;
+  z9 = (x4, h);
+  z10 = (x4, 3uh);
+  ma_bar := z9--z10;
+
+  % draw the full size ma
+  pickup curvepen;
+  draw ma_top;
+  pickup curvepen;
+  draw ma_bot;
+  drawdot(z5);
+  pickup barpen;
+  draw ma_bar;
+  drawdot(z9);
+  drawdot(z10);
+
+  pickup subbarpen;
+  z11 = (x4+6uw, 3uh);
+  z12 = (x4+6uw, -10uh);
+  draw z11--z12; drawdot(z11); drawdot(z12);
+  pickup subpen;
+  z13 = z11 + (-7uw, 0);
+  z14 = z11 + (-9uw, -4uh);
+  z15 = z11 + (-4uw, -9uh);
+  z16 = z11 + (0uw, -5uh);
+  draw z13..z14{down}..z15{right}..{curl0}z16;
+  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
 
 
 
