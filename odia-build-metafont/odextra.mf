@@ -97,7 +97,7 @@ beginchar(c_m_ba, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+ba";
   % standing bar
   pickup barpen;
   z9 = (x4, h);
-  z10 = (x4, 3uh);
+  z10 = (x4, 7uh);
   ma_bar := z9--z10;
 
   % draw the full size ma
@@ -111,15 +111,16 @@ beginchar(c_m_ba, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+ba";
   drawdot(z9);
   drawdot(z10);
 
+  % draw the secondary character va
   pickup subbarpen;
-  z11 = (x4+6uw, 3uh);
-  z12 = (x4+6uw, -10uh);
+  z11 = (x4+6uw, 5uh);
+  z12 = (x4+6uw, -6uh);
   draw z11--z12; drawdot(z11); drawdot(z12);
   pickup subpen;
-  z13 = z11 + (-7uw, 0);
-  z14 = z11 + (-9uw, -4uh);
-  z15 = z11 + (-4uw, -9uh);
-  z16 = z11 + (0uw, -5uh);
+  z13 = z11 + (-6uw, 2uh);
+  z14 = z11 + (-10uw, -2uh);
+  z15 = z11 + (-4uw, -7uh);
+  z16 = z11 + (0uw, -3uh);
   draw z13..z14{down}..z15{right}..{curl0}z16;
   penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
 endchar;

@@ -2956,7 +2956,7 @@ beginchar(c_t_ma, 22uw#+rb#+rm#, 25uh#, 12uh#); "Odia conjunct t+ma";
   ta_tail;
 endchar;
 
-beginchar(c_m_bha, 22uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
+beginchar(c_m_bha, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
   path ma_top;
   path ma_bot;
   path ma_bar;
@@ -2978,7 +2978,7 @@ beginchar(c_m_bha, 22uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
   % standing bar
   pickup barpen;
   z9 = (x4, h);
-  z10 = (x4, 3uh);
+  z10 = (x4, 7uh);
   ma_bar := z9--z10;
 
   % draw the full size ma
@@ -2993,7 +2993,7 @@ beginchar(c_m_bha, 22uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
   drawdot(z10);
 
   % the tail
-  z12 = (x4+1uw, 3uh);
+  z12 = (x4+1uw, 7uh);
   pickup curvepen;
   new_tailtwo(11,12,13,14,15,16,17);
   penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
