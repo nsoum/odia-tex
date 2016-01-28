@@ -3,6 +3,7 @@ History of Odia-TeX
 --------------------------------
 |  Date        |   Edits and Comments               |
 |---           |:---                                |
+|  28-JAN-2016 | modified *t+sa*, touched up *m+ba, m+bha*  |
 |  26-JAN-2016 | added *m+ba* (SN)                  |
 |  25-JAN-2016 | added *m+bha* (SN)                 |
 |  21-DEC-2015 |  1. added the conjunctive consonant *tka (t+ka)* as used in utkala (ଉତ୍କଳ) (SN)<br /> 2. created Odia Cuttack fonts with typographical emphasis (bold, italics), for the extra characters in <code>odextra.mf</code> (SN)  <br /> 3. created font sizes that were missing from the list {8, 10, 12, 17, 24, 36} for all the fonts, edited the <code>odmacs.tex</code> file accordingly (SN)|
