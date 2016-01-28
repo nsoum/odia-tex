@@ -2821,16 +2821,15 @@ beginchar(c_s_pha, 24uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+pha";
   currentpicture := sup_sa_picture + sub_pha_picture;
 endchar;
 
-beginchar(c_t_sa, 22uw#+rm#, 25uh#, 0uh#); "Odia conjunct t+sa";
-  currentpicture := sup_sa_picture shifted (4uw, 0);
-  % lower diagonal;
+beginchar(c_t_sa, 20uw#+rm#, 25uh#, 0uh#); "Odia conjunct t+sa";
+  currentpicture := sup_sa_picture;
   pickup subpen;
-  z1 = (3uw, 12uh);
-  z2 = (0uw, 9uh);
-  z3 = (4uw, 6uh);
-  z4 = (22uw, 0);
+  z1 = (6uw, 6uh);
+  z2 = (3.5uw, 3.5uh);
+  z3 = (6.5uw, 1.6uh);
+  z4 = (18uw, -1.5uh);
   draw z1..z2{down}..z3---z4;
-  penlabels(1,2,3,4);
+  penlabels(1,2,3,4);  
 endchar;
 
 beginchar(c_s_t_ra, 22uw#+rm#, 25uh#, 5uh#); "Odia conjunct s+t+ra";
