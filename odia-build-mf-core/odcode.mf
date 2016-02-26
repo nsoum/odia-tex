@@ -2,6 +2,10 @@
 % Copyright 1996, 97, 98, 99 Jeroen Hellingman
 %
 % History:
+%   25-FEB-2016 Added d+ba, ll+bha, t+tha, n+tu, h+nna, percent sign (SN)
+%   24-FEB-2016	Added the Indian rupee symbol, decimal dot (SN)
+%   26-JAN-2016 added m+ba (SN)
+%   21-DEC-2015 added t+ka (SN)
 %   26-MAY-2002 added data for ppa (AP)
 %   08-JUN-1999 added several conjuncts (JH)
 %   21-MAY-1999 added skha (JH)
@@ -24,7 +28,7 @@
 % upto (inc.)           128--249
 % downto (inc.)         255--250
 %
-% gaps still free:		37, 64
+% gaps still free:	NONE
 %
 % naming conventions
 %
@@ -131,13 +135,16 @@ c_ha            := ASCII "h";
 
 % secondary consonants
 
+cs_ja                   := 82;  %%\def\odsecja{\char82} 
+cs_jha                  := 153; %%\def\odsecjha{\char153}
 cs_ddha         := 175;         %%\def\odsecDha{\char175}
 cs_ta           := 174;         %%\def\odsecta{\char174}
 cs_tha          := 195;         %%\def\odsectha{\char195}\def\odseccha{\char195}
 cs_na           := 240;         %%\def\odsecna{\char240}
-cs_pa           := 143;         %%\def\odsecpa{\char143}   % not used
+cs_na_low               := 36;   	%%\def\odsecnalow{\char36}
 cs_bha          := 239;         %%\def\odsecbha{\char239}
 cs_ma           := 136;         %%\def\odsecma{\char136}
+cs_ma_low               := 231;  	%%\def\odsecmalow{\char231}
 cs_ya           := 138;         %%\def\odsecya{\char138}
 cs_ra           := 146;         %%\def\odsecra{\char146}
 cs_ra_low       := 206;         %%\def\odsecralow{\char206}
@@ -194,6 +201,9 @@ c_six           := ASCII "6";
 c_seven         := ASCII "7";
 c_eight         := ASCII "8";
 c_nine          := ASCII "9";
+c_decimaldot		:= 220;    	%%\def\oddecimaldot{\char220}
+c_percent		:= 64;	        %%\def\odpercent{\char64}
+ 
 
 % consonant-vowel combinations
 
@@ -236,8 +246,6 @@ c_ng_ga         := 160;         %%\def\odngga{\char160}
 c_ng_gha        := 202;         %%\def\odnggha{\char202}
 c_c_ca          := 152;         %%\def\odcca{\char152}
 c_c_cha         := 210;         %%\def\odccha{\char210}
-c_j_ja          := 153;         %%\def\odjja{\char153}
-c_j_jha			:= 36;			%%\def\odjjha{\char36}
 c_j_nya         := 179;         %%\def\odjnya{\char179}
 c_ny_ca         := 172;         %%\def\odnyca{\char172}
 c_ny_cha        := 230;         %%\def\odnycha{\char230}
@@ -248,11 +256,13 @@ c_dd_ga			:= 127;			%%\def\odDga{\char127}
 c_rr_ga			:= 126;			%%\def\odRga{\char126}
 c_dd_dda        := 236;         %%\def\odDDa{\char236}
 c_nn_tta        := 242;         %%\def\odNTa{\char242}
-c_nn_ttha       := 220;         %%\def\odNTha{\char220}
+c_nn_ttha	:= 235;		%%\def\odNTha{\char235}
 c_nn_dda        := 187;         %%\def\odNDa{\char187}
 c_nn_ddha       := 188;         %%\def\odNDha{\char188}
 c_nn_nna        := 186;         %%\def\odNNa{\char186}
+c_t_ka                  := 38;  		%%\def\odtka{\char38}
 c_t_ta          := 154;         %%\def\odtta{\char154}
+c_t_tha			:= 25;  %%\def\odttha{\char25} 
 c_t_na          := 162;         %%\def\odtna{\char162}
 c_t_pa			:= 28;			%%\def\odtpa{\char28}
 c_t_ma          := 163;         %%\def\odtma{\char163}
@@ -261,37 +271,40 @@ c_t_sa          := 241;         %%\def\odtsa{\char241}
 c_d_ga          := 234;         %%\def\oddga{\char234}
 c_d_da          := 169;         %%\def\oddda{\char169}
 c_d_dha         := 170;         %%\def\odddha{\char170}
+c_d_ba			:= 221;	%%\def\oddba{\char221}
 c_d_bha         := 214;         %%\def\oddbha{\char214}
 c_dh_ya         := 178;         %%\def\oddhya{\char178}
 c_n_ta          := 226;         %%\def\odnta{\char226}
-c_n_ta_var		:= 23;			%%\def\odntavar{char23}
-c_n_ti_var		:= 24;			%%\def\odntivar{char24}
+c_n_ta_var		:= 23;			%%\def\odntavar{\char23}
+c_n_ti_var		:= 24;			%%\def\odntivar{\char24}
+c_n_tu			:= 143; 		%%\def\odntu{\char143}
 c_n_t_ra        := 232;         %%\def\odntra{\char232}
 c_n_tha         := 227;         %%\def\odntha{\char227}
 c_n_da          := 165;         %%\def\odnda{\char165}
 c_n_dha         := 166;         %%\def\odndha{\char166}
-c_b_ja			:= 34;			%%\def\odbja{\char34}
-c_b_da          := 167;         %%\def\odbda{\char167}
-c_b_dha			:= 29;			%%\def\odbdha{\char29}
-c_b_ba          := 168;         %%\def\odbba{\char168}
 c_p_ta          := 181;         %%\def\odpta{\char181}
 c_p_pa          := 183;         %%\def\odppa{\char183}
 c_p_sa          := 197;         %%\def\odpsa{\char197}
+c_b_da          := 167;         %%\def\odbda{\char167}
+c_b_dha			:= 29;			%%\def\odbdha{\char29}
+c_b_ba          := 168;         %%\def\odbba{\char168}
 c_m_pa          := 190;         %%\def\odmpa{\char190}
 c_m_pha         := 191;         %%\def\odmpha{\char191}
-c_m_bha		    := 244;		    %%\def\odmbha{\char244}
+c_m_ba                  := 61;  		%%\def\odmba{\char61}
+c_m_bha		    := 244;			%%\def\odmbha{\char244}
 c_m_ma          := 215;         %%\def\odmma{\char215}
-c_l_ka          := 219;         %%\def\odlka{\char219}
-c_l_pa          := 221;         %%\def\odlpa{\char221}
-c_l_pha         := 223;         %%\def\odlpha{\char223}
 c_l_la          := 237;         %%\def\odlla{\char237}
+c_ll_ka             := 219;        %%\def\odLka{\char219}
+c_ll_pa             := 34;         %%\def\odLpa{\char34}
+c_ll_pha	    := 223;	   %%\def\odLpha{\char223}
+c_ll_bha	    := 94;	   %%\def\odLbha{\char94}	
 c_sh_tta        := 204;         %%\def\odshTa{\char204}
 c_sh_ca         := 205;         %%\def\odshca{\char205}
-c_sh_cha        := 229;         %%\def\prshcha{\char229}
+c_sh_cha        := 229;         %%\def\odshcha{\char229}
 c_ss_ka         := 200;         %%\def\odSka{\char200}
 c_ss_tta        := 198;         %%\def\odSTa{\char198}
-c_ss_ttha       := 207;         %%\def\odSTha{\char207}
-c_ss_nna	    := 16;		    %%\def\odSNa{\char16}
+c_ss_ttha           := 86;     			%%\def\odSTha{\char86} 		
+c_ss_nna	    := 16;		        %%\def\odSNa{\char16}
 c_ss_pa         := 184;         %%\def\odSpa{\char184}
 c_ss_pha        := 222;         %%\def\odSpha{\char222}
 c_s_ka          := 201;         %%\def\odska{\char201}
@@ -302,9 +315,10 @@ c_s_t_ra        := 233;         %%\def\odstra{\char233}
 c_s_tha         := 228;         %%\def\odstha{\char228}
 c_s_pa          := 185;         %%\def\odspa{\char185}
 c_s_pha         := 224;         %%\def\odspha{\char224}
-c_h_na			:= 94;			%%\def\odhna{\char94}
+c_s_ma		:= 207;		%%\def\odsma{\char207}
+c_h_nna		:= 251; 	%%\def\odhNa{\char251}
 c_h_ba			:= 95;			%%\def\odhba{\char95}\def\odhva{\odhba}
-c_h_ma			:= 25;			%%\def\odhma{\char25}
+c_h_la                  := 37;                  %%\def\odhla{\char37}
 
 % vowel sign combinations
 
@@ -321,6 +335,7 @@ cs_au_reph_candrabindu	:= 6;
 
 % varia
 
+c_rupee				:= 238;		%\def\odrupee{\char238}
 c_odomsign              := 21;  %%\def\odomsign{\char21}
 c_ganesh                := 254; %%\def\odganesh{\char254}
 c_dotted_circle         := 0;   %%\def\dotcircle{\char0}

@@ -1,0 +1,75 @@
+% odsetup.mf -- setup things for the Odia metafont after the parameters
+%               have been read.
+% Copyright 1996 Jeroen Hellingman
+%
+% History:
+%   16-NOV-1996 changed pen definitions (Jeroen Hellingman)
+
+%% Parameters
+%%
+%% here we set the remaining parameters, based on values set in the
+%% parameter file.
+
+overshoot# :=   1uh#;	% overshoot of certain characters
+joint# := 4uh#;		% height where curves join bars
+
+define_pixels(rb,rm,uw,uh,joint);
+define_whole_pixels(overshoot);
+
+currenttransform := currenttransform shifted (.5rm, 0) slanted slant;
+
+%% set the remaining font parameters in the {\tt .tfm} file
+
+font_slant          := slant;
+font_quad           := 20uw#;
+font_x_height       := 25uh#;
+font_normal_space   := 14uw#;
+font_normal_stretch := 8uw#;
+font_normal_shrink  := 2uw#;
+
+%% pens
+
+superthin# := 0.1pt#;
+define_blacker_pixels(thin,thick,superthin);
+thin := max(thin,1);
+superthin := max(superthin,1);
+smoothing := 0;
+
+% Note: slight variations in pen-thickness have undesireable effects when
+% generating fonts for low resolution printers.
+
+% pen weight factors
+if calligraphic:
+  if (thick > 10.0):
+    HH := 1.15;
+    H  := 1.075; 
+    L  := 0.925;
+    LL := 0.75;
+  else:
+    HH := 1.20;
+    H  := 1.00;
+    L  := 1.00;
+    LL := 0.80;
+  fi
+else:
+  HH := 1.00;
+  H  := 1.00;
+  L  := 1.00;
+  LL := 1.00;
+fi;
+
+% curvepen             % pen used for circular curves
+% subpen               % pen used for subscribed letters
+% subbarpen            % pen used for standing bars in subscribed letters
+% barpen               % pen used for standing bars
+% ddiagpen             % pen used for top-right to bottom-left diagonals
+% udiagpen             % pen used for bottom-right to top-left diagonals
+
+pickup pencircle xscaled        thick  yscaled        thin  rotated rot; curvepen  := savepen;
+pickup pencircle xscaled   (H * thick) yscaled   (H * thin) rotated rot; barpen    := savepen;
+pickup pencircle xscaled  (HH * thick) yscaled  (HH * thin) rotated rot; udiagpen  := savepen;
+pickup pencircle xscaled   (L * thick) yscaled   (L * thin) rotated rot; subpen    := savepen;
+pickup pencircle xscaled        thick  yscaled        thin  rotated rot; subbarpen := savepen;
+pickup pencircle xscaled  (LL * thick) yscaled  (LL * thin) rotated rot; ddiagpen  := savepen;
+
+% end of odsetup.mf

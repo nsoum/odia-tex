@@ -45,5 +45,5 @@ tutorials and tips, please refer to the manual <code>odia-tex-manual.pdf</code> 
 NOTE : Odia-TeX is a work in progress.<br /><br /> 
 
 Soumyashant Nayak,<br />
-nsoum@math.upenn.edu
+<tt>odia.bhashakosha [at] gmail [dot] com </tt>
 

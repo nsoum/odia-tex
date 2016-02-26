@@ -11,6 +11,8 @@
 %   that assume all glyphs are on the same line.
 %
 % History:
+%   24-FEB-2016 Added t+sa, m+ba, m+bha, ligatures for secondary ma (low), secondary na(low), 
+%           	ka, jha, ta, da, na, la, nukta removed h+ma (SN)
 %   20-JUN-1999 Added j+ja, j+jha (JH)
 %   16-JUN-1999 Added s+tu
 %   29-MAY-1999 Added k+tta, t+pa (JH)
@@ -50,6 +52,9 @@ enddef;
 k#   := 1uw#;
 kk#  := 2uw#;
 kkk# := 3uw#;
+kkkk#:= 4uw#;
+K#   := -1uw#;
+KK#  := -2uw#;
 
 % consonant-matra ligatures
 % note that the ligatures for the aa vowel sign will also be used for the
@@ -57,23 +62,28 @@ kkk# := 3uw#;
 % be use, however, the lowered variants of some matras will still be
 % needed.
 
+
+
 if ligs:
 
-ligtable c_ka : cs_aa =: c_kaa,
-                cs_i =: c_ki,
-                cs_u =: c_ku,
-                cs_uu =: c_kuu;
+ligtable c_ka : cs_aa =: c_kaa
+                ,cs_i =: c_ki
+                ,cs_u =: c_ku
+                ,cs_uu =: c_kuu
+		,cs_ri |=: cs_ri_center;
 ligtable c_jha  : lowmatras;
 ligtable c_ta   : cs_aa =: c_taa
                 , cs_i =: c_ti
                 , cs_u =: c_tu
-                , cs_uu =: c_tuu;
-ligtable c_tha  : cs_i |=: cs_i_var;
-ligtable c_da   : cs_i =: c_di;
-ligtable c_dha  : cs_i |=: cs_i_var;
+                , cs_uu =: c_tuu
+		, cs_ri |=: cs_ri_center;
+ligtable c_da   : cs_i =: c_di
+		, cs_ri |=: cs_ri_center;
+
 ligtable c_na   : cs_aa =: c_naa
                 , cs_i =: c_ni
-                , cs_u |=: cs_u_var;
+                , cs_u |=: cs_u_var
+		, cs_ri |=: cs_ri_center;
 ligtable c_yya  : lowmatras;
 ligtable c_la   : cs_aa =: c_laa
                 , cs_u |=: cs_u_var
@@ -82,7 +92,9 @@ ligtable c_ha   : cs_i =: c_hi
                 , cs_u =: c_hu
                 , cs_uu |=: cs_uu_low
                 , cs_ri |=: cs_ri_low
-                , cs_ra |=: cs_ra_low;
+                , cs_ra |=: cs_ra_low
+                , cs_ma |=: cs_ma_low
+	        , cs_na |=: cs_na_low;
 ligtable c_lla  : cs_aa =: c_llaa
                 , cs_i =: c_lli
                 , cs_u |=: cs_u_var;
@@ -90,8 +102,6 @@ ligtable c_lla  : cs_aa =: c_llaa
 % conjunct-matra combinations:
 
 ligtable c_ng_ka    : cs_u |=: cs_u_var;
-ligtable c_ny_ca    : cs_i |=: cs_i_var;
-ligtable c_ny_jha   : cs_i |=: cs_i_var;
 ligtable c_n_ta_var : cs_i =: c_n_ti_var
                     , cs_u |=: cs_u_low
                     , cs_uu |=: cs_uu_low
@@ -101,13 +111,21 @@ ligtable c_n_ta_var : cs_i =: c_n_ti_var
 
 else:
 
-ligtable c_yya  : lowmatras;
-ligtable c_la   : lowmatras;
-ligtable c_ha   : lowmatras;
-
+ligtable c_ka       : centermatras;
+ligtable c_jha	    : centermatras;
+ligtable c_ta	    : centermatras;
+ligtable c_da	    : centermatras;
+ligtable c_na	    : centermatras;
+ligtable c_yya      : lowmatras;
+ligtable c_la	    : centermatras;
+ligtable c_lla	    : centermatras;
+ligtable c_ha       : lowmatras
+                    , cs_na |=: cs_na_low
+	            , cs_ma |=: cs_ma_low;
 ligtable c_n_ta_var : lowmatras;
 
 fi;
+
 
 ligtable c_k_ka         : verylowmatras;
 ligtable c_k_tta        : verylowmatras;
@@ -121,8 +139,10 @@ ligtable c_ca           : if ligs:
                             cs_aa =: c_caa
                         , fi centermatras;
 ligtable c_cha          : centermatras;
-ligtable c_j_ja         : verylowmatras;
-ligtable c_j_jha		: verylowmatras;
+ligtable c_ja		: centermatras;
+ligtable c_nya		: centermatras;
+ligtable c_ny_ca	: cs_i |=: cs_i_var;
+ligtable c_ny_jha   	: cs_i |=: cs_i_var;
 ligtable c_tta          : centermatras
                         , c_ttha kern-kk#;
 ligtable c_ttha         : centermatras;
@@ -135,34 +155,51 @@ ligtable c_dd_dda       : lowmatras;
 ligtable c_ddha         : if ligs:
                             cs_i =: c_ddhi
                         , fi centermatras;
-ligtable c_nn_tta       : verylowmatras;
-ligtable c_nn_ttha      : verylowmatras;
+ligtable c_nn_tta       : verylowmatras
+			, cs_aa kern-KK#
+			, cs_ii kern-KK#;
+ligtable c_nn_ttha	: verylowmatras
+			, cs_aa kern-KK#
+			, cs_ii kern-KK#;
 ligtable c_nn_dda       : lowmatras;
 ligtable c_nn_ddha      : lowmatras;
 ligtable c_nn_nna       : verylowmatras;
+ligtable c_t_tha	: verylowmatras;
 ligtable c_t_na         : lowmatras;
 ligtable c_t_pa         : lowmatras;
 ligtable c_t_ma         : lowmatras;
+ligtable c_t_sa		: verylowmatras
+			, cs_na	|=: cs_na_low
+			, cs_ma |=: cs_ma_low
+			, cs_aa kern-kkkk#;
+ligtable c_tha  	: cs_i |=: cs_i_var;
+ligtable c_dha  	: cs_i |=: cs_i_var;
 ligtable c_d_ga         : lowmatras;
 ligtable c_n_ta         : lowmatras;
 ligtable c_n_t_ra       : verylowmatras;
 ligtable c_p_ta         : lowmatras;
 ligtable c_p_sa         : verylowmatras;
+ligtable c_ba		: centermatras;
 ligtable c_b_dha        : verylowmatras;
+ligtable c_bha		: centermatras;
+ligtable c_m_ba		: verylowmatras;
+ligtable c_m_bha        : verylowmatras;
 ligtable c_m_ma         : lowmatras;
 ligtable c_ra           : if ligs:
                             cs_aa =: c_raa
                         , fi centermatras;
-ligtable c_l_ka         : verylowmatras;
-ligtable c_l_pa         : verylowmatras;
-ligtable c_l_pha        : verylowmatras;
 ligtable c_l_la         : verylowmatras;
+ligtable c_ll_ka        : verylowmatras;
+ligtable c_ll_pa	: verylowmatras;
+ligtable c_ll_pha	: verylowmatras;
+ligtable c_ll_bha	: verylowmatras;
 ligtable c_sh_ca        : verylowmatras;
 ligtable c_ss_ka        : verylowmatras;
 ligtable c_ss_tta       : verylowmatras;
-ligtable c_ss_ttha      : verylowmatras;
+ligtable c_ss_nna       : verylowmatras;
 ligtable c_ss_pa        : verylowmatras;
 ligtable c_ss_pha       : verylowmatras;
+ligtable c_sa		: cs_ma	=: c_s_ma;
 ligtable c_s_ka         : verylowmatras;
 ligtable c_s_ta         : cs_u           =: c_s_tu
                         , cs_uu         |=: cs_uu_low
@@ -173,10 +210,14 @@ ligtable c_s_kha        : verylowmatras;
 ligtable c_s_t_ra       : verylowmatras;
 ligtable c_s_pa         : verylowmatras;
 ligtable c_s_pha        : verylowmatras;
+ligtable c_s_ma		: verylowmatras;
+ligtable c_h_nna	: verylowmatras;
 ligtable c_h_ba         : lowmatras;
-ligtable c_h_ma         : verylowmatras;
+ligtable c_h_la         : lowmatras;
 
 ligtable c_dotted_circle: lowmatras;
+
+
 
 % low matras after secondary consonants
 
@@ -221,6 +262,10 @@ ligtable c_one          : c_one kern-k#
 ligtable c_four         : c_two kern-kk#;
 ligtable c_eight        : c_two kern-kkk#
                         , c_nine kern-kk#;
+
+% special signs
+
+ligtable c_nukta 	: lowmatras;
 
 % punctuation:
 

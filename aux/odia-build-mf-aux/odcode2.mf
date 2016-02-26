@@ -2,8 +2,7 @@
 % Copyright 2015, Jeroen Hellingman, Soumyashant Nayak & Anshuman Pandey
 %
 % History:
-%   26-JAN-2016 added m+ba (SN)
-%   21-DEC-2015 added t+ka (SN)
+
 %   26-MAY-2002 added several conjuncts (AP)
 %
 % the assignment of codes is totally ad hoc, and will be made more
@@ -30,7 +29,5 @@ c_d_ma          := 70;         %%\def\oddma{\char70}
 c_nn_ma         := 71;         %%\def\odNma{\char71}
 c_s_sa          := 72;         %%\def\odssa{\char72}
 c_l_ga          := 73;         %%\def\odlga{\char73}
-c_t_ka          := 74;         %%\def\odtka{\char74}
-c_m_ba          := 75;         %%\def\odmba{\char75}
 
 % end of odcode2.mf

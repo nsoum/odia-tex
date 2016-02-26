@@ -3,6 +3,11 @@
 % the readme file for details.
 %
 % History:
+%   25-FEB-2016 Added d+ba, ll+bha, t+tha, n+tu, h+nna, percent sign (SN)
+%   24-FEB-2016	Added the Indian rupee symbol (SN)
+%   31-JAN-2016 Modified secondary ma, added h+la, secondary ttha, removed nn_ttha, ss_ttha (SN)
+%   30-JAN-2016 Modified t+pa, ya, yya, k+ssa, n+da (SN)
+%   28-JAN-2016 Modified t+sa (SN)
 %   25-JAN-2016 added m+bha (SN)
 %   26-JAN-2003 modified k.s.na (AP)
 %   26-MAY-2002 added p+pa (AP)
@@ -68,6 +73,7 @@ beginchar(cs_bhu, 0uw#, 0uh#, 15uh#); "Odia secondary letter bhu";
   penlabels(1,2,3,4,5,6,7,8);
   adjustpos(rm+rb);
 endchar;
+
 
 picture sec_da_picture;
 
@@ -257,18 +263,32 @@ beginchar(cs_la, 0uw#, 0uh#, 13uh#); "Odia secondary letter la";
   adjustpos(rm+rb);
 endchar;
 
-beginchar(cs_ma, 0uw#, 0uh#, 15uh#); "Odia secondary letter ma";
+beginchar(cs_ma, 0uw#, 0uh#, 16uh#); "Odia secondary letter ma";
   pickup subbarpen;
-  z1 = (0uw, 0.5uh);
-  z2 = (x1, -10uh);
-  z3 = (x1-3uw, -13uh);
-  z4 = (x1-6uw, y2);
-  z5 = (x3, -6uh);
-  z6 = (x1+6uw, -3uh);
-  z7 = (x6, -15uh);
-  draw z1--z2..z3{left}..z4{up}..z5--z6 & z6--z7; drawdot(z7);
+  z1 = (-9uw, -5uh);
+  z2 = (x1+6uw, y1-7uh);
+  z3 = (x1+3uw, y1-10uh);
+  z4 = (x1, y2);
+  z5 = (x3, y3+7uh);
+  z6 = (x1+12uw, y1);
+  z7 = (x6, y1-11uh);
+  draw z1..z2..z3{left}..z4{up}..z5--z6 & z6--z7; drawdot(z7);
   penlabels(1,2,3,4,5,6,7);
   adjustpos(rm+rb);
+endchar;
+
+beginchar(cs_ma_low, 0uw#, 0uh#, 16uh#); "Odia secondary letter ma (lowered version)";
+  pickup subbarpen;
+  z1 = (-9uw, -5uh)+(0uw, -1.5uh);
+  z2 = (x1+6uw, y1-7uh);
+  z3 = (x1+3uw, y1-10uh);
+  z4 = (x1, y2);
+  z5 = (x3, y3+7uh);
+  z6 = (x1+12uw, y1);
+  z7 = (x6, y1-11uh);
+  draw z1..z2..z3{left}..z4{up}..z5--z6 & z6--z7; drawdot(z7);
+  penlabels(1,2,3,4,5,6,7);
+  %adjustpos(rm+rb);
 endchar;
 
 %%%%% dha
@@ -307,7 +327,7 @@ beginchar(c_dha, 20uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter dha";
   pickup barpen;
   draw dha_bar transformed sub;
   drawdot(z8 transformed sub); drawdot(z9 transformed sub);
-  sub_dha_picture := currentpicture;
+  sub_dha_picture := currentpicture + currentpicture;
   clearit;
 
   % draw the full size glyph
@@ -362,6 +382,8 @@ endchar;
 
 %%%%% ta
 
+picture full_ta_picture;
+
 beginchar(c_ta, 25uw#+rm#, 25uh#, 0uh#); "Odia letter ta";
   pickup curvepen;
   z11 = (10uw, 13uh);
@@ -380,6 +402,8 @@ beginchar(c_ta, 25uw#+rm#, 25uh#, 0uh#); "Odia letter ta";
   z1 = (6.5uw, 11uh);
   x4 = 25uw;
   new_outer_circle;
+
+  full_ta_picture := currentpicture;
 endchar;
 
 beginchar(c_taa, 27uw#+rm#+rb#, 25uh#, 0uh#); "Odia combination taa";
@@ -413,6 +437,7 @@ beginchar(c_tuu, 28uw#+rm#, 25uh#, 10uh#); "Odia combination tuu";
   x4 = 28uw;
   new_uu_circle;
 endchar;
+
 
 %%%%% ka related shapes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -496,8 +521,8 @@ beginchar(c_ka, 28uw#+rm#, 25uh#, 0uh#); "Odia letter ka";
   drawdot(z5);
 endchar;
 
-beginchar(c_k_ka, 28uw#+rm#, 25uh#, 9uh#); "Odia conjunct k+ka";
-  currentpicture := full_ka_picture + sub_ka_picture;
+beginchar(c_k_ka, 29uw#+rm#, 25uh#, 9uh#); "Odia conjunct k+ka";
+  currentpicture := full_ka_picture + sub_ka_picture shifted (6uw, 0uh);
   z1 = (4uw, 12uh);
   x4 = 28uw;
   new_outer_circle;
@@ -545,6 +570,21 @@ beginchar(c_k_ta, 28uw#+rm#, 25uh#, 8uh#); "Odia conjunct k+ta";
   new_outer_circle;
 endchar;
 
+beginchar(c_t_ka, 28uw#+rb#+rm#, 25uh#, 10uh#); "Odia conjunct t+ka";
+    currentpicture := full_ka_picture;
+    z1 = (4uw, 12uh);
+    x4 = 28uw;
+    new_outer_circle;
+
+    pickup subpen;
+    z6 = (8uw, 1uh);
+    z7 = (5uw, -4uh);
+    z8 = (9uw, -7uh);
+    z9 = (22uw, -10uh);
+    draw z6..z7{down}..z8---z9;
+    penlabels(1,2,3,4);
+endchar;
+
 %% we now create the lla from the ka by opening up the left loop
 
 picture full_lla_picture;
@@ -573,8 +613,8 @@ beginchar(c_lla, 27uw#+rm#, 25uh#, 0uh#); "Odia letter lla";
   new_outer_circle;
 endchar;
 
-beginchar(c_l_ka, 28uw#+rm#, 25uh#, 9uh#); "Odia conjunct l+ka";
-  currentpicture := full_lla_picture + sub_ka_picture;
+beginchar(c_ll_ka, 29uw#+rm#, 25uh#, 9uh#); "Odia conjunct ll+ka";
+  currentpicture := full_lla_picture + sub_ka_picture shifted (6uw, 0);
   z1 = (4uw, 12uh);
   x4 = 28uw;
   new_outer_circle;
@@ -1101,6 +1141,7 @@ endchar;
 
 picture sup_ga_picture;
 picture sub_ga_picture;
+picture full_ga_picture;
 
 beginchar(c_ga, 24uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter ga";
   z1 = (7.5uw, 9uh);
@@ -1162,12 +1203,38 @@ beginchar(c_ga, 24uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter ga";
   savepicture := currentpicture;
 endchar;
 
-beginchar(c_g_ga, 29uw#+rm#, 25uh#, 10uh#); "Odia conjunct g+ga";
-  currentpicture := sup_ga_picture + sub_ga_picture shifted (6uw, 0);
+beginchar(c_g_ga, 28uw#+rm#, 25uh#, 12uh#); "Odia conjunct g+ga";
+ 
+  z1 = (7.5uw, 9uh);
+  z2 = (6uw, 5uh);
+  z3 = (11.5uw, -overshoot);
+  z4 = (17uw, 5uh);
+  z5 = (12uw, 10uh);
+  z6 = (6uw, 9uh);
+  z7 = (0uw, 16uh);
+  z8 = (11uw, h+overshoot);
+  z9 = (24uw, h - joint);
+  z10 = (x9, h);
+  z11 = (x9, 4uh);
+
+  path ga_curve;
+  path ga_bar;
+  ga_curve := z1{curl0}..z2{down}..z3{right}..z4{up}..z5{left}..z6{left}..
+        z7{up}..z8{right}..{curl0}z9;
+  ga_bar := z10--z11;
+
+  pickup curvepen;
+  draw ga_curve;
+  drawdot(z9);
+  pickup barpen;
+  draw ga_bar;
+  drawdot(z10);
+  drawdot(z11);
+  currentpicture := currentpicture + sub_ga_picture shifted (8uw, -3uh);
 endchar;
 
-beginchar(c_g_dha, 28uw#+rm#, 25uh#, 10uh#); "Odia conjunct g+dha";
-  currentpicture := sup_ga_picture + sub_dha_picture shifted (6uw, 0);
+beginchar(c_g_dha, 27uw#+rm#, 25uh#, 12uh#); "Odia conjunct g+dha";
+  currentpicture := savepicture + sub_dha_picture shifted (11uw, -4uw);
 endchar;
 
 beginchar(c_caa, 24uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter caa";
@@ -1218,7 +1285,7 @@ beginchar(c_tta, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter tta";
               ..z7{up}..z8{right}..z9;
   pickup barpen;
   % standing bar;
-  z10 = (x9, 25uh);  z11 = (x9, 15uh);
+  z10 = (x9, 26.5uh);  z11 = (x9, 15uh);
   tta_bar = z10--z11;
 
   % the subscribed variant:
@@ -1234,7 +1301,7 @@ beginchar(c_tta, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter tta";
   currentpicture := currentpicture + currentpicture + currentpicture;
   % unfill the interiour
   unfill (z5{left}..z6{left}..z7{up}..z8{right}..z9--z11--cycle) transformed sub;
-  sub_tta_picture := currentpicture;
+  sub_tta_picture := currentpicture + currentpicture + currentpicture;
   clearit;
 
   % the full size letter
@@ -1248,7 +1315,10 @@ beginchar(c_tta, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter tta";
 endchar;
 
 beginchar(c_k_tta, 28uw#+rm#, 25uh#, 10uh#); "Odia conjunct k+tta";
-  currentpicture := sup_ka_picture + sub_tta_picture shifted (7uw, 0);
+  currentpicture := full_ka_picture + sub_tta_picture shifted (9uw, -2uh);
+  z1 = (4uw, 12uh);
+  x4 = 28uw;
+  new_outer_circle;
 endchar;
 
 %% from the ga, we create the kha
@@ -1329,7 +1399,7 @@ beginchar(c_ttha, 25uw#+rm#, 25uh#, 0uh#); "Odia letter ttha";
 
   % the subscribed ttha
   transform sub;
-  sub := identity scaled 15/25 shifted (8uw, -9uh);
+  sub := identity scaled 7/12 shifted (8uw, -9uh);
   pickup subbarpen;
   draw ttha_path transformed sub;
   currentpicture := currentpicture + currentpicture + currentpicture;
@@ -1355,6 +1425,7 @@ picture sup_pa_picture;
 picture sup_big_pa_picture;
 picture sub_pa_picture;
 picture sub_pha_picture;
+picture full_pa_picture;
 
 beginchar(c_pa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter pa";
   path pa_top;          % top left curve
@@ -1417,8 +1488,10 @@ beginchar(c_pa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter pa";
   draw pa_bar transformed sub;
   drawdot(z13 transformed sub);
   drawdot(z14 transformed sub);
+
   % make the lines `super black'
   currentpicture := currentpicture + currentpicture + currentpicture;
+
   % make the inside `super white'
   unfill (z1..z2{up}..z3{right}..{curl0}z4 & z4--z10 & z10{curl0}
            ..z9{left}..z8{up}..{curl0}z7..cycle) transformed sub;
@@ -1445,7 +1518,9 @@ beginchar(c_pa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter pa";
   drawdot(z14);
 
   cullit; savepicture := currentpicture;
+  full_pa_picture := currentpicture;
 endchar;
+
 
 % the pha is a pa with a little eye in the top right
 
@@ -1459,19 +1534,41 @@ beginchar(c_p_ta, 26uw#+rm#, 25uh#, 8uh#); "Odia conjunct p+ta";
   currentpicture := savepicture + sec_ta_picture shifted (22uw, 4uh);
 endchar;
 
-beginchar(c_t_pa, 22uw#+rm#, 25uh#, 12uh#); "Odia conjunct t+pa";
-  currentpicture := sup_big_pa_picture;
-  z1 = (22uw * (21.25/25), 0uh);     % = z14 in big superior pa
-  ta_tail;
-  pickup barpen;
-  z10 = (x1, 3.75uh);
-  draw z1..z10;
+beginchar(c_t_pa, 22uw#+rm#, 25uh#, 10uh#); "Odia conjunct t+pa";
+  currentpicture := savepicture;
+  
+  %ta tail
+  pickup subpen;
+  z6 = (21uw, -1uh);
+  z7 = (x6-3.2uw, y6-5.4uh);
+  z8 = (x6+0.8uw, y6-8.4uh);
+  z9 = (x6+9.8uw, y6-10.4uh);
+  draw z6..z7{down}..z8---z9;
+  drawdot(z6);
+  drawdot(z9);
+  penlabels(1,2,3,4,5,6,7,8,9);
+
+endchar;
+
+beginchar(c_ll_pa, 30uw#+rm#, 25uh#, 10uh#); "Odia conjunct ll+pa";
+  currentpicture := full_lla_picture + sub_pha_picture shifted (9uw, -2uh);
+  z1 = (4uw, 12uh);
+  x4 = 28uw;
+  new_outer_circle;
+endchar;
+
+beginchar(c_ll_pha, 30uw#+rm#, 25uh#, 10uh#); "Odia conjunct ll+pa";
+  currentpicture := full_lla_picture + sub_pa_picture shifted (9uw, -2uh);
+  z1 = (4uw, 12uh);
+  x4 = 28uw;
+  new_outer_circle;
 endchar;
 
 % the ssa is simply a pa with a diagonal. Here we have two variants,
 % the normal one, and a sligtly raised version, for use in conjuncts.
 
 picture sup_ssa_picture;
+picture full_ssa_picture;
 
 beginchar(c_ssa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter ssa";
   path ssa_top;
@@ -1530,43 +1627,32 @@ beginchar(c_ssa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter ssa";
   drawdot(z13);
   drawdot(z14);
   cullit; savepicture := currentpicture;
+  full_ssa_picture := currentpicture;
 endchar;
 
-beginchar(c_l_pa, 30uw#+rm#, 25uh#, 10uh#); "Odia conjunct l+pa";
-  currentpicture := full_lla_picture + sub_pa_picture shifted (8uw, 0);
-  z1 = (4uw, 12uh);
-  x4 = 28uw;
-  new_outer_circle;
+
+beginchar(c_ss_ka, 25uw#+rm#, 25uh#, 5uh#); "Odia conjunct ss+ka";
+  currentpicture := savepicture + sub_ka_picture shifted (2uw, 0);
 endchar;
 
-beginchar(c_l_pha, 32uw#+rm#, 25uh#, 10uh#); "Odia conjunct l+pha";
-  currentpicture := full_lla_picture + sub_pha_picture shifted (8uw, 0);
-  z1 = (4uw, 12uh);
-  x4 = 28uw;
-  new_outer_circle;
+beginchar(c_ss_pa, 24uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+pa";
+  currentpicture := savepicture + sub_pa_picture shifted (6uw, -3uh);
 endchar;
 
-beginchar(c_ss_ka, 22uw#+rm#, 25uh#, 5uh#); "Odia conjunct ss+ka";
-  currentpicture := sup_ssa_picture + sub_ka_picture shifted (-4uw, 4uh);
+beginchar(c_ss_pha, 28uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+pha";
+  currentpicture := savepicture + sub_pha_picture shifted (6uw, -3uh);
 endchar;
 
-beginchar(c_ss_pa, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+pa";
-  currentpicture := sup_ssa_picture + sub_pa_picture;
+beginchar(c_ss_tta, 25uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+tta";
+  currentpicture := savepicture + sub_tta_picture shifted (6uw, -1uh);
 endchar;
 
-beginchar(c_ss_pha, 25uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+pha";
-  currentpicture := sup_ssa_picture + sub_pha_picture;
-endchar;
-
-beginchar(c_ss_tta, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+tta";
-  currentpicture := sup_ssa_picture + sub_tta_picture;
-endchar;
-
-beginchar(c_ss_ttha, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+ttha";
-  currentpicture := sup_ssa_picture + sub_ttha_picture;
+beginchar(c_ss_ttha, 26uw#+rm#, 25uh#, 9uh#); "Odia conjunct ss+ttha";
+  currentpicture := savepicture + sub_ttha_picture shifted (6uw, 0);
 endchar;
 
 picture sup_k_ssa_picture;
+picture full_k_ssa_picture;
 
 beginchar(c_k_ssa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia conjunct k+ssa";
   path kssa_top;
@@ -1577,35 +1663,36 @@ beginchar(c_k_ssa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia conjunct k+ssa";
 
   pickup curvepen;
   % top left curve
-  z1 = (7.5uw, 6.5uh);
+  z1 = (7.6uw, 8.2uh);
   z2 = (0uw, 16uh);
-  z3 = (11uw, h+overshoot);
-  z4 = (22uw, h-joint);
+  z3 = (11uw, 25uh+overshoot);
+  z4 = (22uw, 25uh-joint);
   kssa_top = z1{left}..z2{up}..z3{right}..{curl0}z4;
   % bottom left diagonal
   pickup udiagpen;
-  z5 = (10uw, 9uh);
-  z6 = (1uw, 0);
-  kssa_botdiag = z5--z6;
+  z5 = (12uw, 11uh);
+  z6 = (0uw, 3.3uh);
+  z7 = (0.5uw, 2.5uh);
+  kssa_botdiag = z5--z6{down}..{curl0}z7;
   % bottom left curve
   pickup curvepen;
-  z7 = z1;
-  z8 = (6.5uw, 3.5uh);
-  z9 = (11uw, -overshoot);
-  z10 = (x4, joint);
-  kssa_bot = z7..z8{down}..z9{right}..{curl0}z10;
+  z8 = z1;
+  z9 = (6.5uw, 3.5uh);
+  z10 = (14uw, -overshoot);
+  z11 = (x4, joint);
+  kssa_bot = z8{curl0}..z9{down}..z10{right}..{curl0}z11;
   % main diagonal
   pickup ddiagpen;
   % z11 = (4uw, 23uh);
   % z12 = z10;
-  z11 = (5uw, 24uh);
-  z12 = z10 - (1.5uw, 1uh);
+  z12 = (4uw, 23uh);
+  z13 = z11 + (0uw, 1uh);%- (1.5uw, 1uh);
   kssa_diag = z11--z12;
   % standing bar
   pickup barpen;
-  z13 = (x4, h);
-  z14 = (x4, 0uh);
-  kssa_bar = z13--z14;
+  z14 = (x4, h);
+  z15 = (x4, 0uh);
+  kssa_bar = z14--z15;
 
   % draw the raised kssa
   transform super;
@@ -1619,8 +1706,8 @@ beginchar(c_k_ssa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia conjunct k+ssa";
   draw kssa_diag transformed super;
   pickup barpen;
   draw kssa_bar transformed super;
-  drawdot(z13 transformed super);
   drawdot(z14 transformed super);
+  drawdot(z15 transformed super);
   cullit; sup_k_ssa_picture := currentpicture;
   clearit;
 
@@ -1637,8 +1724,9 @@ beginchar(c_k_ssa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia conjunct k+ssa";
   draw kssa_bar;
   drawdot(z13);
   drawdot(z14);
-
-  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+  full_k_ssa_picture := currentpicture;
+  
+  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
 endchar;
 
 %% the ya is like a kssa without a diagonal
@@ -1646,24 +1734,25 @@ endchar;
 beginchar(c_ya, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter ya";
   pickup curvepen;
   % top left curve
-  z1 = (7.5uw, 6.5uh);
+  z1 = (7.6uw, 8.2uh);
   z2 = (0uw, 16uh);
   z3 = (11uw, 25uh+overshoot);
   z4 = (22uw, 25uh-joint);
   draw z1{left}..z2{up}..z3{right}..{curl0}z4;
   % bottom left diagonal
   pickup udiagpen;
-  z5 = (11uw, 10uh);    % adjusted because we removed the diagonal
-  z6 = (1uw, 0);
-  draw z5--z6;
-  drawdot(z6);
+  z5 = (12uw, 11uh);    % adjusted because we removed the diagonal
+  z6 = (0uw, 3.3uh);
+  z7 = (0.5uw, 2.5uh);
+  draw z5--z6{down}..{curl0}z7;
+  drawdot(z7);
   % bottom left curve
   pickup curvepen;
-  z7 = z1;
-  z8 = (6.5uw, 3.5uh);
-  z9 = (11uw, -overshoot);
-  z10 = (x4, joint);
-  draw z7..z8{down}..z9{right}..{curl0}z10;
+  z8 = z1;
+  z9 = (6.5uw, 3.5uh);
+  z10 = (14uw, -overshoot);
+  z11 = (x4, joint);
+  draw z8{curl0}..z9{down}..z10{right}..{curl0}z11;
   % standing bar
   pickup barpen;
   z13 = (x4, h);
@@ -1676,33 +1765,34 @@ endchar;
 
 %% the yya is like a ya with a two-like tail
 
-beginchar(c_yya, 25uw#+rm#, 25uh#, 10uh#); "Odia letter yya";
+beginchar(c_yya, 26uw#+rm#, 25uh#, 10uh#); "Odia letter yya";
   pickup curvepen;
   % top left curve
-  z1 = (7.5uw, 6.5uh);
+  z1 = (7.6uw, 8.2uh);
   z2 = (0uw, 16uh);
   z3 = (10.5uw, h+overshoot);   % a little bit narrower than ya
   z4 = (21uw, h-joint);
   draw z1{left}..z2{up}..z3{right}..{curl0}z4;
   % bottom left diagonal
   pickup udiagpen;
-  z5 = (11uw, 10uh);    % adjusted because we removed the diagonal
-  z6 = (1uw, 0);
-  draw z5--z6;
-  drawdot(z6);
+  z5 = (12uw, 11uh);    % adjusted because we removed the diagonal
+  z6 = (0uw, 3.3uh);
+  z7 = (0.5uw, 2.5uh);
+  draw z5--z6{down}..{curl0}z7;
+  drawdot(z7);
   % bottom left curve
   pickup curvepen;  
-  z7 = z1;
-  z8 = (6.5uw, 3.5uh);  
-  z9 = (11uw, -overshoot);
-  z10 = (x4, joint);
-  draw z7..z8{down}..z9{right}..{curl0}z10;
+  z8 = z1;
+  z9 = (6.5uw, 3.5uh);  
+  z10 = (12uw, -overshoot);
+  z11 = (18uw, 3uh);
+  draw z8{curl0}..z9{down}..z10{right}..{curl0}z11;
   % standing bar
   pickup barpen;
   z13 = (x4, h);
-  z14 = (x4, 3uh);
+  z14 = (x4, 7uh);
   % the tail
-  z16 = (x4+1uw, 3uh);
+  z16 = (x4+1uw, 7uh);
   pickup curvepen;
   new_tailtwo(15,16,17,18,19,20,21);
   draw z13--z14;
@@ -1763,8 +1853,11 @@ beginchar(c_da, 23uw#+rm#, 25uh#, 0uh#); "Odia letter da";
   draw_new_outer_circle;
 endchar;
 
-beginchar(c_d_ga, 22uw#+rm#, 25uh#, 8uh#); "Odia conjunct d+ga";
-  currentpicture := sup_da_picture + sub_ga_picture shifted (-1uw, 1uh);
+beginchar(c_d_ga, 24uw#+rm#, 25uh#, 10uh#); "Odia conjunct d+ga";
+  currentpicture := savepicture + sub_ga_picture shifted (3uw, -1uh);
+  z1 = (4.0uw, 11uh);
+  x4 = 23uw;
+  new_outer_circle;
 endchar;
 
 beginchar(c_di, 23uw#+rm#, 25uh#, 0uh#); "Odia combination di";
@@ -1818,6 +1911,8 @@ beginchar(c_h_ba, 23uw#+rm#, 25uh#, 12uh#); "Odia combination h+ba";
   new_outer_circle;
 endchar;
 
+picture full_ha_picture;
+
 beginchar(c_ha, 23uw#+rm#, 25uh#, 8uh#); "Odia letter ha";
   currentpicture := savepicture;
   pickup curvepen;
@@ -1830,6 +1925,7 @@ beginchar(c_ha, 23uw#+rm#, 25uh#, 8uh#); "Odia letter ha";
   z1 = (4.0uw, 11uh);
   x4 = 23uw;
   new_outer_circle;
+  full_ha_picture := currentpicture;
 endchar;
 
 beginchar(c_hi, 23uw#+rm#, 25uh#, 8uh#); "Odia combination hi";
@@ -1839,52 +1935,35 @@ beginchar(c_hi, 23uw#+rm#, 25uh#, 8uh#); "Odia combination hi";
   new_narrow_i_circle;
 endchar;
 
-beginchar(c_h_na, 32uw#+rm#, 25uh#, 8uh#); "Odia combination h+na";
+beginchar(c_h_la, 25uw#+rm#, 25uh#, 8uh#); "Odia combination h+la";
   currentpicture := savepicture;
-  z1 = (4.0uw, 11uh);
-  z2 = (good.x 0uw, 16uh);
-  z3 = (.5[x2,x4], good.y (25uh+overshoot));
-  z4 = (31uw, y2-2uh);
-  z5 = (29uw, 6.5uh);
 
-  % copied from secondary letter na
+
   pickup curvepen;
-  z11 = (7uw, 0uh);             % copied from letter na
-  z12 = (4uw, 3uh);
-  z13 = (16uw, 12uh);
-  z14 = (18uw, 10uh);
-  z15 = (x14, 0uh);
-  transform sub;
-  sub = identity scaled 10/12 shifted (16uw, -4uh);
-  draw (z11..tension0.95..z12{up}..tension2.0..z13{right}..z14{down}---z15)
-        transformed sub;
-  drawdot(z11 transformed sub);
-  drawdot(z12 transformed sub);
-    
-  % draw the outer circle  
-  draw z1{left}..z2{up}..z3{right}..z4{down}..z5;
+  z6 = (21uw, -14uh);
+  z7 = (x6-1.2uw, y6+6.4uh);
+  z8 = (x6+2uw, y7+4.8uh);
+  z9 = (x6+5.2uw, y7+1.6uh);
+  z10 = (x9, y6);
+  z11 = z9 + (0, 0.8uh);
+  z12 = (x6+8.4uw, y8);
+  z13 = (x6+11.6uw, y7);
+  z14 = (x6+10.4uw, y6);
 
-  penlabels(1, 2, 3, 4, 5, 11, 12, 13, 14, 15);
-endchar;
+  draw (z6..z7{up}..z8{right}..z9{down}---z10); 
+  drawdot(z6); 
+  drawdot(z10);
+  draw (z11{curl0}..z12{right}..z13{down}..z14); 
+  drawdot(z14);
+  z15 = z14 + (4.33uw, -1.33uh);
+  draw (z14--z15);
+  drawdot(z15);
 
-beginchar(c_h_ma, 23uw#+rm#, 25uh#, 16uh#); "Odia combination h+ma";
-  currentpicture := savepicture;
-  pickup curvepen;
-  z15 = (10uw, 2uh);
-  z16 = (3.5uw, -2uh);
-  draw z15--z16;
-  z17 = (7uw, -3.5uh);
-  z18 = (16uw, -11uh);
-  z19 = (12.5uw, -15uh);
-  z20 = (8uw, y18);
-  z21 = (18.5uw, y17);
-  z22 = (22.5uw, y16);
-  z23 = (x22, -16uh);
-  draw z16---z17..z18{down}..z19{left}..z20{up}..z21---z22--z23;
-  penlabels(15,16,17,18,19,20,21,22,23);
+  % draw the outer circle
   z1 = (4.0uw, 11uh);
   x4 = 23uw;
   new_outer_circle;
+  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
 endchar;
 
 %%%%% ja
@@ -1951,9 +2030,11 @@ beginchar(c_ja, 27uw#+rm#, 25uh#, 0uh#); "Odia letter ja";
   savepicture := currentpicture;
 endchar;
 
-beginchar(c_j_ja, 28uw#+rm#, 25uh#, 11uh#); "Odia conjunct j+ja";
-  currentpicture := savepicture + sec_ja_picture;
+beginchar(cs_ja, 0uw#, 0uh#, 10uh#); "Odia secondary letter ja";
+  currentpicture := sec_ja_picture shifted (-28.5uw, -3.5uh);
 endchar;
+
+
 
 %%%%% jha
 
@@ -2011,8 +2092,9 @@ beginchar(c_jha, 24uw#+rm#, 25uh#, 6uh#); "Odia letter jha"; % continuous stroke
   penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
 endchar;
 
-beginchar(c_j_jha, 26uw#+rm#, 25uh#, 11uh#); "Odia conjunct j+jha";
-  currentpicture := sup_ja_picture + sub_jha_picture;
+
+beginchar(cs_jha, 0uw#, 0uh#, 12uh#); "Odia secondary letter jha";
+  currentpicture := sub_jha_picture shifted (-27uw, -6uh);
 endchar;
 
 %%%%% ba
@@ -2066,12 +2148,8 @@ beginchar(c_badot, 24uw#+rm#, 25uh#, 0uh#); "Odia letter ba with dot inside";
   filldraw z1..z2..z3..z4..cycle;
 endchar;
 
-beginchar(c_b_ja, 27uw#+rm#, 25uh#, 11uh#); "Odia conjunct b+ja";
-  currentpicture := ba_picture + sec_ja_picture;
-endchar;
-
-beginchar(c_b_dha, 21uw#+rm#, 25uh#, 10uh#); "Odia conjunct b+dha";
-  currentpicture := sup_ba_picture + sub_dha_picture;
+beginchar(c_b_dha, 24uw#+rm#, 25uh#, 12uh#); "Odia conjunct b+dha";
+  currentpicture := ba_picture + sub_dha_picture shifted (6uw, -4uw);
 endchar;
 
 beginchar(c_b_ba, 27uw#+rm#, 25uh#, 0uh#); "Odia conjunct b+ba";
@@ -2120,6 +2198,33 @@ beginchar(c_b_da, 27uw#+rm#, 25uh#, 0uh#); "Odia conjunct b+da";
   new_outer_circle;
 endchar;
 
+beginchar(c_d_ba, 27uw#+rm#, 25uh#, 0uh#); "Odia conjunct d+ba";
+  pickup curvepen;
+  z11 = z16 - (0, 1uh);
+  z12 = (7.5uw, 3uh);
+  z13 = (3uw, 9uh);
+  z14 = (6uw, 14uh);            % adjusted
+  z15 = (x11, 10uh);            % adjusted
+  z16 = (12uw, 7uh);
+  z17 = (16.5uw, y12);
+  z18 = (21uw, 6uh);
+  draw z11{curl0}..z12{left}..z13{up}..z14; drawdot(z14);
+  draw z15..z16{down}..z17{right}..z18{curl0}; drawdot(z15);
+  % z19 = z15 + (0, 1uh);       % removed
+  % z20 = (x17, y14);           % removed
+  z19 = z15 + (0, 1uh);
+  z20 = (x17, y14) - (0.5uw, 0);
+  z21 = (x18, y15);
+  z22 = (x18, 0uh);
+  draw z19{curl0}..z20{right}..z21{down}..z22; drawdot(z22);
+  penlabels(11,12,13,14,15,16,17,18,19,20,21,22);
+  z1 = (3.75uw, 12uh);
+  x4 = 27uw;
+  new_outer_circle;
+endchar;
+
+
+
 beginchar(c_d_da, 27uw#+rm#, 25uh#, 0uh#); "Odia conjunct d+da";
   pickup curvepen;
   z11 = z16 - (0, 1uh);
@@ -2157,19 +2262,23 @@ beginchar(c_n_da, 23uw#+rm#, 25uh#, 0uh#); "Odia conjunct n+da";
   z1 = (4.5uw, 10uh);
   x4 = 23uw;
   outer_circle;
+  % diagonal
   pickup barpen;
-  z11 = (6uw, 13uh);
-  z12 = (0uw, 0uh);
-  draw z11--z12; drawdot(z11); drawdot(z12);
+  z11 = (7uw, 13uh);
+  z12 = (0uw, 5uh);
+  z13 = (0.5uw, 4uh);
+  draw z11--z12{down}..{curl0}z13; drawdot(z11); drawdot(z13);
+
   pickup curvepen;
-  z13 = (4uw, 7uh);
-  z14 = (10.5uw, 2uh-overshoot);
-  z15 = (17uw, 2uh+joint);
-  draw z11{(z12-z11)}..z13{down}..z14{right}..{curl0}z15;
-  z16 = (x15, 13uh);
-  z17 = (x16, 0uh);
-  draw z16--z17; drawdot(z16); drawdot(z17);
-  penlabels(11,12,13,14,15,16,17);
+  z14 = (4.5uw, 7uh);
+  z15 = (11uw, 2uh-overshoot);
+  z16 = (17uw, 2uh+joint);
+  draw z11{(z12-z11)}..z14{down}..z15{right}..{curl0}z16;
+
+  z17 = (x16, 13uh);
+  z18 = (x17, 0uh);
+  draw z17--z18; drawdot(z17); drawdot(z18);
+  penlabels(11,12,13,14,15,16,17,18);
   savepicture := currentpicture;
 endchar;
 
@@ -2182,6 +2291,8 @@ beginchar(c_n_dha, 24uw#+rm#, 25uh#, 0uh#); "Odia conjunct n+dha";
   penlabels(16,18);
 endchar;
 
+picture sub_bha_picture;
+
 beginchar(c_bha, 28uw#+rm#, 25uh#, 0uh#); "Odia letter bha";
   pickup curvepen;
   z11 = (6uw, 13uh);
@@ -2189,20 +2300,52 @@ beginchar(c_bha, 28uw#+rm#, 25uh#, 0uh#); "Odia letter bha";
   z13 = (12uw, -overshoot);
   z14 = (21uw, y12);
   z15 = (19uw, y11);
-  draw z11..z12{down}..tension0.95..z13{right}..tension0.95..z14{up}..z15;
-  drawdot(z11);
-  drawdot(z15);
+
   % inner cup
   z16 = z15 - (0, 2uw); 
   z17 = (.5[x15,x19], 6uh);
   z18 = (10.5uw, y16);
   z19 = (x18, y15);
+
+  % subscribed bha
+  transform sub;
+  sub := identity scaled 8/12 shifted (8uw, -9uh);
+  draw (z15{down}..z16..tension0.95..z17{left}
+        ..tension0.95..z18..{up}z19) transformed sub;
+  drawdot(z19 transformed sub);
+  z1 = (4uw, 11uh);
+  z2 = (good.x 0uw, 16uh);
+  z3 = (.5[x2, x4], good.y (25uh+overshoot));
+  z4 = (28uw, 13uh);
+  z5 = (x4 - 3uw, 2uh);
+  z6 = (x4 + 2uw, -4uh);
+  draw (z11..z12{down}..tension0.95..z13{right}..tension0.95..z14{up}..z15) transformed sub;
+  drawdot(z11 transformed sub);
+  drawdot(z15 transformed sub);
+  draw (z1{left}..z2{up}..z3{right}..tension0.95..z4{down}..z5) transformed sub;
+  drawdot(z5 transformed sub);
+  draw (z5--z6) transformed sub; drawdot(z6 transformed sub);
+  currentpicture := currentpicture + currentpicture + currentpicture;
+  unfill (z1{left}..z2{up}..z3{right}..tension0.95..z4{down}..z5..cycle) transformed sub;
+  sub_bha_picture := currentpicture;
+  clearit;
+
+  draw z11..z12{down}..tension0.95..z13{right}..tension0.95..z14{up}..z15;
+  drawdot(z11);
+  drawdot(z15);
+
   draw z15{down}..z16..tension0.95..z17{left}..tension0.95..z18..{up}z19;
   drawdot(z19);
+  draw z1{left}..z2{up}..z3{right}..tension0.95..z4{down}..z5; drawdot(z5);
+  draw z5--z6; drawdot(z6);
   penlabels(11,12,13,14,15,16,17,18,19);
-  z1 = (4uw, 11uh);
-  x4 = 28uw;
-  new_tail_circle;
+endchar;
+
+beginchar(c_ll_bha, 32uw#+rm#, 25uh#, 9uh#); "Odia conjunct ll+bha";
+  currentpicture := full_lla_picture + sub_bha_picture shifted (9.25uw, -2uh);
+  z1 = (4uw, 12uh);
+  x4 = 27uw;
+  new_outer_circle;
 endchar;
 
 beginchar(c_d_bha, 28uw#+rm#, 25uh#, 0uh#); "Odia conjunct d+bha";
@@ -2304,22 +2447,34 @@ beginchar(c_dda, 25uw#+rm#, 25uh#, 0uh#); "Odia letter dda";
   draw_new_outer_circle;
 endchar;
 
-beginchar(c_dd_dda, 23uw#+rm#, 25uh#, 10uh#); "Odia conjunct dd+dda";
-  currentpicture := sup_dda_picture + sub_dda_picture;
+beginchar(c_dd_dda, 26uw#+rm#, 25uh#, 10uh#); "Odia conjunct dd+dda";
+  currentpicture := savepicture + sub_dda_picture shifted (6uw, -2uh);
+
+  z1 = (6.5uw, 11uh);
+  x4 = 25uw;
+  new_outer_circle;
 endchar;
 
-beginchar(c_dd_ga, 23uw#+rm#, 25uh#, 10uh#); "Odia conjunct dd+ga";
-  currentpicture := sup_dda_picture + sub_ga_picture;
+beginchar(c_dd_ga, 26uw#+rm#, 25uh#, 10uh#); "Odia conjunct dd+ga";
+  currentpicture := savepicture + sub_ga_picture shifted (6uw, -2uh);
+
+  z1 = (6.5uw, 11uh);
+  x4 = 25uw;
+  new_outer_circle;
 endchar;
 
-beginchar(c_rr_ga, 23uw#+rm#, 25uh#, 10uh#); "Odia conjunct rr+ga";
-  currentpicture := sup_dda_picture + sub_ga_picture;
-  z2 = (2uw, 0uh);
+beginchar(c_rr_ga, 26uw#+rm#, 25uh#, 10uh#); "Odia conjunct rr+ga";
+  currentpicture := savepicture + sub_ga_picture shifted (6uw, -2uh);
+  z12 = (8uw, -5uh);
   pickup barpen;
-  eye(1,2,3,4)(3.5uw,2.5uh);
-  draw_eye(1,2,3,4);
-  filldraw z1..z2..z3..z4..cycle;
-  penlabels(1,2,3,4); 
+  eye(11,12,13,14)(3.5uw,2.5uh);
+  draw_eye(11,12,13,14);
+  filldraw z11..z12..z13..z14..cycle;
+  penlabels(11,12,13,14); 
+
+  z1 = (6.5uw, 11uh);
+  x4 = 25uw;
+  new_outer_circle;
 endchar;
 
 beginchar(c_ddi, 25uw#+rm#, 25uh#, 0uh#); "Odia letter ddi";
@@ -2407,11 +2562,11 @@ beginchar(c_nna, 24uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter nna";
   z6 = (7uw, 17.5uh);
   z7 = (0, 9.5uh);
   z8 = (10uw, -overshoot);
-  z9 = (17uw, 4uh);
-  z10 = (11uw, 9uh);
-  z11 = (2.5uw, 3uh);
+  z9 = (17uw, 2.5uh);
+  z10 = z9;
+  z11 = (0.25uw, 8.5uh);
   nna_bot = z5{curl0}..z6{left}..z7{down}..z8{right}
-                         ..z9{up}..z10{left}..{curl0}z11;
+                         ..z9{up}..z10{up}..{curl0}z11;
   z12 = (x1, 25uh);
   z13 = (x12, 0);
   pickup barpen;
@@ -2465,32 +2620,32 @@ beginchar(c_nn_ddha, 26uw#+rm#, 25uh#, 8uh#); "Odia conjunct nn+ddha";
   currentpicture := savepicture + sec_da_picture shifted (24uw, 4uh);
 endchar;
 
-beginchar(c_nn_tta, 28uw#+rm#, 25uh#, 8uh#); "Odia conjunct nn+tta";
-  currentpicture := sup_nna_picture + sub_tta_picture shifted(5uw, 0);
+beginchar(c_nn_tta, 27uw#+rm#, 25uh#, 10uh#); "Odia conjunct nn+tta";
+  currentpicture := savepicture + sub_tta_picture shifted(11uw, -1uh);
 endchar;
 
-beginchar(c_nn_ttha, 28uw#+rm#, 25uh#, 8uh#); "Odia conjunct nn+ttha";
-  currentpicture := sup_nna_picture + sub_ttha_picture shifted(4uw, 0);
+beginchar(c_nn_ttha, 28uw#+rm#, 25uh#, 8uh#); "Oriya conjunct nn+ttha";
+  currentpicture := savepicture + sub_ttha_picture shifted(10uw, 0uh);
 endchar;
 
 picture sec_nna_picture;
 
-beginchar(c_nn_nna, 30uw#+rm#, 25uh#, 13uh#); "Odia letter nn+nna";
+beginchar(c_nn_nna, 27uw#+rm#, 25uh#, 12uh#); "Odia letter nn+nna";
   % subscribed nna
   pickup curvepen;
-  z21 = (15.75uw, 1uh);
-  z22 = (good.x 14uw, -5uh);
-  z23 = (.5[x22,x24], good.y -13uh);
-  z24 = (good.x 30uw, -7uh);
-  z25 = (26.5uw, -3uh);
-  draw z21..z22{down}..z23{right}..z24{up}..z25;
-  draw z21..z22{down}..z23{right}..z24{up}..z25;
+  % z21 = (14.5uw, -1uh) + (1uw, 0);
+  z22 = (good.x 13uw, -1uh) + (1uw, 0);
+  z23 = (.5[x22,x24], good.y -12uh) + (1uw, 0uh);
+  z24 = (good.x 30uw, -6.5uh) + (1uw, 0);
+  z25 = (26.5uw, -3uh) + (1uw, 0);
+  draw z22{down}..z23{right}..z24{up}..z25;
+  draw z22{down}..z23{right}..z24{up}..z25;
   % unfill z21..z22{down}..z23{right}..z24{up}..z25..cycle;
-  z26 = (22uw, -5.5uh);
-  z27 = (good.x 28uw, 1uh);
-  z28 = (25uw, good.y 4uh);
-  z29 = (good.x 21uw, 1uh);
-  z30 = z29 + (1uw, -2uh);
+  z26 = (22uw, -5.5uh) + (1uw, 0);
+  z27 = (good.x 28uw, 1uh) + (1uw, 0);
+  z28 = (25uw, good.y 4uh) + (1uw, 0);
+  z29 = (good.x 21uw, 1uh) + (1uw, 0);
+  z30 = z29 + (1uw, -2uh) + (1uw, 0);
   draw z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30;
   draw z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30;
   unfill z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30..cycle;
@@ -2499,18 +2654,22 @@ beginchar(c_nn_nna, 30uw#+rm#, 25uh#, 13uh#); "Odia letter nn+nna";
   currentpicture := savepicture + sec_nna_picture;
 endchar;
 
-beginchar(c_k_ss_nna, 25uw#+rm#, 25uh#, 7uh#); "Odia conjunct k+ss+nna";
-%  currentpicture := sup_k_ssa_picture + sub_nna_picture;
-   currentpicture := sup_k_ssa_picture + sec_nna_picture shifted (-6uw, 3uh);
+beginchar(c_k_ss_nna, 25uw#+rm#, 25uh#, 12uh#); "Odia conjunct k+ss+nna";
+   currentpicture := full_k_ssa_picture + sec_nna_picture shifted (-2uw, 0uh);
 endchar;
 
-beginchar(c_ss_nna, 24uw#+rm#, 25uh#, 10uh#); "Odia conjunct ss+nna";
-  currentpicture := sup_ssa_picture + sec_nna_picture shifted (-6uw, 3uh);
+beginchar(c_ss_nna, 25uw#+rm#, 25uh#, 12uh#); "Odia conjunct ss+nna";
+  currentpicture := full_ssa_picture + sec_nna_picture shifted (-2uw, 0uh);
 endchar;
+
+beginchar(c_h_nna, 25uw#+rm#, 25uh#, 12uh#); "Odia conjunct h+nna";
+   currentpicture := full_ha_picture + sec_nna_picture shifted (-4uw, -5uh);
+endchar;
+
 
 %%%%% letter nya and related shapes
 
-beginchar(c_j_nya, 30uw#+rm#, 25uh#, 0uh#); "Odia conjunct j+nya";
+beginchar(c_j_nya, 28uw#+rm#, 25uh#, 0uh#); "Odia conjunct j+nya";
   pickup curvepen;
   % upper part
   z1 = (4uw, 25uh);
@@ -2797,43 +2956,81 @@ beginchar(c_sa, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter sa";
   cullit; savepicture := currentpicture;
 endchar;
 
-beginchar(c_s_ka, 22uw#+rm#, 25uh#, 5uh#); "Odia conjunct s+ka";
-  currentpicture := sup_sa_picture + sub_ka_picture shifted (-4uw, 4uh);
+beginchar(c_s_ka, 25uw#+rm#, 25uh#, 6uh#); "Odia conjunct s+ka";
+  currentpicture := savepicture + sub_ka_picture shifted (2uw, 0);
 endchar;
 
-beginchar(c_s_tu, 23uw#+rm#, 25uh#, 10uh#); "Odia conjunct s+tu";
-  currentpicture := sup_sa_picture + sec_nna_picture shifted (-7uw, 3uh);
+beginchar(c_s_tu, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct s+tu";
+  % modified subscribed nna
+  pickup curvepen;
+  % z21 = (14.5uw, -1uh) + (1uw, 0);
+  z22 = (good.x 13uw, -1uh) + (1uw, 0) + (4uw, 0);
+  z23 = (.5[x22,x24], good.y -12uh) + (1uw, 0uh) + (-2uw,0);
+  z24 = (good.x 30uw, -6.5uh) + (1uw, 0);
+  z25 = (26.5uw, -3uh) + (1uw, 0);
+  z31 = z22 + (-2uw, -5uh);
+  draw z22{left}..z31{down}..z23{right}..z24{up}..z25;
+  draw z22{left}..z31{down}..z23{right}..z24{up}..z25;
+  % unfill z21..z22{down}..z23{right}..z24{up}..z25..cycle;
+  z26 = (22uw, -5.5uh) + (1uw, 0);
+  z27 = (good.x 28uw, 1uh) + (1uw, 0);
+  z28 = (25uw, good.y 4uh) + (1uw, 0);
+  z29 = (good.x 21uw, 1uh) + (1uw, 0);
+  z30 = z29 + (1uw, -2uh) + (1uw, 0);
+  draw z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30;
+  draw z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30;
+  unfill z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30..cycle;
+  penlabels(21,22,23,24,25,26,27,28,29,30,31);
+  
+  currentpicture := savepicture + currentpicture shifted (-4uw, 0uh);
 endchar;
 
-beginchar(c_s_kha, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+kha";
-  currentpicture := sup_sa_picture + sub_kha_picture shifted (-1.5uw, 0);
+beginchar(c_s_kha, 25uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+kha";
+  currentpicture := savepicture + sub_kha_picture shifted (4uw, -2uh);
 endchar;
 
-beginchar(c_s_tha, 21uw#+rm#, 25uh#, 3uh#); "Odia conjunct s+tha";
-  currentpicture := sup_sa_picture + sec_tha_picture shifted (11uw, -1uh);
+beginchar(c_s_tha, 24uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+tha";
+  currentpicture := savepicture + sec_tha_picture shifted (13uw, -8uh);
 endchar;
 
-beginchar(c_s_pa, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+pa";
-  currentpicture := sup_sa_picture + sub_pa_picture;
+beginchar(c_s_pa, 24uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+pa";
+  currentpicture := savepicture + sub_pa_picture shifted (5uw, -2uh);
 endchar;
 
-beginchar(c_s_pha, 24uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+pha";
-  currentpicture := sup_sa_picture + sub_pha_picture;
+beginchar(c_s_pha, 28uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+pha";
+  currentpicture := savepicture + sub_pha_picture shifted (5uw, -2uh);
 endchar;
 
-beginchar(c_t_sa, 20uw#+rm#, 25uh#, 0uh#); "Odia conjunct t+sa";
-  currentpicture := sup_sa_picture;
+beginchar(c_s_ma, 25uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+ma";
+  pickup subbarpen;
+  z1 = (11uw, -1uh);
+  z2 = (x1+6uw, y1-7uh);
+  z3 = (x1+3uw, y1-10uh);
+  z4 = (x1, y2);
+  z5 = (x3, y3+7uh);
+  z6 = (x1+12uw, y1);
+  z7 = (x6, y1-11uh);
+  draw z1..z2..z3{left}..z4{up}..z5--z6 & z6--z7; drawdot(z7);
+  currentpicture := currentpicture + currentpicture + currentpicture;
+  unfill (z1..z2..z3{left}..z4{up}..z5--cycle);
+  unfill (z5--z6--z7--cycle);
+  
+  currentpicture := savepicture + currentpicture;
+endchar;
+
+beginchar(c_t_sa, 25uw#+rm#, 25uh#, 9uh#); "Odia conjunct t+sa";
+  currentpicture := savepicture;
   pickup subpen;
-  z1 = (6uw, 6uh);
-  z2 = (3.5uw, 3.5uh);
-  z3 = (6.5uw, 1.6uh);
-  z4 = (18uw, -1.5uh);
+  z1 = (6uw, 2uh);
+  z2 = (x1-3uw, y1-3uh);
+  z3 = (x1+0uw, y1-5uh);
+  z4 = (x1+15uw, y1-9.5uh);
   draw z1..z2{down}..z3---z4;
   penlabels(1,2,3,4);  
 endchar;
 
-beginchar(c_s_t_ra, 22uw#+rm#, 25uh#, 5uh#); "Odia conjunct s+t+ra";
-  currentpicture := sup_sa_picture + sub_tra_picture shifted (6uw, 0);
+beginchar(c_s_t_ra, 24uw#+rm#, 25uh#, 5uh#); "Odia conjunct s+t+ra";
+  currentpicture := savepicture + sub_tra_picture shifted (10uw, -4uh);
 endchar;
 
 beginchar(c_k_sa, 30uw#+rm#, 28uh#, 9uh#); "Odia conjunct k+sa";
@@ -2844,8 +3041,8 @@ beginchar(c_k_sa, 30uw#+rm#, 28uh#, 9uh#); "Odia conjunct k+sa";
   new_outer_circle;
 endchar;
 
-beginchar(c_p_sa, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct p+sa";
-  currentpicture := sup_pa_picture + sub_sa_picture;
+beginchar(c_p_sa, 25uw#+rm#, 25uh#, 12uh#); "Odia conjunct p+sa";
+  currentpicture := full_pa_picture + sub_sa_picture shifted (6uw, -2uh);
 endchar;
 
 beginchar(c_s_ta, 26uw#+rm#, 25uh#, 8uh#); "Odia conjunct s+ta";
@@ -2874,6 +3071,7 @@ endchar;
 
 picture sub_ma_picture;
 picture sup_ma_picture;
+picture full_ma_picture;
 
 beginchar(c_ma, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter ma";
   path ma_top;
@@ -2943,19 +3141,15 @@ beginchar(c_ma, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter ma";
   drawdot(z10);
   penlabels(1,2,3,4,5,6,7,8,9,10);
   cullit; savepicture := currentpicture;
+  full_ma_picture := currentpicture;
 endchar;
 
-beginchar(c_m_ma, 22uw#+rm#, 25uh#, 7uh#); "Odia conjunct m+ma";
-  currentpicture := sup_ma_picture + sub_ma_picture;
+beginchar(c_m_ma, 24uw#+rm#, 25uh#, 7uh#); "Odia conjunct m+ma";
+  currentpicture := full_ma_picture + sub_ma_picture shifted (5uw, -2uh);
 endchar;
 
-beginchar(c_t_ma, 22uw#+rb#+rm#, 25uh#, 12uh#); "Odia conjunct t+ma";
-  currentpicture := savepicture;
-  z1 = (22uw, 0uh);     % z10 of letter ma
-  ta_tail;
-endchar;
-
-beginchar(c_m_bha, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
+beginchar(c_t_ma, 25uw#+rb#+rm#, 25uh#, 10uh#); "Odia conjunct t+ma";
+  %currentpicture := savepicture;
   path ma_top;
   path ma_bot;
   path ma_bar;
@@ -2977,7 +3171,7 @@ beginchar(c_m_bha, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
   % standing bar
   pickup barpen;
   z9 = (x4, h);
-  z10 = (x4, 7uh);
+  z10 = (x4, 3uh);
   ma_bar := z9--z10;
 
   % draw the full size ma
@@ -2991,12 +3185,16 @@ beginchar(c_m_bha, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
   drawdot(z9);
   drawdot(z10);
 
-  % the tail
-  z12 = (x4+1uw, 7uh);
-  pickup curvepen;
-  new_tailtwo(11,12,13,14,15,16,17);
-  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
+  % the ta-tail
+  pickup subpen;
+  z12 = z10;
+  z13= (x12-5.5uw, y12-4.5uh);
+  z14 = (x12+0.8uw, y12-9uh);
+  z15 = (x12+9.8uw, y12-10.4uh);
+  draw z12..z13{down}..z14..z15;
+  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
 endchar;
+
 
 beginchar(c_m_pa, 28uw#+rm#, 25uh#, 0uh#); "Odia conjunct m+pa";
   pickup curvepen;
@@ -3045,6 +3243,100 @@ beginchar(c_m_pha, 30uw#+rm#, 25uh#, 0uh#); "Odia conjunct m+pha";
   % top left eye
   x31 = 24uw;
   top_left_eye;
+endchar;
+
+beginchar(c_m_ba, 27uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+ba";
+  path ma_top;
+  path ma_bot;
+  path ma_bar;
+
+  pickup curvepen;
+  % top left bow
+  z1 = (5.5uw, 7.75uh);
+  z2 = (good.x 0uw, 17uh);
+  z3 = (11uw, good.y (25uh+overshoot));
+  z4 = (good.x 22uw, 25uh-joint);
+  ma_top = z1..z2{up}..z3{right}..{curl0}z4;
+  % bottom curve
+  pickup curvepen;
+  z5 = (6uw, 0uh);
+  z6 = (good.x 3uw, 3uh);
+  z7 = (8uw, 8uh);
+  z8 = (15uw, 12uh);
+  ma_bot = z5..z6{up}..tension1.2..{(3,1)}z8;
+  % standing bar
+  pickup barpen;
+  z9 = (x4, h);
+  z10 = (x4, 7uh);
+  ma_bar := z9--z10;
+
+  % draw the full size ma
+  pickup curvepen;
+  draw ma_top;
+  pickup curvepen;
+  draw ma_bot;
+  drawdot(z5);
+  pickup barpen;
+  draw ma_bar;
+  drawdot(z9);
+  drawdot(z10);
+
+  % draw the secondary character va
+  pickup subbarpen;
+  z11 = (x4+6uw, 5uh);
+  z12 = (x4+6uw, -6uh);
+  draw z11--z12; drawdot(z11); drawdot(z12);
+  pickup subpen;
+  z13 = z11 + (-6uw, 2uh);
+  z14 = z11 + (-10uw, -2uh);
+  z15 = z11 + (-4uw, -7uh);
+  z16 = z11 + (0uw, -3uh);
+  draw z13..z14{down}..z15{right}..{curl0}z16;
+  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+
+beginchar(c_m_bha, 25uw#+rm#, 25uh#, 10uh#); "Odia conjunct m+bha";
+  path ma_top;
+  path ma_bot;
+  path ma_bar;
+
+  pickup curvepen;
+  % top left bow
+  z1 = (5.5uw, 7.75uh);
+  z2 = (good.x 0uw, 17uh);
+  z3 = (11uw, good.y (25uh+overshoot));
+  z4 = (good.x 22uw, 25uh-joint);
+  ma_top = z1..z2{up}..z3{right}..{curl0}z4;
+  % bottom curve
+  pickup curvepen;
+  z5 = (6uw, 0uh);
+  z6 = (good.x 3uw, 3uh);
+  z7 = (8uw, 8uh);
+  z8 = (15uw, 12uh);
+  ma_bot = z5..z6{up}..tension1.2..{(3,1)}z8;
+  % standing bar
+  pickup barpen;
+  z9 = (x4, h);
+  z10 = (x4, 7uh);
+  ma_bar := z9--z10;
+
+  % draw the full size ma
+  pickup curvepen;
+  draw ma_top;
+  pickup curvepen;
+  draw ma_bot;
+  drawdot(z5);
+  pickup barpen;
+  draw ma_bar;
+  drawdot(z9);
+  drawdot(z10);
+
+  % the tail
+  z12 = (x4, 7uh);
+  pickup curvepen;
+  new_tailtwo(11,12,13,14,15,16,17);
+  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
 endchar;
 
 beginchar(c_dh_ya, 24uw#+rb#+rm#, 25uh#, 0uh#); "Odia conjunct dh+ya";
@@ -3194,6 +3486,32 @@ beginchar(c_n_ta_var, 27uw#+rm#, 25uh#, 7uh#); "Odia letter n+ta (variant)";
   penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 21, 22, 23, 24, 25);
 endchar;
 
+beginchar(c_n_tu, 26uw#+rm#, 25uh#, 7uh#); "Odia conjunct n+tu";
+  % modified subscribed nna
+  pickup curvepen;
+  % z21 = (14.5uw, -1uh) + (1uw, 0);
+  z22 = (good.x 13uw, -1uh) + (1uw, 0) + (4uw, 0);
+  z23 = (.5[x22,x24], good.y -12uh) + (1uw, 0uh) + (-2uw,0);
+  z24 = (good.x 30uw, -6.5uh) + (1uw, 0);
+  z25 = (26.5uw, -3uh) + (1uw, 0);
+  z31 = z22 + (-2uw, -5uh);
+  draw z22{left}..z31{down}..z23{right}..z24{up}..z25;
+  draw z22{left}..z31{down}..z23{right}..z24{up}..z25;
+  % unfill z21..z22{down}..z23{right}..z24{up}..z25..cycle;
+  z26 = (22uw, -5.5uh) + (1uw, 0);
+  z27 = (good.x 28uw, 1uh) + (1uw, 0);
+  z28 = (25uw, good.y 4uh) + (1uw, 0);
+  z29 = (good.x 21uw, 1uh) + (1uw, 0);
+  z30 = z29 + (1uw, -2uh) + (1uw, 0);
+  draw z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30;
+  draw z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30;
+  unfill z26{curl0}..tension 1.1..z27{up}..z28{left}..z29{down}..z30..cycle;
+  penlabels(21,22,23,24,25,26,27,28,29,30,31);
+  
+  currentpicture := savepicture + currentpicture shifted (-4uw, 0uh);
+endchar;
+
+
 beginchar(cs_na, 0uw#, 0uh#, 10uh#); "Odia secondary na";
   pickup curvepen;
   z11 = (7uw, 0uh);             % copied from letter na
@@ -3202,7 +3520,22 @@ beginchar(cs_na, 0uw#, 0uh#, 10uh#); "Odia secondary na";
   z14 = (18uw, 10uh);
   z15 = (x14, 0uh);
   transform sub;
-  sub = identity scaled 10/12 shifted (-(11uw+rm+rb), -10uh);
+  sub = identity scaled 19/24 shifted (-(11uw+rm+rb), -10uh);
+  draw (z11..tension0.95..z12{up}..tension2.0..z13{right}..z14{down}---z15)
+        transformed sub;
+  drawdot(z11 transformed sub);
+  drawdot(z12 transformed sub);
+endchar;
+
+beginchar(cs_na_low, 0uw#, 0uh#, 10uh#); "Odia secondary na (lowered version)";
+  pickup curvepen;
+  z11 = (7uw, 0uh)+(4uw,-4.5uh);             % copied from letter na
+  z12 = (4uw, 3uh)+(4uw,-4.5uh);
+  z13 = (16uw, 12uh)+(4uw,-4.5uh);
+  z14 = (18uw, 10uh)+(4uw,-4.5uh);
+  z15 = (18uw, 0uh)+(4uw,-4.5uh);
+  transform sub;
+  sub = identity scaled 19/24 shifted (-(11uw+rm+rb), -10uh);
   draw (z11..tension0.95..z12{up}..tension2.0..z13{right}..z14{down}---z15)
         transformed sub;
   drawdot(z11 transformed sub);
@@ -3224,10 +3557,19 @@ endchar;
 beginchar(c_t_na, 25uw#+rm#, 25uh#, 12uh#); "Odia conjunct t+na";
   currentpicture := savepicture;
   z1 = (18uw, 0uh);     % = z15 in letter na
-  ta_tail;
+  % the ta-tail
+  pickup subpen;
+  z12 = z1;
+  z13= (x12-5.5uw, y12-4uh);
+  z14 = (x12+0.8uw, y12-9uh);
+  z15 = (x12+9.8uw, y12-10.4uh);
+  draw z12..z13{down}..z14..z15;
+  penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
 endchar;
 
 %%%%% tha
+
+picture sub_tha_picture;
 
 beginchar(c_tha, 20uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter tha";
   pickup curvepen;
@@ -3243,13 +3585,30 @@ beginchar(c_tha, 20uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter tha";
   z10 = (20uw, joint);
   z11 = (x10, 25uh);
   z12 = (x11, 0uh);
-  % draw z1{curl0}..z2{right}..z3{down}..
+
+  % subscribed tha
+  transform sub;
+  sub := identity scaled 8/12 shifted (8uw, -9uh);
+  draw (z4{curl0}..z5{up}..z7{down}
+         ..z8{down}..z9{right}..{curl0}z10) transformed sub;
+  draw (z11--z12) transformed sub; 
+  drawdot(z11 transformed sub);
+  drawdot(z12 transformed sub);
+  currentpicture := currentpicture + currentpicture + currentpicture;
+  unfill (z4{curl0}..z5{up}..z6{right}..z7..cycle) transformed sub;
+  sub_tha_picture := currentpicture;
+  clearit;
+
   draw z4{curl0}..z5{up}..z7{down}
          ..z8{down}..z9{right}..{curl0}z10;
   draw z11--z12; drawdot(z11); drawdot(z12);
+  savepicture := currentpicture;
   penlabels(1,2,3,4,5,6,7,8,9,10,11,12);
 endchar;
 
+beginchar(c_t_tha, 27uw#+rb#+rm#, 25uh#, 13uh#); "Odia conjunct t+tha";
+  currentpicture := full_ta_picture + sub_tha_picture shifted (10uw, -6uh);
+endchar;
 %%%%% sha
 
 picture sup_sha_picture;
@@ -3301,16 +3660,16 @@ beginchar(c_sha, 22uw#+rb#+rm#, 25uh#, 0uh#); "Odia letter sha";  % continuous s
   cullit; savepicture := currentpicture;
 endchar;
 
-beginchar(c_sh_tta, 25uw#+rm#, 25uh#, 9uh#); "Odia conjunct sh+tta";
-  currentpicture := sup_sha_picture + sub_tta_picture shifted (4uw, 0uh);
+beginchar(c_sh_tta, 28uw#+rm#, 25uh#, 9uh#); "Odia conjunct sh+tta";
+  currentpicture := savepicture + sub_tta_picture shifted (8uw, -2uh);
 endchar;
 
-beginchar(c_sh_ca, 25uw#+rm#, 25uh#, 9uh#); "Odia conjunct sh+ca";
-  currentpicture := sup_sha_picture + sub_ca_picture shifted (4uw, 0uh);
+beginchar(c_sh_ca, 28uw#+rm#, 25uh#, 9uh#); "Odia conjunct sh+ca";
+  currentpicture := savepicture + sub_ca_picture shifted (8uw, -2uh);
 endchar;
 
-beginchar(c_sh_cha, 21uw#+rm#, 25uh#, 3uh#); "Odia conjunct s+cha";
-  currentpicture := sup_sha_picture + sec_tha_picture shifted (11uw, -1uh);
+beginchar(c_sh_cha, 21uw#+rm#, 25uh#, 9uh#); "Odia conjunct s+cha";
+  currentpicture := savepicture + sec_tha_picture shifted (13uw, -9uh);
 endchar;
 
 beginchar(c_tta_var, 24uw#+rm#, 25uh#, 0uh#); "Odia letter tta (variant)";
@@ -3476,7 +3835,7 @@ endchar;
 beginchar(c_o, 23uw#+rm#, 25uh#, 0uh#); "Odia letter o";
   pickup curvepen;
   % first curve
-  z1 = (6uw, 35uh);
+  z1 = (7uw, 31uh);
   z2 = (3.5uw, 22.5uh);
   z3 = (0uw, 12.5uh);
   z4 = (11.5uw, -overshoot);
@@ -3498,7 +3857,7 @@ beginchar(c_o, 23uw#+rm#, 25uh#, 0uh#); "Odia letter o";
   penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13);
 endchar;
 
-beginchar(c_oromsign, 23uw#+rm#, 35uh#, 0uh#); "Odia symbol om";
+beginchar(c_odomsign, 23uw#+rm#, 35uh#, 0uh#); "Odia symbol om";
   pickup curvepen;
   % first curve
   z1 = (7uw, 31uh);
@@ -3659,11 +4018,11 @@ beginchar(cs_i, 0uw#, 37uh#, 0uh#); "Odia vowel sign i";
   adjustpos(rm+rb);
 endchar;
 
-beginchar(cs_i_var, 0uw#, 0uh#, 11uh#); "Odia vowel sign i (subscribed variant)";
+beginchar(cs_i_var, 0uw#, 0uh#, 12uh#); "Odia vowel sign i (subscribed variant)";
   pickup curvepen;
-  z1 = (-15uw, -1uh);
-  z2 = (-18uw, -7uh);
-  z3 = (0uw, -11uh);
+  z1 = (-8uw, -2uh);
+  z2 = (-15uw, y1-6uh);
+  z3 = (1uw, y1-10uh);
   draw z1--z2; drawdot(z1);
   draw z2--z3; drawdot(z3);
   penlabels(1,2,3);
@@ -4354,7 +4713,7 @@ endchar;
 %% dda and ddha to make rra and rrha.
 
 beginchar(c_nukta, 0uw#, 0uh#, 8uh#); "Odia sign nukta";
-  z2 = (-12uw, -6uh);
+  z2 = (-12uw, -8uh);
   pickup barpen;
   eye(1,2,3,4)(3.5uw,3.5uh);
   draw_eye(1,2,3,4);
@@ -4401,6 +4760,61 @@ endchar;
 
 beginchar(c_p_pa, 22uw#+rm#, 25uh#, 9uh#); "Odia conjunct p+pa";
   currentpicture := sup_pa_picture + sub_pa_picture;
+endchar;
+
+beginchar (c_decimaldot, 4uw#+rm#, 25uh#, 0uh#); "Decimal dot";
+  z2 = (9uw, 3uh);
+  pickup barpen;
+  eye(1,2,3,4)(3.5uw,3.5uh);
+  draw_eye(1,2,3,4);
+  filldraw z1..z2..z3..z4..cycle;
+  penlabels(1,2,3,4); 
+  adjustpos(rm+rb);
+endchar;
+
+beginchar(c_percent, 26uw#+rm#, 25uh#, 0uh#); "Percentage symbol";
+  pickup curvepen;
+
+  z1 = (1uw, 19uh);
+  z2 = z1 + (5uw, 6uh);
+  z3 = z1 + (10uw, 0uh);
+  z4 = z1 + (5uw, -6uh);
+  draw z1{up}..z2{right}..z3{down}..z4{left}..cycle;
+  z5 = (6uw, 0);
+  z6 = (20uw, 25uh);
+  draw z5--z6;
+
+  z7 = (15uw, 6uh);
+  z8 = z7 + (5uw, 6uh);
+  z9 = z7 + (10uw, 0uh);
+  z10 = z7 + (5uw, -6uh);
+  draw z7{up}..z8{right}..z9{down}..z10{left}..cycle;
+  penlabels(1,2,3,4,5,6,7,8,9,10);
+endchar;
+
+
+beginchar(c_rupee, 20uw#+rm#, 25uh#, 0uh#); "Symbol for Indian rupee";
+  pickup barpen;
+  z1 = (2uw, 25uh);
+  z2 = (16uw, 25uh);
+  draw z1--z2; 
+  drawdot(z1); 
+  drawdot(z2);
+  z3 = (2uw, 18.5uh);
+  z4 = (16uw, 18.5uh);
+  draw z3--z4; 
+  drawdot(z3);
+  drawdot(z4);
+  z5 = (11uw, 18.5uh);
+  z6 = (7uw, 13uh);
+  z7 = (2uw, 12uh);
+  z8 = (7uw, 9uh);
+  z9 = (14uw, 0);
+  draw z1{right}..z5{down}..z6..z7;
+  draw z7{right}..z8..z9;
+  drawdot(z9);
+  penlabels(1,2,3,4,5,6,7,8,9);
+
 endchar;
 
 
