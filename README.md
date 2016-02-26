@@ -46,7 +46,7 @@ Installing od2tex :
 -------------------
 
 <code>od2tex</code> (Copyright &copy; 2016, Soumyashant Nayak, distributed under GNU General Public License )
-is a Python-based script to convert transliterated text in English to Odia-TeX syntax. The protocols
+is a Python-based script to convert Odia text transliterated in English to Odia-TeX syntax. The protocols
  for transliteration, which are quite intuitive, are prescribed in the manual <code>odia-tex-manual.pdf</code> 
 in the <code>doc</code> folder in the repository. Follow the steps below to install <code>od2tex</code> on 
 a GNU/Linux system.
