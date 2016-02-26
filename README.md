@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------
-Odia-TeX v0.10                                                     24 January 2016
+Odia-TeX v0.5                                                     26 February 2016
 ----------------------------------------------------------------------------------
 
-Copyright (C) 1996-2016 Jeroen Hellingman (JH), Soumyashant Nayak (SN) 
+Copyright &copy; 1996-2016 Jeroen Hellingman (JH), Soumyashant Nayak (SN) 
 & Anshuman Pandey (AP). 
 (in alphabetical order of last name)
 
@@ -12,7 +12,8 @@ Project Public License (LPPL) and the GNU General Public License (GPL).
 Note that the instructions below are for a GNU/Linux system (tested on
 Linux Mint 17 Qiana). 
 
-Getting started : 
+Installing the fonts :
+----------------------- 
 
 1. In your system, open the configuration file 
 <code>/usr/share/texmf/web2c/texmf.cnf</code> and ensure that the following is 
@@ -38,8 +39,26 @@ running the following command in the commandline prompt <code>$ sudo update-texm
 Metafont should generate all the fonts now. This may take a few minutes. At the end of 
 the process, type <code>\end</code>.
 
-Now TeX on your system is ready to recognise Odia fonts. For type-setting
-tutorials and tips, please refer to the manual <code>odia-tex-manual.pdf</code> in the 
+Now TeX on your system is ready to recognise Odia fonts.
+
+
+Installing od2tex :
+-------------------
+
+<code>od2tex</code> (Copyright &copy; 2016, Soumyashant Nayak, distributed under GNU General Public License )
+is a Python-based script to convert transliterated text in English toOdia-TeX syntax. The protocols
+ for transliteration, which are quite intuitive, are prescribed in the manual <code>odia-tex-manual.pdf</code> 
+in the <code>doc</code> folder in the repository.Follow the steps below to install <code>od2tex</code> on 
+a GNU/Linux system.
+
+1. Download the source code tarball for <code>od2tex</code> from the <code>src</code> directory
+in the repository.
+
+2. Extract the tarball on your system and go to the extracted folder. Run <code>$ sudo python setup.py install</code>
+(without the $ sign) in the commandline. 
+
+
+For type-setting tutorials and tips, please refer to the manual <code>odia-tex-manual.pdf</code> in the 
 <code>doc</code> folder in the repository.
 
 NOTE : Odia-TeX is a work in progress.<br /><br /> 
