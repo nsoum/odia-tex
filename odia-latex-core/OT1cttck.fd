@@ -1,0 +1,50 @@
+% Copyright (C) 1996-2016 Jeroen Hellingman, Soumyashant Nayak
+
+\ProvidesFile{OT1cttck.fd}[26-Feb-2016 Odia font definition]
+
+\DeclareFontFamily{OT1}{cttck}{}
+
+\DeclareFontShape{OT1}{cttck}{m}{n}{
+	<5> <6> <7> <8> <9>	 odss8
+	<10> <10.95>		 odss10
+	<12> <14.4>	 	 odss12
+	<17.28> <20.74>		 odss17
+	<24> <30>		 odss24
+	<36->			 odss36
+}{}
+\DeclareFontShape{OT1}{cttck}{bx}{n}{
+	<5> <6> <7> <8> <9>	 odssbf8
+	<10> <10.95>		 odssbf10
+	<12> <14.4>	 	 odssbf12
+	<17.28> <20.74> 	 odssbf17
+	<24> <30>		 odssbf24
+	<36->			 odssbf36
+}{}
+\DeclareFontShape{OT1}{cttck}{m}{sl}{
+	<5> <6> <7> <8> <9>	 odsssl8
+	<10> <10.95>		 odsssl10
+	<12> <14.4>	 	 odsssl12
+	<17.28> <20.74>		 odsssl17
+	<24> <30>		 odsssl24
+	<36->			 odsssl36
+}{}
+\DeclareFontShape{OT1}{cttck}{bx}{sl}{
+	<5> <6> <7> <8> <9>	 odssbs8
+	<10> <10.95>		 odssbs10
+	<12> <14.4>	 	 odssbs12
+	<17.28> <20.74>		 odssbs17
+	<24> <30>		 odssbs24
+	<36->			 odssbs36
+}{}
+
+\DeclareFontShape{OT1}{cttck}{m}{sc}{    <-> ssub * cttck/m/n}{}
+\DeclareFontShape{OT1}{cttck}{m}{it}{    <-> ssub * cttck/m/sl}{}
+\DeclareFontShape{OT1}{cttck}{m}{itsc}{  <-> ssub * cttck/m/sl}{}
+\DeclareFontShape{OT1}{cttck}{m}{slsc}{  <-> ssub * cttck/m/sl}{}
+\DeclareFontShape{OT1}{cttck}{bx}{sc}{   <-> ssub * cttck/bx/n}{}
+\DeclareFontShape{OT1}{cttck}{bx}{it}{   <-> ssub * cttck/bx/sl}{}
+\DeclareFontShape{OT1}{cttck}{bx}{itsc}{ <-> ssub * cttck/bx/sl}{}
+\DeclareFontShape{OT1}{cttck}{bx}{slsc}{ <-> ssub * cttck/bx/sl}{}
+
+\endinput
+

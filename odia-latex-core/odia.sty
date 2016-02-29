@@ -1,0 +1,30 @@
+% odia.sty -- set up Odia fonts for LaTeX2e
+% Copyright (C) 1996-2016 Jeroen Hellingman, Soumyashant Nayak
+
+\ProvidesFile{odia.sty}[26-Feb-2016 declare Odia fonts]
+
+\def\odcommon{\tolerance=10000
+\pretolerance=10000%
+\emergencystretch=.2\hsize%
+\linespread{1.25}
+\baselineskip 1.333\baselineskip
+\selectfont}
+
+\def\cttck{\usefont{OT1}{cttck}{m}{n}\odcommon}%
+\def\cttcks{\usefont{OT1}{cttck}{m}{sl}\odcommon}%
+\def\cttckb{\usefont{OT1}{cttck}{bx}{n}\odcommon}%
+\def\cttckbs{\usefont{OT1}{cttck}{bx}{sl}\odcommon}%
+
+\def\knrk{\usefont{OT1}{knrk}{m}{n}\odcommon}%
+\def\knrks{\usefont{OT1}{knrk}{m}{sl}\odcommon}%
+\def\knrkb{\usefont{OT1}{knrk}{bx}{n}\odcommon}%
+\def\knrkbs{\usefont{OT1}{knrk}{bx}{sl}\odcommon}%
+
+\def\@cttck#1{{\cttck\number #1}}
+\def\@knrk#1{{\knrk\number #1}}
+% This allows the printing of page numbers in Cuttack or Konark font
+% using LaTeX command "\pagenumbering{cttck}" or "\pagenumbering{knrk}" respectively.
+
+\input odcode
+
+\endinput

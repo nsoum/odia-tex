@@ -1,0 +1,840 @@
+\documentclass[12pt]{article}
+\usepackage{odia}
+\usepackage{pifont,mdframed}
+\usepackage{hyperref}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+
+
+\newcommand*{\plogo}{} % Generic publisher logo
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleGM}{\begingroup % Create the command for including the title page in the document
+\hbox{ % Horizontal box
+\hspace*{0.2\textwidth} % Whitespace to the left of the title page
+\rule{1pt}{\textheight} % Vertical line
+\hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
+\parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+
+{\noindent\Huge\bfseries The Odia-\TeX\ Manual}\\[2\baselineskip] % Title
+{\large \textit{Typesetting in Odia using \TeX{}, \LaTeX}}\\[4\baselineskip] % Tagline or further description
+{\Large \textsc{SOUMYASHANT NAYAK}} % Author name
+
+\vspace{0.5\textheight} % Whitespace between the title block and the publisher
+{\noindent \plogo}\\[\baselineskip] % Publisher and logo
+}}
+\endgroup}
+
+%\\[0.5\baselineskip]
+
+\def\odtex{Odia-\TeX}
+\def\obrace{\char"7B}
+\def\cbrace{\char"7D}
+
+%----------------------------
+% Load fonts
+%----------------------------
+\font\hugeknrk=od36 at 72pt
+\font\largeknrk=od24 at 24pt
+\font\bigknrk=od17 at 17.28pt
+\font\knrk=od12 at 12pt
+
+\font\hugecttck=odss36 at 72pt
+\font\largecttck=odss24 at 24pt
+\font\bigcttck=odss17	at 17.28pt
+\font\cttck=odss12 at 12pt
+
+%-----------------------------
+% Warning Environment
+%-----------------------------
+
+\newenvironment{warning}
+  {\par\begin{mdframed}[linewidth=2pt,linecolor=red]%
+    \begin{list}{}{\leftmargin=1cm
+                   \labelwidth=\leftmargin}\item[\Large\ding{43}]}
+  {\end{list}\end{mdframed}\par}
+
+
+
+
+\begin{document}
+\titleGM
+\thispagestyle{empty}
+\clearpage
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+\pagenumbering{knrk}
+
+\section*{Summary}
+
+This article gives an overview of the \odtex-package which can be used with \TeX{}, \LaTeX{} 
+for typesetting text in Odia {\knrk{}(ow[\odnukta aA)}. It also lays down an intuitive scheme for transliterating words
+from Odia into English and describes usage of the Python script {\tt od2tex} to convert the transliterated text to 
+Odia-TeX syntax. Additionally, one may use \odtex\ in combination with other packages, to typeset mixed language documents. 
+\odtex{} is a fork of the Oriya-\TeX\ project by Jeroen Hellingman and this manual borrows extensively from the original
+article written by him.
+
+\section*{License}
+
+The Odia-\TeX\ fonts are Copyright \copyright\ 1999-2016 Jeroen Hellingman, 
+Soumyashant Nayak. The pre-processor {\tt od2tex} is Copyright \copyright\ 2016 Soumyashant Nayak. However,
+ they may be freely distributed in the spirit 
+of the GNU General Public License. The only restriction is that you cannot place further restrictions on this or 
+derived works and you should give others you give this software or derived works to, everything, 
+including the sources. Of course, works you print using this font are not derived 
+works, but if you add or touch up a few characters, or create a post script font, 
+based on this design, it is.
+\vskip 0.1in
+This is still a work in progress and is part of a bigger vision to make user-friendly professional typesetting options
+available in Odia. If you would like to contribute to this project, feel free to write to the e-mail address
+given below.
+
+\vskip 0.2in
+
+\noindent Soumyashant Nayak\\
+\noindent E-mail: {\tt<odia.bhashakosha@gmail.com>}\\
+\noindent Github page : {\tt<https://github.com/nsoum/odia-tex>}
+
+\newpage
+
+\section{Introduction}
+The Odia alphabet follows the alphabetic order of Sanskrit. This
+order is based on phonetic principles. The vowels come first, in pairs of 
+a short and long sound, those articulated in the
+back of the mouth first. After the `pure' vowels come the `diphtongs'
+(in Sanskrit, {\it e} and
+{\it o} are supposed to have been diphtongs originally).
+
+\def\OB#1#2{$\hbox{\bigknrk#1}\atop\hbox{\strut\it#2}$}
+
+$$
+\vbox{\halign{\it\hfill#\hfill\quad&&\it\hfill#\hfill\quad\cr
+\OB{a}{a}	&\OB{aA}{\=a}	&\OB{i}{i}	&\OB{I}{\=\i}	&\OB{u}{u}	&\OB{U}{\=u}	\cr\noalign{\smallskip}
+\OB{\odvowelri}{\d r}&\OB{\odvowelrii}{\d{\=r}}&\OB{\odvowelli}{\d l}&\OB{\odvowellii}{\d{\=l}}	\cr\noalign{\smallskip}
+\OB{e}{e}	&\OB{E}{ai}	&\OB{o}{o}	&\OB{O}{au}	\cr
+}}
+$$
+
+\noindent Three vowel modifiers traditionally follow the vowels. These are
+{\knrk a/} {\it a\.m}, {\knrk aM} {\it a\d{m}}, and {\knrk aH} {\it a\d{h}},
+which originally stood for a nasalisation, a following
+nasal, and a following aspiration respectively. 
+In Odia, {\knrk H} {\it \d h} is now used to indicate that the following consonant
+is doubled.
+Here written on the letter {\knrk a} {\it a,}
+they can appear on any letter. The modifiers are 
+followed by the consonants arranged in rows (called {\it varg}) of related sounds. The rows are ordered
+again by point of articulation, with semivowels and sibilants comming at the end, 
+and in each row the voiceless sound first, followed by the aspirated, voiced,
+voiced and aspirated sound and the corresponding nasal.
+
+$$
+\vbox{\halign{\it\hfill#\hfill\quad&&\it\hfill#\hfill\quad\cr
+\OB{k}{ka}	&\OB{K}{kha}	&\OB{g}{ga}	&\OB{G}{gha}	&\OB{f}{\.na}	\cr\noalign{\smallskip}
+\OB{c}{ca}	&\OB{C}{cha}	&\OB{j}{ja}	&\OB{J}{jha}	&\OB{F}{\~na}	\cr\noalign{\smallskip}
+\OB{q}{\d ta}	&\OB{Q}{\d tha}	&\OB{w}{\d da}	&\OB{W}{\d dha}	&\OB{N}{\d na}	\cr\noalign{\smallskip}
+\OB{t}{ta}	&\OB{T}{tha}	&\OB{d}{da}	&\OB{D}{dha}	&\OB{n}{na}	\cr\noalign{\smallskip}
+\OB{p}{pa}	&\OB{P}{pha}	&\OB{b}{ba}	&\OB{B}{bha}	&\OB{m}{ma}	\cr\noalign{\smallskip}
+\OB{Y}{ya}	&\OB{y}{\.ya}	&\OB{r}{ra}	&\OB{l}{la}	&\OB{v}{va}	\cr\noalign{\smallskip}
+\OB{z}{\'sa}	&\OB{S}{\d sa}	&\OB{s}{sa}					\cr\noalign{\smallskip}
+\OB{h}{ha}	&\OB{L}{\d la}	&	&\OB{w\odnukta}{\d{r}a}	&\OB{W\odnukta}{\d{r}ha}\cr
+}}
+$$
+
+\noindent as shown in this table, all consonants are thought to be followed by the
+short letter {\knrk a} {\it a.}\footnote{The vowels {\knrk\odvowelrii, \odvowelli,}
+and {\knrk\odvowellii} are not used in Odia at all. They are borrowed from Sanskrit
+(and even in Sanskrit the last one is only introduced for symmetry), and are
+included in the alphabet for completeness. The letter {\knrk v} is a
+recent invention to distinguish the sound {\it va} from {\it ba} in loanwords.
+It is a combination of the vowel {\knrk o} with a secondary {\knrk b}.}
+
+When a vowel follows a consonant, this is indicated by writing a special vowel sign,
+attached to the consonant. These vowel signs sometimes even stand before the
+consonant they apply to. Here the vowel signs are shown attached to the letter 
+{\knrk g} {\it ga\/}:
+
+$$
+\vbox{\halign{\it\hfill#\hfill\quad&&\it\hfill#\hfill\quad\cr
+\OB{g}{ga}	&\OB{gA}{g\=a}	&\OB{g[}{gi}	&\OB{gX}{g\=\i} &\OB{g]}{gu}	&\OB{gZ}{g\=u}	\cr\noalign{\smallskip}
+\OB{g\odsignri}{g\d r}	&\OB{<g}{ge}	&\OB{<g>}{gai}	&\OB{<gA}{go} &\OB{<g*}{gau}	\cr\noalign{\smallskip}
+}}
+$$
+
+Vowel signs often combine with the consonant they apply to:
+The vowel sign for {\it\=a,} {\knrk\dotcircle A}, is often joined to the letter, as
+in {\knrk kA} {\it k\=a.}
+The vowel sign for {\it i,} {\knrk\dotcircle[}, `sinks' into the outer circle,
+for example in 
+{\knrk k[} {\it ki}, and the vowel sign for {\it u,} {\knrk\dotcircle]}, can be written
+in one continuous stroke, as in {\knrk k]} {\it ku}. Sometimes
+the vowel sign for {\it u,} {\knrk\dotcircle]}, becomes {\knrk\dotcircle\odsignuvar},
+for example in {\knrk l]} {\it lu}.
+On the letters  
+{\knrk T} {\it tha\/} and {\knrk D} {\it dha}, the vowel sign for {\it i,}
+{\knrk\dotcircle[}, becomes a little hook {\knrk\dotcircle\odsignivar}, written
+below the letter: {\knrk T[} {\it thi}, {\knrk D[} {\it dhi}. However, recent
+simplifications
+of the script have done away with all these irregular vowel signs.
+
+When no vowel follows a consonant at all, not even the short {\knrk a} {\it a,}
+this can be indicated with
+a sign called virama, {\knrk\dotcircle\odhalant}, for example, {\knrk k\odhalant} {\it k.}
+However, this symbol is not
+used that often. It is normally omitted at the end of words.
+
+When two or more consonants follow each other, they are combined into a
+consonant cluster or conjunct.
+Often these conjuncts consist of a smaller version of the second letter subscribed
+to the first letter, for example, {\knrk\odshca} {\it \'sca\/}
+is used for {\knrk z\odhalant c}. Sometimes,
+the outer circle of the subscribed consonant is omitted, as in {\knrk \odLka} {\it \d{l}ka\/}
+for {\knrk L\odhalant k}. In many cases, however, the original consonants can hardly
+be recognised in the conjunct, for example in {\knrk\odkSa} {\it k\d sa\/}
+for {\knrk k\odhalant S}. A fairly complete list of conjuncts is given in Section 8.
+
+The letters {\knrk Y} {\it ya} and {\knrk r} {\it ra\/} are treated in a special way. 
+When {\knrk r} {\it ra\/} is the first consonant of a cluster, it appears as the symbol
+reph {\knrk\dotcircle\odreph} at
+the end of the cluster, for example, {\knrk\odNNa\odreph} {\it r\d n\d na}. When it
+is the last in a cluster, it appears as a subscribed hook, {\knrk\dotcircle\odsecra}, for
+example in {\knrk p\odsecra} {\it pra.} When the letter {\knrk Y} {\it y\/} is the
+last in a cluster,
+it appears as the symbol {\knrk\dotcircle\odsecya}, for example, {\knrk k\odsecya} {\it
+kya.} This same symbol {\knrk\dotcircle\odsecya} appears after the vowels {\knrk e} 
+{\it e\/} and {\knrk o} {\it o\/} to modify their sounds.
+
+The rules for combining consonants into conjuncts used to make typing and typesetting
+Odia a very complicated business.
+Traditional Odia typefaces in lead require several hundereds of different types.
+A computer, however, can easily apply all the rules, and
+make it possible to type only the base letters of Odia in their phonetic order.
+
+The spelling and the use of conjuncts is hardly standardized, and it is no exception
+to come across spelling variations even inside a single book.
+
+Punctuation in Odia script is similar to that in English, except that
+the period is replaced by a standing bar {\knrk\oddanda}, called
+{\it danda}, which is separated from the last word by a space to avoid
+confusion with the vowel sign for {\knrk aA} {\it \=a}.
+
+Finally, Odia uses its own set of figures for numerals, {\knrk 1 2 3 4 5 6 7 8 9 0}, although
+international figures are sometimes used as well, and {\knrk \odpercent} for the percent sign. The symbol for Indian 
+rupee, given by {\knrk \odrupee}, is also included in \odtex.
+
+
+\newpage
+
+\section{\odtex{} fonts}
+
+\def\odalphabet{\\a aA i I u U \odvowelri\ e E o O a/ aM aH\\
+k K g G f c C j J F q Q w W N t T d D n\\
+p P b B m y Y r l L z S s h\\}
+\def\odmatras{k kA k[ kX k] kZ k\odsignri\ <k <k> <kA <k* k/ kM kH}
+\def\odfigures{1 2 3 4 5 6 7 8 9 0 }
+\def\odsigns{\oddecimaldot{} \odpercent{} \odrupee{} }
+
+In this section, we display the two variants of fonts in the \odtex-package. The alphabets, numerals and some extra signs (decimal dot,
+percent sign and the Indian rupee symbol) are included.
+
+\subsection{Konark font}
+Konark regular 72 pt\\
+{\hugeknrk{}a <kANAk\odreph}\\ \\
+Konark regular 24pt\\
+{\largeknrk{}a aA i I u U \odvowelri\ \odvowelrii\ \odvowelli\ \odvowellii\ e E o O a/ aM aH}\\ \\
+{\largeknrk{}k K g G f c C j J F q Q w W N t T d D n}\\ \\
+{\largeknrk{}p P b B m y Y r l L z S s h \odkSa{} w\odnukta{} W\odnukta}\\ \\
+{\bigknrk{}\odmatras}\\ \\
+{\bigknrk{}\odfigures}\\ \\
+{\bigknrk{}\odsigns}
+
+\subsection{Cuttack font}
+\font\ssbfXII=cmss10 at 12pt
+Cuttack regular 72pt\\ \\
+{\hugecttck{}a kqk}\\ \\
+Cuttack regular 24pt\\
+{\largecttck{}a aA i I u U \odvowelri\ \odvowelrii\ \odvowelli\ \odvowellii\ e E o O a/ aM aH}\\ \\
+{\largecttck{}k K g G f c C j J F q Q w W N t T d D n}\\ \\
+{\largecttck{}p P b B m y Y r l L z S s h \odkSa{} w\odnukta{} W\odnukta}\\ \\
+{\bigcttck{}\odmatras}\\ \\
+{\bigcttck{}\odfigures}\\ \\
+{\bigcttck{}\odsigns} 
+
+
+\section{Setting up \odtex\ }
+In order to setup \odtex\ on a GNU/Linux system, please follow the instructions below.
+\begin{itemize}
+\item[(i)] Download and extract the \odtex-package from the github page at \\
+{\tt \url{https://github.com/nsoum/odia-tex}}. 
+\item[(ii)] Place the folders {\tt odia-fonts-core} and {\tt odia-build-metafont-core} in {\tt texmf/fonts/source}. If you are not using a
+local {\tt texmf} directory, you must also set the appropriate permissions.
+\item[(iii)] Place the folder {\tt odia-tex-core} in {\tt texmf/tex}, and the folder {\tt odia-latex-core} in \\
+{\tt texmf/tex/latex}.
+\item[(iv)] In order to generate the fonts, run {\tt tex odmacs.tex} at the commandline. This may take a few minutes depending on the specifications of your computer.
+\item[(v)] From the {\tt src} folder in the {\tt odia-tex} directory of Step (i), extract the tarball {\tt od2tex-0.5.tar.gz} containing the {\tt od2tex} source code. Go to the extracted folder and run {\tt sudo python setup.py install} at the commandline to install {\tt od2tex} on your system.
+\end{itemize}
+Now the Konark and Cuttack fonts are ready to be used with plain \TeX\ and \LaTeX\ . Also the pre-processor {\tt od2tex} is installed and the usage tips may be found by running {\tt od2tex --help} at the commandline.
+
+\section{How to Use \odtex{}}
+A set of Odia fonts alone doesn't make up an easy-to-use Odia typesetting system.
+One also needs an easy way of typing Odia text. The complex
+rules of Odia script makes it cumbersome and error prone to type all
+required shapes directly. A computer can handle the composition and allow
+the user to type only the base characters in phonetic order. As the rules of
+Odia composition are not built into \TeX, the pre-processor {\tt od2tex} will be used to accomplish
+this by converting Odia text typed in an ASCII-based transliteration scheme to \odtex\ syntax. The transliteration scheme is
+prescribed in \ref{subsection: transliterate}. The details of usage of the preprocessor {\tt od2tex} is described in \ref{subsection: od2tex}.
+
+Before you can start, you will have to load some macros.
+Users of plain \TeX\ have to input the file {\tt odmacs.tex} somewhere at the
+start of their document. Users of \LaTeX\ can simply use the package {\tt odia} to load the
+required macros and fonts. In 4.3, an example is discussed to illustrate various aspects of 
+the \odtex-package.
+
+
+
+
+\subsection{Transliteration scheme}
+\label{subsection: transliterate}
+The following table indicates how to type Odia. The first column indicates the
+transliteration typed, the second the Odia letter output, and the third the
+scientific transcription. It should be noted that the scientific transcription
+is based on the model of Sanskrit, and does not give an exact indication of the
+actual pronunciation in Odia.
+\vskip 5mm
+
+\bgroup
+\def\knrkstrut{\vtop to4pt{}\vbox to10pt{}}
+\def\q{\quad\hfill}
+\def\x{\vrule\ }
+\def\xx{\vrule width.8pt}
+\offinterlineskip
+\halign{\knrkstrut\xx\ \tt#\q&\x#\q&\x#\q\xx\ &\tt#\q&\x#\q&\x#\q\xx\ &\tt#\q&\x#\q&\x#\q\xx\cr
+\noalign{\hrule height.8pt}
+a       & {\knrk a} or implicit       	& {\it a}         	&
+ka      & {\knrk k}                  		& {\it ka}         	&
+pa      & {\knrk p}                   	& {\it pa}        	\cr
+A      & {\knrk aA} or {\knrk\dotcircle A}	& {\it \=a}     	&
+kha     & {\knrk K}                 		& {\it kha}	        &
+pha, fa & {\knrk P}                   	& {\it pha, fa}     \cr
+i       & {\knrk i} or {\knrk\dotcircle[}	& {\it i}       	&
+ga      & {\knrk g}                   	& {\it ga}          &
+ba  & {\knrk b}                  	 	& {\it ba}      \cr
+I      & {\knrk I} or {\knrk\dotcircle X}	& {\it \=\i}    	&
+gha     & {\knrk G}                   	& {\it gha}         &
+bha     & {\knrk B}                   	& {\it bha}         \cr
+u       & {\knrk u} or {\knrk\dotcircle]}  	& {\it u}       	&
+nga.    & {\knrk f}                   	& {\it \.na}        &
+ma      & {\knrk m}                   	& {\it ma}       	\cr
+U      & {\knrk U} or {\knrk\dotcircle Z}	& {\it \=u}         &
+cha      & {\knrk c}                  		& {\it ca}	        &
+ya      & {\knrk Y}                   	& {\it ya}          \cr
+Ru       & {\knrk\odvowelri} or {\knrk\dotcircle\odsignri}	& {\it \d{r}}	&
+chha     & {\knrk C}                 		& {\it cha}         &
+Ja     & {\knrk y}                  		& {\it \.ya}        \cr
+RU      & {\knrk\odvowelrii} or {\knrk\dotcircle\odsignrii}     		& {\it \d{\=r}}     &
+ja      & {\knrk j}                       & {\it ja}          &
+ra      & {\knrk r}                		& {\it ra}   		\cr
+L.u       & {\knrk\odvowelli} or {\knrk\dotcircle\odsignli}               & {\it \d{l}}       &
+jha     & {\knrk J}                 		& {\it jha}		    &
+la 		& {\knrk l}            			& {\it la}          \cr
+L.U      & {\knrk\odvowellii} or {\knrk\dotcircle\odsignlii}              & {\it \d{\=l}}     &
+nya.  & {\knrk F}                 		& {\it \~na}        &
+va     & {\knrk v}	                  	& {\it va}          \cr
+e       & {\knrk e} or {\knrk<\dotcircle}	& {\it e}           &
+Ta     & {\knrk q}                 		& {\it \d{t}a}      &
+sha     & {\knrk z}                 		& {\it \'sa}        \cr
+ai.      & {\knrk E} or {\knrk<\dotcircle>}  & {\it ai}          &
+Tha    & {\knrk Q}                		& {\it \d{t}ha}     &
+Sa     & {\knrk S}                 		& {\it \d{s}a}      \cr
+o       & {\knrk o} or {\knrk<\dotcircle A} & {\it o}           &
+Da     & {\knrk w}                 		& {\it \d{d}a}      &
+sa      & {\knrk s}                 		& {\it sa}          \cr
+au.      & {\knrk O} or {\knrk<\dotcircle*}  & {\it au}	        &
+Dha    & {\knrk W}                		& {\it \d{d}ha}     &
+ha      & {\knrk h}                  		& {\it ha}          \cr
+n.	    & {\knrk\dotcircle/}				& {\it \.m}			&
+Na     & {\knrk N}                 		& {\it \d{n}a}      &
+La     & {\knrk L}                  		& {\it \d{l}a}      \cr
+m.      & {\knrk\dotcircle M}          	& {\it \d{m}}       &
+ta  	& {\knrk t}                  		& {\it ta}		    &
+D.a     & {\knrk w\odnukta}               & {\it \d{r}a}	    \cr
+H      & {\knrk\dotcircle H}           	& {\it \d{h}}       &
+tha     & {\knrk T}                 		& {\it tha}         &
+Dh.a    & {\knrk W\odnukta}               & {\it \d{r}ha}     \cr
+	    & 								& 					&
+da      & {\knrk d}                  		& {\it da}          &
+k		& {\knrk{}k\odhalant} 				&					\cr
+	    & 								& 					&
+% \~{}e   & {\knrk e\knrksecya>}			 	& {\it \^e}        	&
+dha     & {\knrk D}                 		& {\it dha}         &
+		&								&					\cr
+	    & 								& 					&
+% \~{}o 	& {\knrk o\knrksecya>}				& {\it \^o}			&
+na		& {\knrk n}                  		& {\it na}		    &
+        &                       		&               	\cr
+\noalign{\hrule height.8pt}
+}\egroup 
+\vskip 5mm
+For dead consonants, the ASCII transcription is the one for the corresponding consonant without the trailing {\tt a} (for example, {\knrk\ K\odhalant} $\rightarrow$ {\tt kh}). The transliteration for consonant-vowel combinations or conjunctive consonants is achieved by treating the leading consonants in the combination as dead consonants ({\it consonant} + {\knrk \dotcircle \odhalant}).  Below we consider one example each for a consonant-vowel combination and a conjunctive consonant.
+\begin{itemize}
+\item[{\knrk\ 1}.]{\knrk\ G[} = {\knrk\ G\odhalant} + {\knrk\ i}. Thus, {\knrk\ G[} is transliterated as {\tt ghi},
+\item[{\knrk\ 2}.] {\knrk\ \odkSa \odsecma} = {\knrk\ k\odhalant} + {\knrk\ S\odhalant} + {\knrk\ m}. Thus, {\knrk\ \odkSa \odsecma} is transliterated as {\tt kSma}.
+\end{itemize}
+\begin{warning}
+Note that the transliteration scheme is case-sensitive.\\
+{\knrk\ k} $\rightarrow$ {\tt ka}, {\knrk\ kA} $\rightarrow$ {\tt kA}, {\knrk\ k[} $\rightarrow$ {\tt ki}, {\knrk\ kX} $\rightarrow$ {\tt kI}, 
+{\knrk\ k]} $\rightarrow$ {\tt ku}, {\knrk\ kZ} $\rightarrow$ {\tt kU}.\\
+{\knrk\ k\odsignri} $\rightarrow$ {\tt kRu}, {\knrk\ <k} $\rightarrow$ {\tt ke} , {\knrk\ <k>} $\rightarrow$ {\tt kai.}, {\knrk\ <kA} $\rightarrow$ {\tt ko},
+{\knrk\ <k*} $\rightarrow$ {\tt kau.}.\\ \\
+{\knrk\ ym]nA} $\rightarrow$ {\tt JamunA}, {\knrk\ jh\odsecnalow} $\rightarrow$ {\tt jahna}.
+\end{warning}
+
+\subsection{\tt od2tex}
+\label{subsection: od2tex}
+The pre-processor {\tt od2tex} accepts text files with {\tt .od} extension, containing text in which Odia is typed
+in the transliteration scheme described in \ref{subsection: transliterate}. The ideal method for large blocks of Odia text
+is to include them in a separate {\tt [TEXNAME].od} file and convert it to {\tt [TEXNAME].tex} using {\tt od2tex}.
+The output file {\tt [TEXNAME].tex} contains \odtex\ syntax which tells \TeX\ how to typeset your Odia text. This should be included
+via {\tt $\backslash$input\{[TEXNAME].tex\}} in the main \TeX\ file at the appropriate place. For small chunks of text, the conversion 
+may be directly done at the commandline by using the {\tt --conv} option, and the results copied to the main \TeX\ file.
+
+We quote the help documentation for {\tt od2tex} verbatim below.
+\begin{verbatim}
+Usage: od2tex [OPTION]
+   or: od2tex [ODNAME[.od]]
+   or: od2tex [ODNAME[.od]] [TEXNAME[.tex]]
+  Run od2tex on ODNAME.od which contains transliterated text (in English), 
+  creating a TeX file ODNAME.tex with Odia-TeX syntax in the same directory,
+  if output file is not specified.
+
+  Else run od2tex on ODNAME.od and output to TEXNAME.tex
+  
+  
+-h, --help : View this help file to learn usage
+-c, --conv : Convert transliterated text string to Odia-TeX syntax
+
+EXAMPLE(s) :
+$ od2tex --conv "oD.ishA"
+This is od2tex, Version 0.5 (Odia-Tex, 2016)
+
+Converting the string 'oD.ishA' to Odia-TeX syntax : 
+ow\odnukta [zA
+
+$ od2tex init.od
+This is od2tex, Version 0.5 (Odia-Tex, 2016)
+Converting init.od to init.tex.
+
+$ od2tex init.od final.tex
+This is od2tex, Version 0.5 (Odia-Tex, 2016)
+Converting init.od to final.tex. 
+
+
+
+Written by :
+  Soumyashant Nayak
+  github page: https://github.com/nsoum/odia-tex/src
+
+Email bug-reports to odia.bhashakosha@gmail.com.
+\end{verbatim}
+
+\begin{warning}
+Although {\tt od2tex} will process any text file, it is good practice to name the files containing the transliterated text, with the {\tt .od} extension for easier
+organization. {\tt od2tex}  will display a warning if the file does not have the extension {\tt .od} though and append {\tt .tex} to the filename after processing.
+\end{warning}
+
+\subsection{Example}
+Create a file {\tt example.od} which contains transliterated text:
+\begin{verbatim}
+kaTaka jillAra hariharapura praganA madhyare goTie grAma,
+nAma pATapura | grAma muNDAmuNDire goTie ghara | Agili 
+pichhili chAri bakharA, khanjA pAchiri chALiAre DhinkishALa,
+agaNA madhyare kUa, Agaku dANDaduAra, pachhaku bAD.iduAra |
+\end{verbatim}
+Run {\tt od2tex example.od} to obtain the output file {\tt example.tex} which contains the text in \odtex\ syntax :
+\begin{verbatim}
+kqk j[\odlla Ar hr[hrp]r p\odsecra gnA m\oddhya <r <gAq[e g\odsecra Am,
+nAm pAqp]r . g\odsecra Am m]\odNDa Am]\odNDa [<r <gAq[e Gr . aAg[l[ 
+p[C[l[ cAr[ bKrA, K\odnyja A pAc[r[ cAL[aA<r W[\odngka [zAL,
+agNA m\oddhya <r kZa, aAgk] dA\odNDa d]aAr, pCk] bAw\odnukta [d]aAr .
+\end{verbatim}
+Then {\tt example.tex} is invoked from the main \TeX\ file using the {\tt $\backslash$input} command. A sample \LaTeX\ file and its final output are given below.
+
+\subsubsection{Sample \LaTeX\ file}
+
+\begin{verbatim}
+\documentclass[12pt]{article}
+\usepackage{odia}
+
+\begin{document}
+Text in Konark font :\\
+{\knrk
+\input{example.tex}
+}\\ \\
+Text in Cuttack font :\\
+{\cttck
+\input{example.tex}
+}
+\end{document}
+\end{verbatim}
+
+\subsubsection{Final output}
+Text in Konark font :\\
+{\knrk{}
+kqk j[\odlla Ar hr[hrp]r p\odsecra gnA m\oddhya <r <gAq[e g\odsecra Am,
+nAm pAqp]r . g\odsecra Am m]\odNDa Am]\odNDa [<r <gAq[e Gr . aAg[l[ 
+p[C[l[ cAr[ bKrA, K\odnyja A pAc[r[ cAL[aA<r W[\odngka [zAL,
+agNA m\oddhya <r kZa, aAgk] dA\odNDa d]aAr, pCk] bAw\odnukta [d]aAr .
+}\\ \\
+Text in Cuttack font :\\
+{\cttck{}
+kqk j[\odlla Ar hr[hrp]r p\odsecra gnA m\oddhya <r <gAq[e g\odsecra Am,
+nAm pAqp]r . g\odsecra Am m]\odNDa Am]\odNDa [<r <gAq[e Gr . aAg[l[ 
+p[C[l[ cAr[ bKrA, K\odnyja A pAc[r[ cAL[aA<r W[\odngka [zAL,
+agNA m\oddhya <r kZa, aAgk] dA\odNDa d]aAr, pCk] bAw\odnukta [d]aAr .
+}
+
+\section{Table of Odia letters}
+All basic characters of the Odia script are given, together with their Roman
+transliteration, ISCII\footnote{Indian Script Code for Information Interchange, 
+IS 13194:1991} and Unicode\footnote{The Unicode Standard, Version 1.0, Vol 1., 
+and checked against the tables of version 2.014} code-position, ASCII representation, 
+and name. In a few cases, two ISCII characters are needed to represent a single 
+Odia character. The vowel signs are given on a dotted circle, which represents 
+the consonant or conjunct to which the vowel sign is to be applied.
+
+Conjuncts and ligatures of consonants and vowel signs are given in the
+next sections.
+
+\medskip
+
+\halign{\knrk #\quad\hfill&#\quad\hfill&\tt#\ \hfill&\tt#\ \hfill&\tt#\ \hfill&#\hfill\cr
+\bf Odia	&\bf Roman	&\bf ISCII	&\bf Unicode	&\bf ASCII	&\bf name	\cr\noalign{\medskip\leftline{\it vowels}\medskip}
+%
+a		&a		&A4		&0B05		&a	&vowel a 	\cr
+aA		&\=a		&A5		&0B06		&A	&vowel aa 	\cr
+i		&i		&A6		&0B07		&i	&vowel i	\cr
+I		&\=\i		&A7		&0B08		&I	&vowel ii	\cr
+u		&u		&A8		&0B09		&u	&vowel u	\cr
+U		&\=u		&A9		&0B0A		&U	&vowel uu	\cr
+\odvowelri	&\d{r}		&AA		&0B0B		&Ru	&vowel ri	\cr
+\odvowelrii	&\d{\=r}		&AA E9		&0B60		&RU	&vowel rii	\cr
+\odvowelli	&\d{l}		&A6 E9		&0B0C		&L.u	&vowel li	\cr
+\odvowellii	&\d{\=l}		&A7 E9 		&0B61		&L.U	&vowel lii	\cr
+e		&e		&AC		&0B0F		&e	&vowel e	\cr
+E		&ai		&AD		&0B10		&ai.	&vowel ai	\cr
+o		&o		&B0		&0B13		&o	&vowel o	\cr
+O		&au		&B1		&0B14		&au.	&vowel au	\cr\noalign{\medskip\leftline{\it vowel modifiers}\medskip}
+%
+a/		&a\.m		&A1		&0B01		&n.	&candrabindu	\cr
+aM		&a\d{m}		&A2		&0B02		&m.	&anusvar	\cr
+aH		&a\d{h}		&A3		&0B03		&H	&visarg		\cr\noalign{\medskip\leftline{\it consonants}\medskip}
+%
+k		&ka		&B3		&0B15		&ka	&consonant ka	\cr
+K		&kha		&B4		&0B16		&kha	&consonant kha	\cr
+g		&ga		&B5		&0B17		&ga	&consonant ga	\cr
+G		&gha		&B6		&0B18		&gha	&consonant gha	\cr
+f		&\.na		&B7		&0B19		&nga.	&consonant nga	\cr\noalign{\medskip}
+%
+c		&ca		&B8		&0B1A		&cha	&consonant ca	\cr
+C		&cha		&B9		&0B1B		&chha	&consonant cha	\cr
+j		&ja		&BA		&0B1C		&ja	&consonant ja	\cr
+J		&jha		&BB		&0B1D		&jha	&consonant jha	\cr
+F		&\~na		&BC		&0B1E		&nya.	&consonant nya	\cr\noalign{\medskip}
+%
+q		&\d{t}a		&BD		&0B1F		&Ta	&consonant tta	\cr
+Q		&\d{t}ha	&BE		&0B20		&Tha	&consonant ttha	\cr
+w		&\d{d}a		&BF		&0B21		&Da	&consonant dda	\cr
+W		&\d{d}ha	&C0		&0B22		&Dha	&consonant ddha	\cr
+N		&\d{n}a		&C1		&0B23		&Na	&consonant nna	\cr\noalign{\medskip}
+%
+t		&ta		&C2		&0B24		&ta	&consonant ta	\cr
+T		&tha		&C3		&0B25		&tha	&consonant tha	\cr
+d		&da		&C4		&0B26		&da	&consonant da	\cr
+D		&dha		&C5		&0B27		&dha	&consonant dha	\cr
+n		&na		&C6		&0B28		&na	&consonant na	\cr\noalign{\medskip}
+%
+p		&pa		&C8		&0B2A		&pa	&consonant pa	\cr
+P		&pha		&C9		&0B2B		&pha	&consonant pha	\cr
+b		&ba		&CA		&0B2C		&ba	&consonant ba	\cr
+B		&bha		&CB		&0B2D		&bha	&consonant bha	\cr
+m		&ma		&CC		&0B2E		&ma	&consonant ma	\cr\noalign{\medskip}
+%
+y		&ya		&CD		&0B5F		&Ja	&consonant ya	\cr
+Y		&\.ya		&CE		&0B2F		&ya	&consonant yya	\cr
+r		&ra		&CF		&0B30		&ra	&consonant ra	\cr
+l		&la		&D1		&0B32		&la	&consonant la	\cr
+v		&va		&D4		&0B13 0B4D 0B2C		&va	&consonant va	\cr
+\odbadot&ba		&--		&--		&b.		&consonant ba with dot \cr
+z		&\'sa		&D5		&0B36		&sha	&consonant sha	\cr
+S		&\d{s}a		&D6		&0B37		&Sa	&consonant ssa	\cr
+s		&sa		&D7		&0B38		&sa	&consonant sa	\cr
+h		&ha		&D8		&0B39		&ha	&consonant ha	\cr
+L		&\d{l}a		&D2		&0B33		&La	&consonant lla	\cr\noalign{\medskip}
+%
+w\odnukta	&\d{r}a		&BF E9		&0B5C		&D.a	&consonant rra	\cr
+W\odnukta	&\d{r}ha	&C0 E9		&0B5D		&Dh.a	&consonant rrha	\cr\noalign{\medskip\leftline{\it vowel signs}\medskip}
+%
+\dotcircle A	&\=a		&DA		&0B3E		&A	&vowel sign aa	\cr
+\dotcircle[	&i		&DB		&0B3F		&i	&vowel sign i	\cr
+\dotcircle X	&\=\i		&DC		&0B40		&I	&vowel sign ii	\cr
+\dotcircle]	&u		&DD		&0B41		&u	&vowel sign u	\cr
+\dotcircle Z	&\=u		&DE		&0B42		&U	&vowel sign uu	\cr
+\dotcircle\odsignri&\d{r}		&DF		&0B43		&Ru	&vowel sign ri	\cr
+\dotcircle\odsignrii&\d{\=r}		&DF E9		&--		&RU	&vowel sign rii	\cr
+\dotcircle\odsignli&\d{l}		&DB E9		&--		&L.u	&vowel sign li	\cr
+\dotcircle\odsignlii&\d{\=l}		&DC E9		&--		&L.U	&vowel sign lii	\cr
+<\dotcircle	&e		&E1		&0B47		&e	&vowel sign e	\cr
+<\dotcircle>	&ai		&E2		&0B48		&ai.	&vowel sign ai	\cr
+<\dotcircle A	&o		&E4		&0B4B		&o	&vowel sign o	\cr
+<\dotcircle*	&au		&E5		&0B4C		&au.	&vowel sign au	\cr\noalign{\medskip\leftline{\it additional vowels}\medskip}
+%
+e\odsecya>	&\^e	&--	&0BOF 0B4D 0B5F	&ai.	\cr
+o\odsecya>	&\^o	&--	&0B13 0B4D 0B5F	&au.	\cr\noalign{\medskip\leftline{\it other signs and symbols}\medskip}
+%
+\dotcircle+	&		&E8		&0B4D		&$\backslash$odhalant	&halant		\cr
+\odavagraha	&		&EA E9		&0B3D		&$\backslash$odavagraha 	&avagraha	\cr
+\odganesh	&		&--		&0B70		&$\backslash$odganesh	&isshar		\cr
+\odomsign	&		&A1 E9		&--		&$\backslash$odomsign	&om sign	\cr
+\odpercent & & &0025 &$\backslash$odpercent &percent sign   \cr
+\odrupee & &  &20B9 &$\backslash$odrupee &Indian rupee symbol \cr\noalign{\medskip\leftline{\it digits}\medskip}
+%
+0		&0		&F1		&0B66		&0	&digit zero	\cr
+1		&1		&F2		&0b67		&1	&digit one	\cr
+2		&2		&F3		&0B68		&2	&digit two	\cr
+3		&3		&F4		&0B69		&3	&digit three	\cr
+4		&4		&F5		&0B6A		&4	&digit four	\cr
+5		&5		&F6		&0B6B		&5	&digit five	\cr
+6		&6		&F7		&0B6C		&6	&digit six	\cr
+7		&7		&F8		&0B6D		&7	&digit seven	\cr
+8		&8		&F9		&0B6E		&8	&digit eight	\cr
+9		&9		&FA		&0B6F		&9	&digit nine	\cr\noalign{\medskip\leftline{\it conjunct control}\medskip}
+%
+\odkra	&kra	&B3 E8 CF		&0B15 0B4D 0B30	&kra	&{\it ordinary conjunct}\cr
+k+r		&kra	&B3 E8 E8 CF	&0B15 0B4D 200C 0B30	&k\{\}ra	&{\it explicit halant}\cr
+k\odsecra	&kra	&B3 E8 E8 E8 CF	&0B15 0B4D 200D 0B30	&k$\backslash$odsecra 	&{\it alternate conjunct}\cr
+}
+
+\section{Table of Consonant-Vowel Sign Combinations}
+
+Vowel-signs often combine with the consonant or conjunct they modify.\\
+\halign{\it#\quad\hfill&&\knrk#\quad\hfill\cr
+	&\it a	&\it\=a &\it i	&\it\=\i &\it u	&\it\=u &\it\d{r} &\it e &\it ai &\it o &\it au &\it \.m&\it \d{m}&\it \d{h}\cr
+	&a	&aA	&i	&I	&u	&U	&\odvowelri	 &e	&E	&o	&O	&a/	&aM	&aH	\cr\noalign{\smallskip}
+k	&k	&kA	&k[	&kX	&k]	&kZ	&k\odsignri &<k	&<k>	&<kA	&<k*	&k/	&kM	&kH	\cr
+kh	&K	&KA	&K[	&KX	&K]	&KZ	&K\odsignri &<K	&<K>	&<KA	&<K*	&K/	&KM	&KH	\cr
+g	&g	&gA	&g[	&gX	&g]	&gZ	&g\odsignri &<g	&<g>	&<gA	&<g*	&g/	&gM	&gH	\cr
+gh	&G	&GA	&G[	&GX	&G]	&GZ	&G\odsignri &<G	&<G>	&<GA	&<G*	&G/	&GM	&GH	\cr
+\.n	&f	&fA	&f[	&fX	&f]	&fZ	&f\odsignri &<f	&<f>	&<fA	&<f*	&f/	&fM	&fH	\cr\noalign{\smallskip}
+%
+c	&c	&cA	&c[	&cX	&c]	&cZ	&c\odsignri &<c	&<c>	&<cA	&<c*	&c/	&cM	&cH	\cr
+ch	&C	&CA	&C[	&CX	&C]	&CZ	&C\odsignri &<C	&<C>	&<CA	&<C*	&C/	&CM	&CH	\cr
+j	&j	&jA	&j[	&jX	&j]	&jZ	&j\odsignri &<j	&<j>	&<jA	&<j*	&j/	&jM	&jH	\cr
+jh	&J	&JA	&J[	&JX	&J]	&JZ	&J\odsignri &<J	&<J>	&<JA	&<J*	&J/	&JM	&JH	\cr
+\~n	&F	&FA	&F[	&FX	&F]	&FZ	&F\odsignri &<F	&<F>	&<FA	&<F*	&F/	&FM	&FH	\cr\noalign{\smallskip}
+%
+\d{t}	&q	&qA	&q[	&qX	&q]	&qZ	&q\odsignri &<q	&<q>	&<qA	&<q*	&q/	&qM	&qH	\cr
+\d{t}h	&Q	&QA	&Q[	&QX	&Q]	&QZ	&Q\odsignri &<Q	&<Q>	&<QA	&<Q*	&Q/	&QM	&QH	\cr
+\d{d}	&w	&wA	&w[	&wX	&w]	&wZ	&w\odsignri &<w	&<w>	&<wA	&<w*	&w/	&wM	&wH	\cr
+\d{d}h	&W	&WA	&W[	&WX	&W]	&WZ	&W\odsignri &<W	&<W>	&<WA	&<W*	&W/	&WM	&WH	\cr
+\d{n}	&N	&NA	&N[	&NX	&N]	&NZ	&N\odsignri &<N	&<N>	&<NA	&<N*	&N/	&NM	&NH	\cr\noalign{\smallskip}
+%
+t	&t	&tA	&t[	&tX	&t]	&tZ	&t\odsignri &<t	&<t>	&<tA	&<t*	&t/	&tM	&tH	\cr
+th	&T	&TA	&T[	&TX	&T]	&TZ	&T\odsignri &<T	&<T>	&<TA	&<T*	&T/	&TM	&TH	\cr
+d	&d	&dA	&d[	&dX	&d]	&dZ	&d\odsignri &<d	&<d>	&<dA	&<d*	&d/	&dM	&dH	\cr
+dh	&D	&DA	&D[	&DX	&D]	&DZ	&D\odsignri &<D	&<D>	&<DA	&<D*	&D/	&DM	&DH	\cr
+n	&n	&nA	&n[	&nX	&n]	&nZ	&n\odsignri &<n	&<n>	&<nA	&<n*	&n/	&nM	&nH	\cr\noalign{\smallskip}
+%
+p	&p	&pA	&p[	&pX	&p]	&pZ	&p\odsignri &<p	&<p>	&<pA	&<p*	&p/	&pM	&pH	\cr
+ph	&P	&PA	&P[	&PX	&P]	&PZ	&P\odsignri &<P	&<P>	&<PA	&<P*	&P/	&PM	&PH	\cr
+b	&b	&bA	&b[	&bX	&b]	&bZ	&b\odsignri &<b	&<b>	&<bA	&<b*	&b/	&bM	&bH	\cr
+bh	&B	&BA	&B[	&BX	&B]	&BZ	&B\odsignri &<B	&<B>	&<BA	&<B*	&B/	&BM	&BH	\cr
+m	&m	&mA	&m[	&mX	&m]	&mZ	&m\odsignri &<m	&<m>	&<mA	&<m*	&m/	&mM	&mH	\cr\noalign{\smallskip}
+%
+y	&Y	&YA	&Y[	&YX	&Y]	&YZ	&Y\odsignri &<Y	&<Y>	&<YA	&<Y*	&Y/	&YM	&YH	\cr
+\.{y}	&y	&yA	&y[	&yX	&y]	&yZ	&y\odsignri &<y	&<y>	&<yA	&<y*	&y/	&yM	&yH	\cr
+r	&r	&rA	&r[	&rX	&r]	&rZ	&r\odsignri &<r	&<r>	&<rA	&<r*	&r/	&rM	&rH	\cr
+l	&l	&lA	&l[	&lX	&l]	&lZ	&l\odsignri &<l	&<l>	&<lA	&<l*	&l/	&lM	&lH	\cr
+%v	&v	&vA	&v[	&vX	&v]	&vZ	&v\odsignri &<v	&<v>	&<vA	&<v*	&v/	&vM	&vH	\cr
+\'s	&z	&zA	&z[	&zX	&z]	&zZ	&z\odsignri &<z	&<z>	&<zA	&<z*	&z/	&zM	&zH	\cr
+\d{s}	&S	&SA	&S[	&SX	&S]	&SZ	&S\odsignri &<S	&<S>	&<SA	&<S*	&S/	&SM	&SH	\cr
+s	&s	&sA	&s[	&sX	&s]	&sZ	&s\odsignri &<s	&<s>	&<sA	&<s*	&s/	&sM	&sH	\cr
+h	&h	&hA	&h[	&hX	&h]	&hZ	&h\odsignri &<h	&<h>	&<hA	&<h*	&h/	&hM	&hH	\cr
+\d{l}	&L	&LA	&L[	&LX	&L]	&LZ	&L\odsignri &<L	&<L>	&<LA	&<L*	&L/	&LM	&LH	\cr\noalign{\smallskip}
+	&\dotcircle 	&\dotcircle A	&\dotcircle [	
+&\dotcircle X	&\dotcircle ]	&\dotcircle Z	&\dotcircle\odsignri
+&<\dotcircle 	&<\dotcircle >	&<\dotcircle A	&<\dotcircle *
+&\dotcircle / &\dotcircle M	&\dotcircle H	\cr
+}
+\subsection{combinations of vowel signs, reph and candrabindu}
+When vowel signs, reph and candrabindu appear together, the following
+ligatures are used.
+\hspace{0.1in}  {\knrk
+\dotcircle[\odcandrabindu\ %
+\dotcircle[\odreph\ %
+\dotcircle[\odreph\odcandrabindu\ %
+<\dotcircle>\odcandrabindu\ %
+<\dotcircle>\odreph\ %
+<\dotcircle>\odreph\odcandrabindu\ %
+<\dotcircle*\odcandrabindu\ %
+<\dotcircle*\odreph\ %
+<\dotcircle*\odreph\odcandrabindu\ %
+}
+
+
+\section{Table of Conjunct Consonants}
+The table below gives all the conjuncts included in the font.
+
+\twocolumn
+
+\halign{%
+\knrk#\rm\ \hfill&#\  \hfill&
+\knrk#\rm\ \hfill&#\  \hfill&
+\knrk#\rm\ \hfill&#\  \hfill&
+\knrk#\rm\ \hfill&#\  \hfill&
+\knrk#\rm\quad\quad\hfill&#\cr
+k\odhalant	&+&k	&&	&&	&=&\odkka		&kka		\cr
+k\odhalant   &+&q    &&  &&  &=&\odkTa		&k\d{t}a	\cr
+k\odhalant	&+&t	&&	&&	&=&\odkta		&kta		\cr
+k\odhalant	&+&r	&&	&&	&=&\odkra {\rm\ or} k\odsecra	&kra	\cr
+k\odhalant	&+&l	&&	&&	&=&k\odsecla	&kla		\cr
+k\odhalant	&+&b	&&	&&	&=&k\odsecva	&kva		\cr
+k\odhalant	&+&S	&&	&&	&=&\odkSa		&k\d{s}a	\cr
+k\odhalant	&+&S\odhalant	&+&N	&&	&=&\odkSNa	&k\d{s}\d{n}a	\cr
+k\odhalant	&+&s	&&	&&	&=&\odksa		&ksa		\cr
+%
+K\odhalant	&+&Y	&&	&&	&=&K\odsecya	&khya		\cr
+%
+g\odhalant	&+&g	&&	&&	&=&\odgga		&gga		\cr
+g\odhalant	&+&D	&&	&&	&=&\odgdha		&gdha		\cr
+g\odhalant	&+&n	&&	&&	&=&g\odsecna	&gna		\cr
+g\odhalant	&+&r	&&	&&	&=&g\odsecra	&gra		\cr
+g\odhalant	&+&l	&&	&&	&=&g\odsecla	&gla		\cr
+%
+G\odhalant	&+&n	&&	&&	&=&G\odsecna	&ghna		\cr
+%
+f\odhalant	&+&k	&&	&&	&=&\odngka		&\.nka		\cr
+f\odhalant	&+&K	&&	&&	&=&\odngkha		&\.nkha		\cr
+f\odhalant	&+&g	&&	&&	&=&\odngga		&\.nga		\cr
+f\odhalant	&+&G	&&	&&	&=&\odnggha		&\.ngha		\cr
+%
+c\odhalant	&+&c	&&	&&	&=&\odcca		&cca		\cr
+c\odhalant	&+&C	&&	&&	&=&\odccha		&ccha		\cr
+%
+j\odhalant	&+&j	&&	&&	&=&j\odsecja		&jja		\cr
+j\odhalant	&+&J	&&	&&	&=&j\odsecjha		&jjha		\cr
+j\odhalant	&+&F	&&	&&	&=&\odjnya		&j\~na		\cr
+j\odhalant	&+&Y	&&	&&	&=&j\odsecya	&jya		\cr
+j\odhalant	&+&b	&&	&&	&=&j\odsecva	&jva		\cr
+%
+F\odhalant	&+&c	&&	&&	&=&\odnyca		&\~nca		\cr
+F\odhalant	&+&C	&&	&&	&=&\odnyca\odseccha	&\~ncha		\cr
+F\odhalant	&+&j	&&	&&	&=&\odnyja		&\~nja		\cr
+F\odhalant	&+&J	&&	&&	&=&\odnyjha		&\~njha		\cr
+%
+q\odhalant	&+&q	&&	&&	&=&\odTTa		&\d{t}\d{t}a	\cr
+%
+w\odhalant   &+&g	&&	&&	&=&\odDga		&\d{d}ga		\cr
+w\odnukta\odhalant&+&g&&	&&	&=&\odRga		&\d{r}ga		\cr
+w\odhalant	&+&w	&&	&&	&=&\odDDa		&\d{d}\d{d}a	\cr
+%
+N\odhalant	&+&q	&&	&&	&=&\odNTa		&\d{n}\d{t}a	\cr
+N\odhalant	&+&Q	&&	&&	&=&\odNTha		&\d{n}\d{t}ha	\cr
+N\odhalant	&+&w	&&	&&	&=&\odNDa		&\d{n}\d{d}a	\cr		
+N\odhalant	&+&W	&&	&&	&=&\odNDha		&\d{n}\d{d}ha	\cr
+N\odhalant	&+&N	&&	&&	&=&\odNNa		&\d{n}\d{n}a	\cr
+%
+t\odhalant	&+&k    &&  	&& 	&=&\odtka		&tka		\cr
+t\odhalant	&+&t	&&	&&	&=&\odtta		&tta		\cr
+t\odhalant	&+&n	&&	&&	&=&\odtna		&tna		\cr
+t\odhalant      &+&p	&&	&&	&=&\odtpa		&tpa		\cr
+t\odhalant	&+&m	&&	&&	&=&\odtma {\rm\ or} t\odsecma	&tma	\cr
+t\odhalant	&+&r	&&	&&	&=&\odtra {\rm\ or} t\odsecra	&tra	\cr
+t\odhalant	&+&s	&&	&&	&=&\odtsa		&tsa		\cr
+%
+d\odhalant	&+&g	&&	&&	&=&\oddga		&dga		\cr
+d\odhalant	&+&d	&&	&&	&=&\oddda		&dda		\cr
+d\odhalant	&+&D	&&	&&	&=&\odddha		&ddha		\cr
+d\odhalant	&+&b	&&	&&	&=&\oddba		&dba		\cr
+d\odhalant	&+&B	&&	&&	&=&\oddbha		&dbha		\cr
+d\odhalant	&+&m	&&	&&	&=&d\odsecma	&dma		\cr
+%
+D\odhalant	&+&Y	&&	&&	&=&\oddhya		&dhya		\cr
+D\odhalant	&+&b	&&	&&	&=&D\odsecva	&dhva		\cr
+%
+n\odhalant	&+&t	&&	&&	&=&\odnta		&nta		\cr
+n\odhalant	&+&t	&+&Y	&&	&=&\odnta\odsecya	&ntya		\cr
+n\odhalant	&+&t	&+&r	&&	&=&\odntra	&ntra		\cr
+n\odhalant	&+&T	&&	&&	&=&n\odsectha	&ntha		\cr
+n\odhalant	&+&d	&&	&&	&=&\odnda		&nda		\cr
+n\odhalant	&+&D	&&	&&	&=&\odndha		&ndha		\cr
+n\odhalant	&+&n	&&	&&	&=&n\odsecna	&nna		\cr
+%
+p\odhalant	&+&Y	&&	&&	&=&p\odsecya	&pya		\cr
+%
+b\odhalant	&+&j	&&	&&	&=&b\odsecja		&bja		\cr
+b\odhalant	&+&d	&&	&&	&=&\odbda		&bda		\cr
+b\odhalant   &+&D	&&	&&	&=&\odbdha		&bdha		\cr
+b\odhalant	&+&b	&&	&&	&=&\odbba		&bba		\cr
+%
+p\odhalant	&+&t	&&	&&	&=&\odpta		&pta		\cr
+p\odhalant	&+&s	&&	&&	&=&\odpsa		&psa		\cr
+%
+m\odhalant	&+&p	&&	&&	&=&\odmpa		&mpa		\cr
+m\odhalant	&+&P	&&	&&	&=&\odmpha		&mpha		\cr
+m\odhalant	&+&b	&&	&&	&=&\odmba	&mba		\cr
+m\odhalant	&+&B	&&	&&	&=&\odmbha	&mbha		\cr
+m\odhalant	&+&m	&&	&&	&=&\odmma		&mma		\cr
+%
+r\odhalant	&+&N	&+&N	&&	&=&\odNNa\odreph	&r\d{n}\d{n}a	\cr
+r\odhalant	&+&b	&&	&&	&=&b\odreph		&rba		\cr
+%
+L\odhalant	&+&k	&&	&&	&=&\odLka		&lka		\cr
+L\odhalant	&+&p	&&	&&	&=&\odLpa		&lpa		\cr
+L\odhalant	&+&P	&&	&&	&=&\odLpha		&lpha		\cr
+l\odhalantlow	&+&l	&&	&&	&=&\odlla		&lla		\cr
+%
+z\odhalant	&+&c	&&	&&	&=&\odshca		&\'sca		\cr
+z\odhalant	&+&C	&&	&&	&=&z\odseccha	&\'scha		\cr
+z\odhalant	&+&q	&&	&&	&=&\odshTa		&\'s\d{t}a	\cr
+z\odhalant	&+&n	&&	&&	&=&z\odsecna	&\'sna		\cr
+%
+S\odhalant	&+&k	&&	&&	&=&\odSka		&\d{s}ka	\cr
+S\odhalant	&+&q	&&	&&	&=&\odSTa		&\d{s}\d{t}a	\cr
+S\odhalant	&+&Q	&&	&&	&=&\odSTha		&\d{s}\d{t}ha	\cr
+S\odhalant   &+&N    &&  &&  &=&\odSNa		&\d{s}\d{n}a	\cr
+S\odhalant	&+&p	&&	&&	&=&\odSpa		&\d{s}pa	\cr
+S\odhalant	&+&P	&&	&&	&=&\odSpha		&\d{s}pha	\cr
+%
+s\odhalant	&+&k	&&	&&	&=&\odska		&ska		\cr
+s\odhalant	&+&K	&&	&&	&=&\odskha		&skha		\cr
+s\odhalant	&+&t	&&	&&	&=&\odsta		&sta		\cr
+s\odhalant	&+&t	&+&r	&&	&=&\odstra	&stra		\cr
+s\odhalant	&+&T	&&	&&	&=&s\odsectha	&stha		\cr
+s\odhalant	&+&p	&&	&&	&=&\odspa		&spa		\cr
+s\odhalant	&+&P	&&	&&	&=&\odspha		&spha		\cr
+%
+h\odhalantlow	&+&n	&&	&&	&=&h\odsecna		&hna		\cr
+h\odhalantlow	&+&m	&&	&&	&=&h\odsecma		&hma		\cr
+h\odhalantlow	&+&b	&&	&&	&=&\odhva		&hva		\cr
+}
+
+
+%\section{Glyph Chart}
+
+%\section{Concluding Remarks}
+
+
+\end{document}
