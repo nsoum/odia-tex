@@ -5,6 +5,7 @@ History of Odia-TeX
 |---           |:---                                |
 |  25-FEB-2016 | added *d+ba*, *ll+bha*, *t+tha*, *n+tu*, *h+nna*, percent sign (SN) |
 |  24-FEB-2016 | added the Indian rupee symbol, decimal dot (SN) |
+|  23-FEB-2016 | developed *od2tex* to convert transliteration in English to Odia-TeX (SN)|
 |  28-JAN-2016 | modified *t+sa*, touched up *m+ba, m+bha* (SN) |
 |  26-JAN-2016 | added *m+ba* (SN)                  |
 |  25-JAN-2016 | added *m+bha* (SN)                 |
