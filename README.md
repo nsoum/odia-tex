@@ -22,17 +22,18 @@ set, <code>TEXMFHOME = ~/texmf</code> .
 2. Create a directory named <code>texmf</code> (if there isn't one) in the home 
 folder and create the standard TeX directory structure inside it. In simpler terms,
 create sub-directories named <code>bibtex, fonts, metafont, metapost, tex, doc, 
-scripts</code> in <code>~/texmf/</code>.
+scripts</code> in <code>$HOME/texmf/</code>. (Note that <code>$HOME</code> refers
+to the pathname of the home folder.)
 
-3. In the directory <code>~/texmf/fonts/</code>, create sub-directories <code>gf, 
+3. In the directory <code>$HOME/texmf/fonts/</code>, create sub-directories <code>gf, 
 pk, source, tfm</code>. Copy the folders <code>odia-build-mf-core, odia-fonts-core</code> 
-from the repository into <code>~/texmf/fonts/source/</code>.
+from the repository into <code>$HOME/texmf/fonts/source/</code>.
 
 4. Copy the folder <code>odia-tex-core</code> from the repository into
-<code>~/texmf/tex/</code>. 
+<code>$HOME/texmf/tex/</code>. 
 
 5. Copy the folder <code>odia-latex-core</code> from the repository into 
-<code>~/texmf/tex/latex</code>.
+<code>$HOME/texmf/tex/latex</code>.
 
 6. Inform texmf to look into your new local TeX directory structure by 
 running the following command in the commandline prompt <code>$ sudo update-texmf</code>
