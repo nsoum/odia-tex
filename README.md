@@ -25,17 +25,20 @@ create sub-directories named <code>bibtex, fonts, metafont, metapost, tex, doc,
 scripts</code> in <code>~/texmf/</code>.
 
 3. In the directory <code>~/texmf/fonts/</code>, create sub-directories <code>gf, 
-pk, source, tfm</code>. Copy the folders <code>odia-build-metafont, odia-fonts</code> 
+pk, source, tfm</code>. Copy the folders <code>odia-build-mf-core, odia-fonts-core</code> 
 from the repository into <code>~/texmf/fonts/source/</code>.
 
 4. Copy the folder <code>odia-tex-core</code> from the repository into
 <code>~/texmf/tex/</code>. 
 
-5. Inform texmf to look into your new local TeX directory structure by 
+5. Copy the folder <code>odia-latex-core</code> from the repository into 
+<code>~/texmf/tex/latex</code>.
+
+6. Inform texmf to look into your new local TeX directory structure by 
 running the following command in the commandline prompt <code>$ sudo update-texmf</code>
 (without the $ sign).
 
-6. At the commandline prompt, run <code>$ tex odmacs.tex</code> (without the $ sign). 
+7. At the commandline prompt, run <code>$ tex odmacs.tex</code> (without the $ sign). 
 Metafont should generate all the fonts now. This may take a few minutes. At the end of 
 the process, type <code>\end</code>.
 
