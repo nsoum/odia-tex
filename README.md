@@ -24,7 +24,7 @@ folder and create the standard TeX directory structure inside it. In simpler ter
 create sub-directories named <code>bibtex, fonts, metafont, metapost, tex, doc, 
 scripts</code> in <code>~/texmf/</code>.
 
-3. In the directory <code>~/texmf/fonts/</code>, create sub-directories <code>gf, 
+3. In the directory <code>\sim/texmf/fonts/</code>, create sub-directories <code>gf, 
 pk, source, tfm</code>. Copy the folders <code>odia-build-mf-core, odia-fonts-core</code> 
 from the repository into <code>~/texmf/fonts/source/</code>.
 
@@ -67,5 +67,5 @@ For type-setting tutorials and tips, please refer to the manual <code>odia-tex-m
 NOTE : Odia-TeX is a work in progress.<br /><br /> 
 
 Soumyashant Nayak,<br />
-<tt>odia.bhashakosha [at] gmail [dot] com </tt>
+<tt>soumyashant [at] gmail [dot] com </tt>
 
